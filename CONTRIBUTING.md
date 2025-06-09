@@ -41,7 +41,7 @@ To use a local version of this library from source in another project, edit the 
 directive. This can be done through the CLI with the following:
 
 ```sh
-$ go mod edit -replace github.com/stainless-sdks/qanapi-go=/path/to/qanapi-go
+$ go mod edit -replace github.com/qanapi/qanapi-sdk-golang=/path/to/qanapi-sdk-golang
 ```
 
 ## Running tests

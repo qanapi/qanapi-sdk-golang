@@ -1,7 +1,7 @@
 package apijson
 
 import (
-	"github.com/stainless-sdks/qanapi-go/packages/respjson"
+	"github.com/qanapi/qanapi-sdk-golang/packages/respjson"
 	"reflect"
 )
 

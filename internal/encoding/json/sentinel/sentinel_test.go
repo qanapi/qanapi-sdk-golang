@@ -1,7 +1,7 @@
 package sentinel_test
 
 import (
-	"github.com/stainless-sdks/qanapi-go/internal/encoding/json/sentinel"
+	"github.com/qanapi/qanapi-sdk-golang/internal/encoding/json/sentinel"
 	"reflect"
 	"slices"
 	"testing"

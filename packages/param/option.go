@@ -3,7 +3,7 @@ package param
 import (
 	"encoding/json"
 	"fmt"
-	shimjson "github.com/stainless-sdks/qanapi-go/internal/encoding/json"
+	shimjson "github.com/qanapi/qanapi-sdk-golang/internal/encoding/json"
 	"time"
 )
 
