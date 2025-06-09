@@ -2,8 +2,8 @@ package apijson_test
 
 import (
 	"encoding/json"
-	"github.com/stainless-sdks/qanapi-go/internal/apijson"
-	"github.com/stainless-sdks/qanapi-go/packages/respjson"
+	"github.com/qanapi/qanapi-sdk-golang/internal/apijson"
+	"github.com/qanapi/qanapi-sdk-golang/packages/respjson"
 	"testing"
 )
 
