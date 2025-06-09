@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-package qanapiqanapisdkgolang
+package qanapi
 
 import (
 	"context"
@@ -8,10 +8,10 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/qanapi/qanapi-sdk-golang/internal/apijson"
-	"github.com/qanapi/qanapi-sdk-golang/internal/requestconfig"
-	"github.com/qanapi/qanapi-sdk-golang/option"
-	"github.com/qanapi/qanapi-sdk-golang/packages/respjson"
+	"github.com/stainless-sdks/qanapi-go/internal/apijson"
+	"github.com/stainless-sdks/qanapi-go/internal/requestconfig"
+	"github.com/stainless-sdks/qanapi-go/option"
+	"github.com/stainless-sdks/qanapi-go/packages/respjson"
 )
 
 // APIKeyService contains methods and other services that help with interacting

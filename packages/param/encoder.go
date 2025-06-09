@@ -6,7 +6,7 @@ import (
 	"reflect"
 	"time"
 
-	shimjson "github.com/qanapi/qanapi-sdk-golang/internal/encoding/json"
+	shimjson "github.com/stainless-sdks/qanapi-go/internal/encoding/json"
 
 	"github.com/tidwall/sjson"
 )

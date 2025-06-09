@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-package qanapiqanapisdkgolang_test
+package qanapi_test
 
 import (
 	"context"
@@ -8,9 +8,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/qanapi/qanapi-sdk-golang"
-	"github.com/qanapi/qanapi-sdk-golang/internal/testutil"
-	"github.com/qanapi/qanapi-sdk-golang/option"
+	"github.com/stainless-sdks/qanapi-go"
+	"github.com/stainless-sdks/qanapi-go/internal/testutil"
+	"github.com/stainless-sdks/qanapi-go/option"
 )
 
 func TestAPIKeyScopeGet(t *testing.T) {
@@ -22,14 +22,14 @@ func TestAPIKeyScopeGet(t *testing.T) {
 	if !testutil.CheckTestServer(t, baseURL) {
 		return
 	}
-	client := qanapiqanapisdkgolang.NewClient(
+	client := qanapi.NewClient(
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
 	)
 	_, err := client.APIKeys.Scopes.Get(context.TODO(), 0)
 	if err != nil {
-		var apierr *qanapiqanapisdkgolang.Error
+		var apierr *qanapi.Error
 		if errors.As(err, &apierr) {
 			t.Log(string(apierr.DumpRequest(true)))
 		}
@@ -46,7 +46,7 @@ func TestAPIKeyScopeAttach(t *testing.T) {
 	if !testutil.CheckTestServer(t, baseURL) {
 		return
 	}
-	client := qanapiqanapisdkgolang.NewClient(
+	client := qanapi.NewClient(
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
@@ -54,12 +54,12 @@ func TestAPIKeyScopeAttach(t *testing.T) {
 	_, err := client.APIKeys.Scopes.Attach(
 		context.TODO(),
 		0,
-		qanapiqanapisdkgolang.APIKeyScopeAttachParams{
+		qanapi.APIKeyScopeAttachParams{
 			ScopeIDs: []int64{25},
 		},
 	)
 	if err != nil {
-		var apierr *qanapiqanapisdkgolang.Error
+		var apierr *qanapi.Error
 		if errors.As(err, &apierr) {
 			t.Log(string(apierr.DumpRequest(true)))
 		}
@@ -76,7 +76,7 @@ func TestAPIKeyScopeDetach(t *testing.T) {
 	if !testutil.CheckTestServer(t, baseURL) {
 		return
 	}
-	client := qanapiqanapisdkgolang.NewClient(
+	client := qanapi.NewClient(
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
@@ -84,12 +84,12 @@ func TestAPIKeyScopeDetach(t *testing.T) {
 	_, err := client.APIKeys.Scopes.Detach(
 		context.TODO(),
 		0,
-		qanapiqanapisdkgolang.APIKeyScopeDetachParams{
+		qanapi.APIKeyScopeDetachParams{
 			ScopeIDs: []int64{1},
 		},
 	)
 	if err != nil {
-		var apierr *qanapiqanapisdkgolang.Error
+		var apierr *qanapi.Error
 		if errors.As(err, &apierr) {
 			t.Log(string(apierr.DumpRequest(true)))
 		}
@@ -106,7 +106,7 @@ func TestAPIKeyScopeSync(t *testing.T) {
 	if !testutil.CheckTestServer(t, baseURL) {
 		return
 	}
-	client := qanapiqanapisdkgolang.NewClient(
+	client := qanapi.NewClient(
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
@@ -114,12 +114,12 @@ func TestAPIKeyScopeSync(t *testing.T) {
 	_, err := client.APIKeys.Scopes.Sync(
 		context.TODO(),
 		0,
-		qanapiqanapisdkgolang.APIKeyScopeSyncParams{
+		qanapi.APIKeyScopeSyncParams{
 			ScopeIDs: []int64{25},
 		},
 	)
 	if err != nil {
-		var apierr *qanapiqanapisdkgolang.Error
+		var apierr *qanapi.Error
 		if errors.As(err, &apierr) {
 			t.Log(string(apierr.DumpRequest(true)))
 		}

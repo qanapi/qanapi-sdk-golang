@@ -2,7 +2,7 @@ package apijson
 
 import (
 	"errors"
-	"github.com/qanapi/qanapi-sdk-golang/packages/param"
+	"github.com/stainless-sdks/qanapi-go/packages/param"
 	"reflect"
 
 	"github.com/tidwall/gjson"

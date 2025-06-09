@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-package qanapiqanapisdkgolang_test
+package qanapi_test
 
 import (
 	"context"
@@ -10,9 +10,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/qanapi/qanapi-sdk-golang"
-	"github.com/qanapi/qanapi-sdk-golang/internal"
-	"github.com/qanapi/qanapi-sdk-golang/option"
+	"github.com/stainless-sdks/qanapi-go"
+	"github.com/stainless-sdks/qanapi-go/internal"
+	"github.com/stainless-sdks/qanapi-go/option"
 )
 
 type closureTransport struct {
@@ -25,7 +25,7 @@ func (t *closureTransport) RoundTrip(req *http.Request) (*http.Response, error) 
 
 func TestUserAgentHeader(t *testing.T) {
 	var userAgent string
-	client := qanapiqanapisdkgolang.NewClient(
+	client := qanapi.NewClient(
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
 		option.WithHTTPClient(&http.Client{
@@ -39,7 +39,7 @@ func TestUserAgentHeader(t *testing.T) {
 			},
 		}),
 	)
-	client.Auth.Login(context.Background(), qanapiqanapisdkgolang.AuthLoginParams{
+	client.Auth.Login(context.Background(), qanapi.AuthLoginParams{
 		Email:    "valid@email.com",
 		Password: "secret123",
 	})
@@ -50,7 +50,7 @@ func TestUserAgentHeader(t *testing.T) {
 
 func TestRetryAfter(t *testing.T) {
 	retryCountHeaders := make([]string, 0)
-	client := qanapiqanapisdkgolang.NewClient(
+	client := qanapi.NewClient(
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
 		option.WithHTTPClient(&http.Client{
@@ -67,7 +67,7 @@ func TestRetryAfter(t *testing.T) {
 			},
 		}),
 	)
-	_, err := client.Auth.Login(context.Background(), qanapiqanapisdkgolang.AuthLoginParams{
+	_, err := client.Auth.Login(context.Background(), qanapi.AuthLoginParams{
 		Email:    "valid@email.com",
 		Password: "secret123",
 	})
@@ -88,7 +88,7 @@ func TestRetryAfter(t *testing.T) {
 
 func TestDeleteRetryCountHeader(t *testing.T) {
 	retryCountHeaders := make([]string, 0)
-	client := qanapiqanapisdkgolang.NewClient(
+	client := qanapi.NewClient(
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
 		option.WithHTTPClient(&http.Client{
@@ -106,7 +106,7 @@ func TestDeleteRetryCountHeader(t *testing.T) {
 		}),
 		option.WithHeaderDel("X-Stainless-Retry-Count"),
 	)
-	_, err := client.Auth.Login(context.Background(), qanapiqanapisdkgolang.AuthLoginParams{
+	_, err := client.Auth.Login(context.Background(), qanapi.AuthLoginParams{
 		Email:    "valid@email.com",
 		Password: "secret123",
 	})
@@ -122,7 +122,7 @@ func TestDeleteRetryCountHeader(t *testing.T) {
 
 func TestOverwriteRetryCountHeader(t *testing.T) {
 	retryCountHeaders := make([]string, 0)
-	client := qanapiqanapisdkgolang.NewClient(
+	client := qanapi.NewClient(
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
 		option.WithHTTPClient(&http.Client{
@@ -140,7 +140,7 @@ func TestOverwriteRetryCountHeader(t *testing.T) {
 		}),
 		option.WithHeader("X-Stainless-Retry-Count", "42"),
 	)
-	_, err := client.Auth.Login(context.Background(), qanapiqanapisdkgolang.AuthLoginParams{
+	_, err := client.Auth.Login(context.Background(), qanapi.AuthLoginParams{
 		Email:    "valid@email.com",
 		Password: "secret123",
 	})
@@ -156,7 +156,7 @@ func TestOverwriteRetryCountHeader(t *testing.T) {
 
 func TestRetryAfterMs(t *testing.T) {
 	attempts := 0
-	client := qanapiqanapisdkgolang.NewClient(
+	client := qanapi.NewClient(
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
 		option.WithHTTPClient(&http.Client{
@@ -173,7 +173,7 @@ func TestRetryAfterMs(t *testing.T) {
 			},
 		}),
 	)
-	_, err := client.Auth.Login(context.Background(), qanapiqanapisdkgolang.AuthLoginParams{
+	_, err := client.Auth.Login(context.Background(), qanapi.AuthLoginParams{
 		Email:    "valid@email.com",
 		Password: "secret123",
 	})
@@ -186,7 +186,7 @@ func TestRetryAfterMs(t *testing.T) {
 }
 
 func TestContextCancel(t *testing.T) {
-	client := qanapiqanapisdkgolang.NewClient(
+	client := qanapi.NewClient(
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
 		option.WithHTTPClient(&http.Client{
@@ -200,7 +200,7 @@ func TestContextCancel(t *testing.T) {
 	)
 	cancelCtx, cancel := context.WithCancel(context.Background())
 	cancel()
-	_, err := client.Auth.Login(cancelCtx, qanapiqanapisdkgolang.AuthLoginParams{
+	_, err := client.Auth.Login(cancelCtx, qanapi.AuthLoginParams{
 		Email:    "valid@email.com",
 		Password: "secret123",
 	})
@@ -210,7 +210,7 @@ func TestContextCancel(t *testing.T) {
 }
 
 func TestContextCancelDelay(t *testing.T) {
-	client := qanapiqanapisdkgolang.NewClient(
+	client := qanapi.NewClient(
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
 		option.WithHTTPClient(&http.Client{
@@ -224,7 +224,7 @@ func TestContextCancelDelay(t *testing.T) {
 	)
 	cancelCtx, cancel := context.WithTimeout(context.Background(), 2*time.Millisecond)
 	defer cancel()
-	_, err := client.Auth.Login(cancelCtx, qanapiqanapisdkgolang.AuthLoginParams{
+	_, err := client.Auth.Login(cancelCtx, qanapi.AuthLoginParams{
 		Email:    "valid@email.com",
 		Password: "secret123",
 	})
@@ -242,7 +242,7 @@ func TestContextDeadline(t *testing.T) {
 	defer cancel()
 
 	go func() {
-		client := qanapiqanapisdkgolang.NewClient(
+		client := qanapi.NewClient(
 			option.WithAPIKey("My API Key"),
 			option.WithSubdomain("My-Subdomain"),
 			option.WithHTTPClient(&http.Client{
@@ -254,7 +254,7 @@ func TestContextDeadline(t *testing.T) {
 				},
 			}),
 		)
-		_, err := client.Auth.Login(deadlineCtx, qanapiqanapisdkgolang.AuthLoginParams{
+		_, err := client.Auth.Login(deadlineCtx, qanapi.AuthLoginParams{
 			Email:    "valid@email.com",
 			Password: "secret123",
 		})

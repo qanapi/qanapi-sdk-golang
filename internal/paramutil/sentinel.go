@@ -1,7 +1,7 @@
 package paramutil
 
 import (
-	"github.com/qanapi/qanapi-sdk-golang/internal/encoding/json/sentinel"
+	"github.com/stainless-sdks/qanapi-go/internal/encoding/json/sentinel"
 )
 
 // NullPtr returns a pointer to the zero value of the type T.

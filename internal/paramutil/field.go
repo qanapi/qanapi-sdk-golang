@@ -1,8 +1,8 @@
 package paramutil
 
 import (
-	"github.com/qanapi/qanapi-sdk-golang/packages/param"
-	"github.com/qanapi/qanapi-sdk-golang/packages/respjson"
+	"github.com/stainless-sdks/qanapi-go/packages/param"
+	"github.com/stainless-sdks/qanapi-go/packages/respjson"
 )
 
 func AddrIfPresent[T comparable](v param.Opt[T]) *T {

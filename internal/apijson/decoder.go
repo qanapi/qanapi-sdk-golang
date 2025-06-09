@@ -7,7 +7,7 @@ package apijson
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/qanapi/qanapi-sdk-golang/packages/param"
+	"github.com/stainless-sdks/qanapi-go/packages/param"
 	"reflect"
 	"strconv"
 	"sync"

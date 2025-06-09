@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-package qanapiqanapisdkgolang_test
+package qanapi_test
 
 import (
 	"context"
@@ -8,9 +8,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/qanapi/qanapi-sdk-golang"
-	"github.com/qanapi/qanapi-sdk-golang/internal/testutil"
-	"github.com/qanapi/qanapi-sdk-golang/option"
+	"github.com/stainless-sdks/qanapi-go"
+	"github.com/stainless-sdks/qanapi-go/internal/testutil"
+	"github.com/stainless-sdks/qanapi-go/option"
 )
 
 func TestEncryptEncryptDataWithOptionalParams(t *testing.T) {
@@ -22,27 +22,27 @@ func TestEncryptEncryptDataWithOptionalParams(t *testing.T) {
 	if !testutil.CheckTestServer(t, baseURL) {
 		return
 	}
-	client := qanapiqanapisdkgolang.NewClient(
+	client := qanapi.NewClient(
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
 	)
-	_, err := client.Encrypt.EncryptData(context.TODO(), qanapiqanapisdkgolang.EncryptEncryptDataParams{
-		Data: qanapiqanapisdkgolang.EncryptEncryptDataParamsDataUnion{
-			OfString: qanapiqanapisdkgolang.String("string"),
+	_, err := client.Encrypt.EncryptData(context.TODO(), qanapi.EncryptEncryptDataParams{
+		Data: qanapi.EncryptEncryptDataParamsDataUnion{
+			OfString: qanapi.String("string"),
 		},
-		Access: qanapiqanapisdkgolang.EncryptEncryptDataParamsAccess{
+		Access: qanapi.EncryptEncryptDataParamsAccess{
 			ACL: []string{"admin"},
 		},
-		Attributes: qanapiqanapisdkgolang.EncryptEncryptDataParamsAttributes{
+		Attributes: qanapi.EncryptEncryptDataParamsAttributes{
 			Classification: "confidential",
-			Owner:          qanapiqanapisdkgolang.String("alice@example.com"),
+			Owner:          qanapi.String("alice@example.com"),
 			Tags:           []string{"legal"},
 		},
 		SensitiveFields: []string{"password"},
 	})
 	if err != nil {
-		var apierr *qanapiqanapisdkgolang.Error
+		var apierr *qanapi.Error
 		if errors.As(err, &apierr) {
 			t.Log(string(apierr.DumpRequest(true)))
 		}

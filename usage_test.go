@@ -1,15 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-package qanapiqanapisdkgolang_test
+package qanapi_test
 
 import (
 	"context"
 	"os"
 	"testing"
 
-	"github.com/qanapi/qanapi-sdk-golang"
-	"github.com/qanapi/qanapi-sdk-golang/internal/testutil"
-	"github.com/qanapi/qanapi-sdk-golang/option"
+	"github.com/stainless-sdks/qanapi-go"
+	"github.com/stainless-sdks/qanapi-go/internal/testutil"
+	"github.com/stainless-sdks/qanapi-go/option"
 )
 
 func TestUsage(t *testing.T) {
@@ -20,12 +20,12 @@ func TestUsage(t *testing.T) {
 	if !testutil.CheckTestServer(t, baseURL) {
 		return
 	}
-	client := qanapiqanapisdkgolang.NewClient(
+	client := qanapi.NewClient(
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
 	)
-	response, err := client.Auth.Login(context.TODO(), qanapiqanapisdkgolang.AuthLoginParams{
+	response, err := client.Auth.Login(context.TODO(), qanapi.AuthLoginParams{
 		Email:    "valid@email.com",
 		Password: "secret123",
 	})
