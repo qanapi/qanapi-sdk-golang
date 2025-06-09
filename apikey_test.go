@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-package qanapi_test
+package qanapiqanapisdkgolang_test
 
 import (
 	"context"
@@ -22,14 +22,14 @@ func TestAPIKeyRevoke(t *testing.T) {
 	if !testutil.CheckTestServer(t, baseURL) {
 		return
 	}
-	client := qanapi.NewClient(
+	client := qanapiqanapisdkgolang.NewClient(
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
 	)
 	_, err := client.APIKeys.Revoke(context.TODO(), "apiKey")
 	if err != nil {
-		var apierr *qanapi.Error
+		var apierr *qanapiqanapisdkgolang.Error
 		if errors.As(err, &apierr) {
 			t.Log(string(apierr.DumpRequest(true)))
 		}
@@ -46,14 +46,14 @@ func TestAPIKeyRotate(t *testing.T) {
 	if !testutil.CheckTestServer(t, baseURL) {
 		return
 	}
-	client := qanapi.NewClient(
+	client := qanapiqanapisdkgolang.NewClient(
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
 	)
 	_, err := client.APIKeys.Rotate(context.TODO(), "apiKey")
 	if err != nil {
-		var apierr *qanapi.Error
+		var apierr *qanapiqanapisdkgolang.Error
 		if errors.As(err, &apierr) {
 			t.Log(string(apierr.DumpRequest(true)))
 		}

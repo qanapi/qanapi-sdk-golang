@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-package qanapi_test
+package qanapiqanapisdkgolang_test
 
 import (
 	"context"
@@ -22,19 +22,19 @@ func TestDecryptDecryptPayloadWithOptionalParams(t *testing.T) {
 	if !testutil.CheckTestServer(t, baseURL) {
 		return
 	}
-	client := qanapi.NewClient(
+	client := qanapiqanapisdkgolang.NewClient(
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
 	)
-	_, err := client.Decrypt.DecryptPayload(context.TODO(), qanapi.DecryptDecryptPayloadParams{
-		Data: qanapi.DecryptDecryptPayloadParamsDataUnion{
-			OfString: qanapi.String("string"),
+	_, err := client.Decrypt.DecryptPayload(context.TODO(), qanapiqanapisdkgolang.DecryptDecryptPayloadParams{
+		Data: qanapiqanapisdkgolang.DecryptDecryptPayloadParamsDataUnion{
+			OfString: qanapiqanapisdkgolang.String("string"),
 		},
 		SensitiveFields: []string{"password"},
 	})
 	if err != nil {
-		var apierr *qanapi.Error
+		var apierr *qanapiqanapisdkgolang.Error
 		if errors.As(err, &apierr) {
 			t.Log(string(apierr.DumpRequest(true)))
 		}

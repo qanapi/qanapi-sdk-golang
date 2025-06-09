@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-package qanapi_test
+package qanapiqanapisdkgolang_test
 
 import (
 	"context"
@@ -22,17 +22,17 @@ func TestScopeNew(t *testing.T) {
 	if !testutil.CheckTestServer(t, baseURL) {
 		return
 	}
-	client := qanapi.NewClient(
+	client := qanapiqanapisdkgolang.NewClient(
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
 	)
-	_, err := client.Scopes.New(context.TODO(), qanapi.ScopeNewParams{
+	_, err := client.Scopes.New(context.TODO(), qanapiqanapisdkgolang.ScopeNewParams{
 		Name:  "read:secrets",
 		Route: "decrypt",
 	})
 	if err != nil {
-		var apierr *qanapi.Error
+		var apierr *qanapiqanapisdkgolang.Error
 		if errors.As(err, &apierr) {
 			t.Log(string(apierr.DumpRequest(true)))
 		}
@@ -49,14 +49,14 @@ func TestScopeGet(t *testing.T) {
 	if !testutil.CheckTestServer(t, baseURL) {
 		return
 	}
-	client := qanapi.NewClient(
+	client := qanapiqanapisdkgolang.NewClient(
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
 	)
 	_, err := client.Scopes.Get(context.TODO(), 0)
 	if err != nil {
-		var apierr *qanapi.Error
+		var apierr *qanapiqanapisdkgolang.Error
 		if errors.As(err, &apierr) {
 			t.Log(string(apierr.DumpRequest(true)))
 		}
@@ -73,7 +73,7 @@ func TestScopeUpdateWithOptionalParams(t *testing.T) {
 	if !testutil.CheckTestServer(t, baseURL) {
 		return
 	}
-	client := qanapi.NewClient(
+	client := qanapiqanapisdkgolang.NewClient(
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
@@ -81,13 +81,13 @@ func TestScopeUpdateWithOptionalParams(t *testing.T) {
 	_, err := client.Scopes.Update(
 		context.TODO(),
 		0,
-		qanapi.ScopeUpdateParams{
-			Name:  qanapi.String("read:secrets"),
-			Route: qanapi.String("decrypt"),
+		qanapiqanapisdkgolang.ScopeUpdateParams{
+			Name:  qanapiqanapisdkgolang.String("read:secrets"),
+			Route: qanapiqanapisdkgolang.String("decrypt"),
 		},
 	)
 	if err != nil {
-		var apierr *qanapi.Error
+		var apierr *qanapiqanapisdkgolang.Error
 		if errors.As(err, &apierr) {
 			t.Log(string(apierr.DumpRequest(true)))
 		}
@@ -104,14 +104,14 @@ func TestScopeList(t *testing.T) {
 	if !testutil.CheckTestServer(t, baseURL) {
 		return
 	}
-	client := qanapi.NewClient(
+	client := qanapiqanapisdkgolang.NewClient(
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
 	)
 	_, err := client.Scopes.List(context.TODO())
 	if err != nil {
-		var apierr *qanapi.Error
+		var apierr *qanapiqanapisdkgolang.Error
 		if errors.As(err, &apierr) {
 			t.Log(string(apierr.DumpRequest(true)))
 		}
@@ -128,14 +128,14 @@ func TestScopeDelete(t *testing.T) {
 	if !testutil.CheckTestServer(t, baseURL) {
 		return
 	}
-	client := qanapi.NewClient(
+	client := qanapiqanapisdkgolang.NewClient(
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
 	)
 	_, err := client.Scopes.Delete(context.TODO(), 0)
 	if err != nil {
-		var apierr *qanapi.Error
+		var apierr *qanapiqanapisdkgolang.Error
 		if errors.As(err, &apierr) {
 			t.Log(string(apierr.DumpRequest(true)))
 		}

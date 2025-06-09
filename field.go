@@ -1,4 +1,4 @@
-package qanapi
+package qanapiqanapisdkgolang
 
 import (
 	"github.com/qanapi/qanapi-sdk-golang/packages/param"
