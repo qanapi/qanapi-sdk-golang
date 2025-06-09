@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-package qanapi_test
+package qanapiqanapisdkgolang_test
 
 import (
 	"context"
@@ -22,17 +22,17 @@ func TestAuthLogin(t *testing.T) {
 	if !testutil.CheckTestServer(t, baseURL) {
 		return
 	}
-	client := qanapi.NewClient(
+	client := qanapiqanapisdkgolang.NewClient(
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
 	)
-	_, err := client.Auth.Login(context.TODO(), qanapi.AuthLoginParams{
+	_, err := client.Auth.Login(context.TODO(), qanapiqanapisdkgolang.AuthLoginParams{
 		Email:    "valid@email.com",
 		Password: "secret123",
 	})
 	if err != nil {
-		var apierr *qanapi.Error
+		var apierr *qanapiqanapisdkgolang.Error
 		if errors.As(err, &apierr) {
 			t.Log(string(apierr.DumpRequest(true)))
 		}
@@ -49,14 +49,14 @@ func TestAuthLogout(t *testing.T) {
 	if !testutil.CheckTestServer(t, baseURL) {
 		return
 	}
-	client := qanapi.NewClient(
+	client := qanapiqanapisdkgolang.NewClient(
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
 	)
 	_, err := client.Auth.Logout(context.TODO())
 	if err != nil {
-		var apierr *qanapi.Error
+		var apierr *qanapiqanapisdkgolang.Error
 		if errors.As(err, &apierr) {
 			t.Log(string(apierr.DumpRequest(true)))
 		}
@@ -73,14 +73,14 @@ func TestAuthRefreshToken(t *testing.T) {
 	if !testutil.CheckTestServer(t, baseURL) {
 		return
 	}
-	client := qanapi.NewClient(
+	client := qanapiqanapisdkgolang.NewClient(
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
 	)
 	_, err := client.Auth.RefreshToken(context.TODO())
 	if err != nil {
-		var apierr *qanapi.Error
+		var apierr *qanapiqanapisdkgolang.Error
 		if errors.As(err, &apierr) {
 			t.Log(string(apierr.DumpRequest(true)))
 		}
@@ -97,14 +97,14 @@ func TestAuthGetUserDetails(t *testing.T) {
 	if !testutil.CheckTestServer(t, baseURL) {
 		return
 	}
-	client := qanapi.NewClient(
+	client := qanapiqanapisdkgolang.NewClient(
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
 	)
 	_, err := client.Auth.GetUserDetails(context.TODO())
 	if err != nil {
-		var apierr *qanapi.Error
+		var apierr *qanapiqanapisdkgolang.Error
 		if errors.As(err, &apierr) {
 			t.Log(string(apierr.DumpRequest(true)))
 		}
@@ -121,14 +121,14 @@ func TestAuthRevokeToken(t *testing.T) {
 	if !testutil.CheckTestServer(t, baseURL) {
 		return
 	}
-	client := qanapi.NewClient(
+	client := qanapiqanapisdkgolang.NewClient(
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
 	)
 	_, err := client.Auth.RevokeToken(context.TODO())
 	if err != nil {
-		var apierr *qanapi.Error
+		var apierr *qanapiqanapisdkgolang.Error
 		if errors.As(err, &apierr) {
 			t.Log(string(apierr.DumpRequest(true)))
 		}

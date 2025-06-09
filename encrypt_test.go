@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-package qanapi_test
+package qanapiqanapisdkgolang_test
 
 import (
 	"context"
@@ -22,27 +22,27 @@ func TestEncryptEncryptDataWithOptionalParams(t *testing.T) {
 	if !testutil.CheckTestServer(t, baseURL) {
 		return
 	}
-	client := qanapi.NewClient(
+	client := qanapiqanapisdkgolang.NewClient(
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
 	)
-	_, err := client.Encrypt.EncryptData(context.TODO(), qanapi.EncryptEncryptDataParams{
-		Data: qanapi.EncryptEncryptDataParamsDataUnion{
-			OfString: qanapi.String("string"),
+	_, err := client.Encrypt.EncryptData(context.TODO(), qanapiqanapisdkgolang.EncryptEncryptDataParams{
+		Data: qanapiqanapisdkgolang.EncryptEncryptDataParamsDataUnion{
+			OfString: qanapiqanapisdkgolang.String("string"),
 		},
-		Access: qanapi.EncryptEncryptDataParamsAccess{
+		Access: qanapiqanapisdkgolang.EncryptEncryptDataParamsAccess{
 			ACL: []string{"admin"},
 		},
-		Attributes: qanapi.EncryptEncryptDataParamsAttributes{
+		Attributes: qanapiqanapisdkgolang.EncryptEncryptDataParamsAttributes{
 			Classification: "confidential",
-			Owner:          qanapi.String("alice@example.com"),
+			Owner:          qanapiqanapisdkgolang.String("alice@example.com"),
 			Tags:           []string{"legal"},
 		},
 		SensitiveFields: []string{"password"},
 	})
 	if err != nil {
-		var apierr *qanapi.Error
+		var apierr *qanapiqanapisdkgolang.Error
 		if errors.As(err, &apierr) {
 			t.Log(string(apierr.DumpRequest(true)))
 		}

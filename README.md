@@ -13,7 +13,7 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 ```go
 import (
-	"github.com/qanapi/qanapi-sdk-golang" // imported as qanapi
+	"github.com/qanapi/qanapi-sdk-golang" // imported as qanapiqanapisdkgolang
 )
 ```
 
@@ -49,11 +49,11 @@ import (
 )
 
 func main() {
-	client := qanapi.NewClient(
+	client := qanapiqanapisdkgolang.NewClient(
 		option.WithAPIKey("My API Key"),      // defaults to os.LookupEnv("QANAPI_API_KEY")
 		option.WithSubdomain("My-Subdomain"), // defaults to os.LookupEnv("QANAPI_SUBDOMAIN")
 	)
-	response, err := client.Auth.Login(context.TODO(), qanapi.AuthLoginParams{
+	response, err := client.Auth.Login(context.TODO(), qanapiqanapisdkgolang.AuthLoginParams{
 		Email:    "valid@email.com",
 		Password: "secret123",
 	})
@@ -67,13 +67,13 @@ func main() {
 
 ### Request fields
 
-The qanapi library uses the [`omitzero`](https://tip.golang.org/doc/go1.24#encodingjsonpkgencodingjson)
+The qanapiqanapisdkgolang library uses the [`omitzero`](https://tip.golang.org/doc/go1.24#encodingjsonpkgencodingjson)
 semantics from the Go 1.24+ `encoding/json` release for request fields.
 
 Required primitive fields (`int64`, `string`, etc.) feature the tag <code>\`json:"...,required"\`</code>. These
 fields are always serialized, even their zero values.
 
-Optional primitive types are wrapped in a `param.Opt[T]`. These fields can be set with the provided constructors, `qanapi.String(string)`, `qanapi.Int(int64)`, etc.
+Optional primitive types are wrapped in a `param.Opt[T]`. These fields can be set with the provided constructors, `qanapiqanapisdkgolang.String(string)`, `qanapiqanapisdkgolang.Int(int64)`, etc.
 
 Any `param.Opt[T]`, map, slice, struct or string enum uses the
 tag <code>\`json:"...,omitzero"\`</code>. Its zero value is considered omitted.
@@ -81,17 +81,17 @@ tag <code>\`json:"...,omitzero"\`</code>. Its zero value is considered omitted.
 The `param.IsOmitted(any)` function can confirm the presence of any `omitzero` field.
 
 ```go
-p := qanapi.ExampleParams{
-	ID:   "id_xxx",             // required property
-	Name: qanapi.String("..."), // optional property
+p := qanapiqanapisdkgolang.ExampleParams{
+	ID:   "id_xxx",                            // required property
+	Name: qanapiqanapisdkgolang.String("..."), // optional property
 
-	Point: qanapi.Point{
-		X: 0,             // required field will serialize as 0
-		Y: qanapi.Int(1), // optional field will serialize as 1
+	Point: qanapiqanapisdkgolang.Point{
+		X: 0,                            // required field will serialize as 0
+		Y: qanapiqanapisdkgolang.Int(1), // optional field will serialize as 1
 		// ... omitted non-required fields will not be serialized
 	},
 
-	Origin: qanapi.Origin{}, // the zero value of [Origin] is considered omitted
+	Origin: qanapiqanapisdkgolang.Origin{}, // the zero value of [Origin] is considered omitted
 }
 ```
 
@@ -120,7 +120,7 @@ p.SetExtraFields(map[string]any{
 })
 
 // Send a number instead of an object
-custom := param.Override[qanapi.FooParams](12)
+custom := param.Override[qanapiqanapisdkgolang.FooParams](12)
 ```
 
 ### Request unions
@@ -261,7 +261,7 @@ This library uses the functional options pattern. Functions defined in the
 requests. For example:
 
 ```go
-client := qanapi.NewClient(
+client := qanapiqanapisdkgolang.NewClient(
 	// Adds a header to every request made by the client
 	option.WithHeader("X-Some-Header", "custom_header_info"),
 )
@@ -288,19 +288,19 @@ with additional helper methods like `.GetNextPage()`, e.g.:
 ### Errors
 
 When the API returns a non-success status code, we return an error with type
-`*qanapi.Error`. This contains the `StatusCode`, `*http.Request`, and
+`*qanapiqanapisdkgolang.Error`. This contains the `StatusCode`, `*http.Request`, and
 `*http.Response` values of the request, as well as the JSON of the error body
 (much like other response objects in the SDK).
 
 To handle errors, we recommend that you use the `errors.As` pattern:
 
 ```go
-_, err := client.Auth.Login(context.TODO(), qanapi.AuthLoginParams{
+_, err := client.Auth.Login(context.TODO(), qanapiqanapisdkgolang.AuthLoginParams{
 	Email:    "valid@email.com",
 	Password: "secret123",
 })
 if err != nil {
-	var apierr *qanapi.Error
+	var apierr *qanapiqanapisdkgolang.Error
 	if errors.As(err, &apierr) {
 		println(string(apierr.DumpRequest(true)))  // Prints the serialized HTTP request
 		println(string(apierr.DumpResponse(true))) // Prints the serialized HTTP response
@@ -325,7 +325,7 @@ ctx, cancel := context.WithTimeout(context.Background(), 5*time.Minute)
 defer cancel()
 client.Auth.Login(
 	ctx,
-	qanapi.AuthLoginParams{
+	qanapiqanapisdkgolang.AuthLoginParams{
 		Email:    "valid@email.com",
 		Password: "secret123",
 	},
@@ -344,7 +344,7 @@ The file name and content-type can be customized by implementing `Name() string`
 string` on the run-time type of `io.Reader`. Note that `os.File` implements `Name() string`, so a
 file returned by `os.Open` will be sent with the file name on disk.
 
-We also provide a helper `qanapi.File(reader io.Reader, filename string, contentType string)`
+We also provide a helper `qanapiqanapisdkgolang.File(reader io.Reader, filename string, contentType string)`
 which can be used to wrap any `io.Reader` with the appropriate file name and content type.
 
 ### Retries
@@ -357,14 +357,14 @@ You can use the `WithMaxRetries` option to configure or disable this:
 
 ```go
 // Configure the default for all requests:
-client := qanapi.NewClient(
+client := qanapiqanapisdkgolang.NewClient(
 	option.WithMaxRetries(0), // default is 2
 )
 
 // Override per-request:
 client.Auth.Login(
 	context.TODO(),
-	qanapi.AuthLoginParams{
+	qanapiqanapisdkgolang.AuthLoginParams{
 		Email:    "valid@email.com",
 		Password: "secret123",
 	},
@@ -382,7 +382,7 @@ you need to examine response headers, status codes, or other details.
 var response *http.Response
 response, err := client.Auth.Login(
 	context.TODO(),
-	qanapi.AuthLoginParams{
+	qanapiqanapisdkgolang.AuthLoginParams{
 		Email:    "valid@email.com",
 		Password: "secret123",
 	},
@@ -432,7 +432,7 @@ or the `option.WithJSONSet()` methods.
 params := FooNewParams{
     ID:   "id_xxxx",
     Data: FooNewParamsData{
-        FirstName: qanapi.String("John"),
+        FirstName: qanapiqanapisdkgolang.String("John"),
     },
 }
 client.Foo.New(context.Background(), params, option.WithJSONSet("data.last_name", "Doe"))
@@ -467,7 +467,7 @@ func Logger(req *http.Request, next option.MiddlewareNext) (res *http.Response, 
     return res, err
 }
 
-client := qanapi.NewClient(
+client := qanapiqanapisdkgolang.NewClient(
 	option.WithMiddleware(Logger),
 )
 ```

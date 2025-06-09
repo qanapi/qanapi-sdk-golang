@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-package qanapi
+package qanapiqanapisdkgolang
 
 import (
 	"github.com/qanapi/qanapi-sdk-golang/internal/apierror"
