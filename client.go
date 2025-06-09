@@ -1,14 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-package qanapiqanapisdkgolang
+package qanapi
 
 import (
 	"context"
 	"net/http"
 	"os"
 
-	"github.com/qanapi/qanapi-sdk-golang/internal/requestconfig"
-	"github.com/qanapi/qanapi-sdk-golang/option"
+	"github.com/stainless-sdks/qanapi-go/internal/requestconfig"
+	"github.com/stainless-sdks/qanapi-go/option"
 )
 
 // Client creates a struct with services and top level methods that help with
