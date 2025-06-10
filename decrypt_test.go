@@ -29,7 +29,9 @@ func TestDecryptDecryptPayloadWithOptionalParams(t *testing.T) {
 	)
 	_, err := client.Decrypt.DecryptPayload(context.TODO(), qanapi.DecryptDecryptPayloadParams{
 		Data: qanapi.DecryptDecryptPayloadParamsDataUnion{
-			OfString: qanapi.String("string"),
+			OfAnyMap: map[string]any{
+				"password": "bar",
+			},
 		},
 		SensitiveFields: []string{"password"},
 	})
