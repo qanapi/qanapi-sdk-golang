@@ -42,24 +42,27 @@ func (r *EncryptService) EncryptData(ctx context.Context, body EncryptEncryptDat
 }
 
 // EncryptEncryptDataResponseUnion contains all possible properties and values from
-// [string], [float64], [[]any].
+// [string], [float64], [map[string]any], [[]any].
 //
 // Use the methods beginning with 'As' to cast the union to one of its variants.
 //
 // If the underlying value is not a json object, one of the following properties
-// will be valid: OfString OfFloat OfAnyArray]
+// will be valid: OfString OfFloat OfEncryptEncryptDataResponseMapItem OfAnyArray]
 type EncryptEncryptDataResponseUnion struct {
 	// This field will be present if the value is a [string] instead of an object.
 	OfString string `json:",inline"`
 	// This field will be present if the value is a [float64] instead of an object.
 	OfFloat float64 `json:",inline"`
+	// This field will be present if the value is a [any] instead of an object.
+	OfEncryptEncryptDataResponseMapItem any `json:",inline"`
 	// This field will be present if the value is a [[]any] instead of an object.
 	OfAnyArray []any `json:",inline"`
 	JSON       struct {
-		OfString   respjson.Field
-		OfFloat    respjson.Field
-		OfAnyArray respjson.Field
-		raw        string
+		OfString                            respjson.Field
+		OfFloat                             respjson.Field
+		OfEncryptEncryptDataResponseMapItem respjson.Field
+		OfAnyArray                          respjson.Field
+		raw                                 string
 	} `json:"-"`
 }
 
@@ -69,6 +72,11 @@ func (u EncryptEncryptDataResponseUnion) AsString() (v string) {
 }
 
 func (u EncryptEncryptDataResponseUnion) AsFloat() (v float64) {
+	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
+	return
+}
+
+func (u EncryptEncryptDataResponseUnion) AsAnyMap() (v map[string]any) {
 	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
 	return
 }
@@ -126,12 +134,13 @@ func (r *EncryptEncryptDataParams) UnmarshalJSON(data []byte) error {
 type EncryptEncryptDataParamsDataUnion struct {
 	OfString   param.Opt[string]  `json:",omitzero,inline"`
 	OfFloat    param.Opt[float64] `json:",omitzero,inline"`
+	OfAnyMap   map[string]any     `json:",omitzero,inline"`
 	OfAnyArray []any              `json:",omitzero,inline"`
 	paramUnion
 }
 
 func (u EncryptEncryptDataParamsDataUnion) MarshalJSON() ([]byte, error) {
-	return param.MarshalUnion(u, u.OfString, u.OfFloat, u.OfAnyArray)
+	return param.MarshalUnion(u, u.OfString, u.OfFloat, u.OfAnyMap, u.OfAnyArray)
 }
 func (u *EncryptEncryptDataParamsDataUnion) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, u)
@@ -142,6 +151,8 @@ func (u *EncryptEncryptDataParamsDataUnion) asAny() any {
 		return &u.OfString.Value
 	} else if !param.IsOmitted(u.OfFloat) {
 		return &u.OfFloat.Value
+	} else if !param.IsOmitted(u.OfAnyMap) {
+		return &u.OfAnyMap
 	} else if !param.IsOmitted(u.OfAnyArray) {
 		return &u.OfAnyArray
 	}
