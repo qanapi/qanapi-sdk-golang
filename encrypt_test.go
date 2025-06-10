@@ -29,7 +29,9 @@ func TestEncryptEncryptDataWithOptionalParams(t *testing.T) {
 	)
 	_, err := client.Encrypt.EncryptData(context.TODO(), qanapi.EncryptEncryptDataParams{
 		Data: qanapi.EncryptEncryptDataParamsDataUnion{
-			OfString: qanapi.String("string"),
+			OfAnyMap: map[string]any{
+				"password": "bar",
+			},
 		},
 		Access: qanapi.EncryptEncryptDataParamsAccess{
 			ACL: []string{"admin"},
