@@ -42,25 +42,33 @@ func (r *DecryptService) DecryptPayload(ctx context.Context, body DecryptDecrypt
 }
 
 // DecryptDecryptPayloadResponseUnion contains all possible properties and values
-// from [string], [[]any].
+// from [string], [map[string]any], [[]any].
 //
 // Use the methods beginning with 'As' to cast the union to one of its variants.
 //
 // If the underlying value is not a json object, one of the following properties
-// will be valid: OfString OfAnyArray]
+// will be valid: OfString OfDecryptDecryptPayloadResponseMapItem OfAnyArray]
 type DecryptDecryptPayloadResponseUnion struct {
 	// This field will be present if the value is a [string] instead of an object.
 	OfString string `json:",inline"`
+	// This field will be present if the value is a [any] instead of an object.
+	OfDecryptDecryptPayloadResponseMapItem any `json:",inline"`
 	// This field will be present if the value is a [[]any] instead of an object.
 	OfAnyArray []any `json:",inline"`
 	JSON       struct {
-		OfString   respjson.Field
-		OfAnyArray respjson.Field
-		raw        string
+		OfString                               respjson.Field
+		OfDecryptDecryptPayloadResponseMapItem respjson.Field
+		OfAnyArray                             respjson.Field
+		raw                                    string
 	} `json:"-"`
 }
 
 func (u DecryptDecryptPayloadResponseUnion) AsString() (v string) {
+	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
+	return
+}
+
+func (u DecryptDecryptPayloadResponseUnion) AsAnyMap() (v map[string]any) {
 	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
 	return
 }
@@ -109,12 +117,13 @@ func (r *DecryptDecryptPayloadParams) UnmarshalJSON(data []byte) error {
 // Use [param.IsOmitted] to confirm if a field is set.
 type DecryptDecryptPayloadParamsDataUnion struct {
 	OfString   param.Opt[string] `json:",omitzero,inline"`
+	OfAnyMap   map[string]any    `json:",omitzero,inline"`
 	OfAnyArray []any             `json:",omitzero,inline"`
 	paramUnion
 }
 
 func (u DecryptDecryptPayloadParamsDataUnion) MarshalJSON() ([]byte, error) {
-	return param.MarshalUnion(u, u.OfString, u.OfAnyArray)
+	return param.MarshalUnion(u, u.OfString, u.OfAnyMap, u.OfAnyArray)
 }
 func (u *DecryptDecryptPayloadParamsDataUnion) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, u)
@@ -123,6 +132,8 @@ func (u *DecryptDecryptPayloadParamsDataUnion) UnmarshalJSON(data []byte) error 
 func (u *DecryptDecryptPayloadParamsDataUnion) asAny() any {
 	if !param.IsOmitted(u.OfString) {
 		return &u.OfString.Value
+	} else if !param.IsOmitted(u.OfAnyMap) {
+		return &u.OfAnyMap
 	} else if !param.IsOmitted(u.OfAnyArray) {
 		return &u.OfAnyArray
 	}
