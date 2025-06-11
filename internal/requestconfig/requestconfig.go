@@ -18,10 +18,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/stainless-sdks/qanapi-go/internal"
-	"github.com/stainless-sdks/qanapi-go/internal/apierror"
-	"github.com/stainless-sdks/qanapi-go/internal/apiform"
-	"github.com/stainless-sdks/qanapi-go/internal/apiquery"
+	"github.com/qanapi/qanapi-sdk-golang/internal"
+	"github.com/qanapi/qanapi-sdk-golang/internal/apierror"
+	"github.com/qanapi/qanapi-sdk-golang/internal/apiform"
+	"github.com/qanapi/qanapi-sdk-golang/internal/apiquery"
 )
 
 func getDefaultHeaders() map[string]string {

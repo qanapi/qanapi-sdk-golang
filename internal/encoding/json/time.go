@@ -2,7 +2,7 @@
 package json
 
 import (
-	"github.com/stainless-sdks/qanapi-go/internal/encoding/json/shims"
+	"github.com/qanapi/qanapi-sdk-golang/internal/encoding/json/shims"
 	"reflect"
 	"time"
 )

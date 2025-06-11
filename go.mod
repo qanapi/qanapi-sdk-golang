@@ -1,4 +1,4 @@
-module github.com/stainless-sdks/qanapi-go
+module github.com/qanapi/qanapi-sdk-golang
 
 go 1.21
 

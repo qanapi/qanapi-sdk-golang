@@ -1,7 +1,7 @@
 package apiquery
 
 import (
-	"github.com/stainless-sdks/qanapi-go/packages/param"
+	"github.com/qanapi/qanapi-sdk-golang/packages/param"
 	"net/url"
 	"testing"
 	"time"

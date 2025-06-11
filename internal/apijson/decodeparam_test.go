@@ -3,8 +3,8 @@ package apijson_test
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/stainless-sdks/qanapi-go/internal/apijson"
-	"github.com/stainless-sdks/qanapi-go/packages/param"
+	"github.com/qanapi/qanapi-sdk-golang/internal/apijson"
+	"github.com/qanapi/qanapi-sdk-golang/packages/param"
 	"reflect"
 	"testing"
 )
