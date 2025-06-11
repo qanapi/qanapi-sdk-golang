@@ -27,7 +27,7 @@ func TestUsage(t *testing.T) {
 	)
 	response, err := client.Auth.Login(context.TODO(), qanapi.AuthLoginParams{
 		Email:    "valid@email.com",
-		Password: "secret123",
+		Password: "secret1234",
 	})
 	if err != nil {
 		t.Fatalf("err should be nil: %s", err.Error())

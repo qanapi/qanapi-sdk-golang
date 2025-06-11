@@ -55,7 +55,7 @@ func main() {
 	)
 	response, err := client.Auth.Login(context.TODO(), qanapi.AuthLoginParams{
 		Email:    "valid@email.com",
-		Password: "secret123",
+		Password: "secret1234",
 	})
 	if err != nil {
 		panic(err.Error())
@@ -297,7 +297,7 @@ To handle errors, we recommend that you use the `errors.As` pattern:
 ```go
 _, err := client.Auth.Login(context.TODO(), qanapi.AuthLoginParams{
 	Email:    "valid@email.com",
-	Password: "secret123",
+	Password: "secret1234",
 })
 if err != nil {
 	var apierr *qanapi.Error
@@ -327,7 +327,7 @@ client.Auth.Login(
 	ctx,
 	qanapi.AuthLoginParams{
 		Email:    "valid@email.com",
-		Password: "secret123",
+		Password: "secret1234",
 	},
 	// This sets the per-retry timeout
 	option.WithRequestTimeout(20*time.Second),
@@ -366,7 +366,7 @@ client.Auth.Login(
 	context.TODO(),
 	qanapi.AuthLoginParams{
 		Email:    "valid@email.com",
-		Password: "secret123",
+		Password: "secret1234",
 	},
 	option.WithMaxRetries(5),
 )
@@ -384,7 +384,7 @@ response, err := client.Auth.Login(
 	context.TODO(),
 	qanapi.AuthLoginParams{
 		Email:    "valid@email.com",
-		Password: "secret123",
+		Password: "secret1234",
 	},
 	option.WithResponseInto(&response),
 )
