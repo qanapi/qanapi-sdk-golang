@@ -1,6 +1,6 @@
 # Qanapi Go API Library
 
-<a href="https://pkg.go.dev/github.com/stainless-sdks/qanapi-go"><img src="https://pkg.go.dev/badge/github.com/stainless-sdks/qanapi-go.svg" alt="Go Reference"></a>
+<a href="https://pkg.go.dev/github.com/qanapi/qanapi-sdk-golang"><img src="https://pkg.go.dev/badge/github.com/qanapi/qanapi-sdk-golang.svg" alt="Go Reference"></a>
 
 The Qanapi Go library provides convenient access to the Qanapi REST API
 from applications written in Go.
@@ -9,17 +9,25 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 ## Installation
 
+<!-- x-release-please-start-version -->
+
 ```go
 import (
-	"github.com/stainless-sdks/qanapi-go" // imported as qanapi
+	"github.com/qanapi/qanapi-sdk-golang" // imported as qanapi
 )
 ```
 
+<!-- x-release-please-end -->
+
 Or to pin the version:
 
+<!-- x-release-please-start-version -->
+
 ```sh
-go get -u 'github.com/stainless-sdks/qanapi-go@v0.0.1-alpha.0'
+go get -u 'github.com/qanapi/qanapi-sdk-golang@v0.1.0-alpha.1'
 ```
+
+<!-- x-release-please-end -->
 
 ## Requirements
 
@@ -36,8 +44,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/stainless-sdks/qanapi-go"
-	"github.com/stainless-sdks/qanapi-go/option"
+	"github.com/qanapi/qanapi-sdk-golang"
+	"github.com/qanapi/qanapi-sdk-golang/option"
 )
 
 func main() {
@@ -47,7 +55,7 @@ func main() {
 	)
 	response, err := client.Auth.Login(context.TODO(), qanapi.AuthLoginParams{
 		Email:    "valid@email.com",
-		Password: "secret123",
+		Password: "secret1234",
 	})
 	if err != nil {
 		panic(err.Error())
@@ -266,7 +274,7 @@ client.Auth.Login(context.TODO(), ...,
 )
 ```
 
-See the [full list of request options](https://pkg.go.dev/github.com/stainless-sdks/qanapi-go/option).
+See the [full list of request options](https://pkg.go.dev/github.com/qanapi/qanapi-sdk-golang/option).
 
 ### Pagination
 
@@ -289,7 +297,7 @@ To handle errors, we recommend that you use the `errors.As` pattern:
 ```go
 _, err := client.Auth.Login(context.TODO(), qanapi.AuthLoginParams{
 	Email:    "valid@email.com",
-	Password: "secret123",
+	Password: "secret1234",
 })
 if err != nil {
 	var apierr *qanapi.Error
@@ -319,7 +327,7 @@ client.Auth.Login(
 	ctx,
 	qanapi.AuthLoginParams{
 		Email:    "valid@email.com",
-		Password: "secret123",
+		Password: "secret1234",
 	},
 	// This sets the per-retry timeout
 	option.WithRequestTimeout(20*time.Second),
@@ -358,7 +366,7 @@ client.Auth.Login(
 	context.TODO(),
 	qanapi.AuthLoginParams{
 		Email:    "valid@email.com",
-		Password: "secret123",
+		Password: "secret1234",
 	},
 	option.WithMaxRetries(5),
 )
@@ -376,7 +384,7 @@ response, err := client.Auth.Login(
 	context.TODO(),
 	qanapi.AuthLoginParams{
 		Email:    "valid@email.com",
-		Password: "secret123",
+		Password: "secret1234",
 	},
 	option.WithResponseInto(&response),
 )
@@ -484,7 +492,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/qanapi-go/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/qanapi/qanapi-sdk-golang/issues) with questions, bugs, or suggestions.
 
 ## Contributing
 

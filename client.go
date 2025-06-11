@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/stainless-sdks/qanapi-go/internal/requestconfig"
-	"github.com/stainless-sdks/qanapi-go/option"
+	"github.com/qanapi/qanapi-sdk-golang/internal/requestconfig"
+	"github.com/qanapi/qanapi-sdk-golang/option"
 )
 
 // Client creates a struct with services and top level methods that help with

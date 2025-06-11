@@ -7,9 +7,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/stainless-sdks/qanapi-go"
-	"github.com/stainless-sdks/qanapi-go/internal/testutil"
-	"github.com/stainless-sdks/qanapi-go/option"
+	"github.com/qanapi/qanapi-sdk-golang"
+	"github.com/qanapi/qanapi-sdk-golang/internal/testutil"
+	"github.com/qanapi/qanapi-sdk-golang/option"
 )
 
 func TestUsage(t *testing.T) {
@@ -27,7 +27,7 @@ func TestUsage(t *testing.T) {
 	)
 	response, err := client.Auth.Login(context.TODO(), qanapi.AuthLoginParams{
 		Email:    "valid@email.com",
-		Password: "secret123",
+		Password: "secret1234",
 	})
 	if err != nil {
 		t.Fatalf("err should be nil: %s", err.Error())

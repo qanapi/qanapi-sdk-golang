@@ -10,9 +10,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stainless-sdks/qanapi-go"
-	"github.com/stainless-sdks/qanapi-go/internal"
-	"github.com/stainless-sdks/qanapi-go/option"
+	"github.com/qanapi/qanapi-sdk-golang"
+	"github.com/qanapi/qanapi-sdk-golang/internal"
+	"github.com/qanapi/qanapi-sdk-golang/option"
 )
 
 type closureTransport struct {
@@ -41,7 +41,7 @@ func TestUserAgentHeader(t *testing.T) {
 	)
 	client.Auth.Login(context.Background(), qanapi.AuthLoginParams{
 		Email:    "valid@email.com",
-		Password: "secret123",
+		Password: "secret1234",
 	})
 	if userAgent != fmt.Sprintf("Qanapi/Go %s", internal.PackageVersion) {
 		t.Errorf("Expected User-Agent to be correct, but got: %#v", userAgent)
@@ -69,7 +69,7 @@ func TestRetryAfter(t *testing.T) {
 	)
 	_, err := client.Auth.Login(context.Background(), qanapi.AuthLoginParams{
 		Email:    "valid@email.com",
-		Password: "secret123",
+		Password: "secret1234",
 	})
 	if err == nil {
 		t.Error("Expected there to be a cancel error")
@@ -108,7 +108,7 @@ func TestDeleteRetryCountHeader(t *testing.T) {
 	)
 	_, err := client.Auth.Login(context.Background(), qanapi.AuthLoginParams{
 		Email:    "valid@email.com",
-		Password: "secret123",
+		Password: "secret1234",
 	})
 	if err == nil {
 		t.Error("Expected there to be a cancel error")
@@ -142,7 +142,7 @@ func TestOverwriteRetryCountHeader(t *testing.T) {
 	)
 	_, err := client.Auth.Login(context.Background(), qanapi.AuthLoginParams{
 		Email:    "valid@email.com",
-		Password: "secret123",
+		Password: "secret1234",
 	})
 	if err == nil {
 		t.Error("Expected there to be a cancel error")
@@ -175,7 +175,7 @@ func TestRetryAfterMs(t *testing.T) {
 	)
 	_, err := client.Auth.Login(context.Background(), qanapi.AuthLoginParams{
 		Email:    "valid@email.com",
-		Password: "secret123",
+		Password: "secret1234",
 	})
 	if err == nil {
 		t.Error("Expected there to be a cancel error")
@@ -202,7 +202,7 @@ func TestContextCancel(t *testing.T) {
 	cancel()
 	_, err := client.Auth.Login(cancelCtx, qanapi.AuthLoginParams{
 		Email:    "valid@email.com",
-		Password: "secret123",
+		Password: "secret1234",
 	})
 	if err == nil {
 		t.Error("Expected there to be a cancel error")
@@ -226,7 +226,7 @@ func TestContextCancelDelay(t *testing.T) {
 	defer cancel()
 	_, err := client.Auth.Login(cancelCtx, qanapi.AuthLoginParams{
 		Email:    "valid@email.com",
-		Password: "secret123",
+		Password: "secret1234",
 	})
 	if err == nil {
 		t.Error("expected there to be a cancel error")
@@ -256,7 +256,7 @@ func TestContextDeadline(t *testing.T) {
 		)
 		_, err := client.Auth.Login(deadlineCtx, qanapi.AuthLoginParams{
 			Email:    "valid@email.com",
-			Password: "secret123",
+			Password: "secret1234",
 		})
 		if err == nil {
 			t.Error("expected there to be a deadline error")

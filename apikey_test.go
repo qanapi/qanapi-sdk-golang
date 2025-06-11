@@ -8,9 +8,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/stainless-sdks/qanapi-go"
-	"github.com/stainless-sdks/qanapi-go/internal/testutil"
-	"github.com/stainless-sdks/qanapi-go/option"
+	"github.com/qanapi/qanapi-sdk-golang"
+	"github.com/qanapi/qanapi-sdk-golang/internal/testutil"
+	"github.com/qanapi/qanapi-sdk-golang/option"
 )
 
 func TestAPIKeyRevoke(t *testing.T) {

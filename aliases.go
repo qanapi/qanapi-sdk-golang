@@ -3,8 +3,8 @@
 package qanapi
 
 import (
-	"github.com/stainless-sdks/qanapi-go/internal/apierror"
-	"github.com/stainless-sdks/qanapi-go/packages/param"
+	"github.com/qanapi/qanapi-sdk-golang/internal/apierror"
+	"github.com/qanapi/qanapi-sdk-golang/packages/param"
 )
 
 // aliased to make [param.APIUnion] private when embedding
