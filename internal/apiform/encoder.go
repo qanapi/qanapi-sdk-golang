@@ -13,7 +13,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/stainless-sdks/qanapi-go/packages/param"
+	"github.com/qanapi/qanapi-sdk-golang/packages/param"
 )
 
 var encoders sync.Map // map[encoderEntry]encoderFunc

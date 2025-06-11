@@ -14,7 +14,7 @@ import (
 	"encoding"
 	"encoding/base64"
 	"fmt"
-	"github.com/stainless-sdks/qanapi-go/internal/encoding/json/shims"
+	"github.com/qanapi/qanapi-sdk-golang/internal/encoding/json/shims"
 	"reflect"
 	"strconv"
 	"strings"

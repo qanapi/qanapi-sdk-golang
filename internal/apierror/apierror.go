@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"net/http/httputil"
 
-	"github.com/stainless-sdks/qanapi-go/internal/apijson"
-	"github.com/stainless-sdks/qanapi-go/packages/respjson"
+	"github.com/qanapi/qanapi-sdk-golang/internal/apijson"
+	"github.com/qanapi/qanapi-sdk-golang/packages/respjson"
 )
 
 // Error represents an error that originates from the API, i.e. when a request is

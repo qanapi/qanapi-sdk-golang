@@ -3,8 +3,8 @@ package respjson_test
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/stainless-sdks/qanapi-go/internal/apijson"
-	rj "github.com/stainless-sdks/qanapi-go/packages/respjson"
+	"github.com/qanapi/qanapi-sdk-golang/internal/apijson"
+	rj "github.com/qanapi/qanapi-sdk-golang/packages/respjson"
 	"reflect"
 	"testing"
 )

@@ -10,9 +10,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stainless-sdks/qanapi-go"
-	"github.com/stainless-sdks/qanapi-go/internal"
-	"github.com/stainless-sdks/qanapi-go/option"
+	"github.com/qanapi/qanapi-sdk-golang"
+	"github.com/qanapi/qanapi-sdk-golang/internal"
+	"github.com/qanapi/qanapi-sdk-golang/option"
 )
 
 type closureTransport struct {
