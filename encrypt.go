@@ -41,110 +41,6 @@ func (r *EncryptService) EncryptData(ctx context.Context, body EncryptEncryptDat
 	return
 }
 
-// The property Data is required.
-type EncryptedDataParam struct {
-	// The actual data to encrypt.
-	//
-	//   - Can be a scalar (string/number), object, or array.
-	//   - If the value is an object or array, only the specified `sensitiveFields` are
-	//     encrypted.
-	Data   EncryptedDataDataUnionParam `json:"data,omitzero,required"`
-	Access EncryptedDataAccessParam    `json:"access,omitzero"`
-	// Optional metadata describing the data's context.
-	Attributes EncryptedDataAttributesParam `json:"attributes,omitzero"`
-	// Laravel-style dot-notated paths to fields that should be encrypted.
-	//
-	// Supports:
-	//
-	// - Dot notation for nested fields: `user.profile.ssn`
-	// - Wildcard `*` for arrays or dynamic keys: `users.*.token`
-	//
-	// Examples:
-	//
-	// - `password`
-	// - `user.credentials.secret`
-	// - `accounts.*.secret`
-	// - `teams.*.members.*.email`
-	SensitiveFields []string `json:"sensitiveFields,omitzero"`
-	paramObj
-}
-
-func (r EncryptedDataParam) MarshalJSON() (data []byte, err error) {
-	type shadow EncryptedDataParam
-	return param.MarshalObject(r, (*shadow)(&r))
-}
-func (r *EncryptedDataParam) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-// Only one field can be non-zero.
-//
-// Use [param.IsOmitted] to confirm if a field is set.
-type EncryptedDataDataUnionParam struct {
-	OfString   param.Opt[string]  `json:",omitzero,inline"`
-	OfFloat    param.Opt[float64] `json:",omitzero,inline"`
-	OfAnyMap   map[string]any     `json:",omitzero,inline"`
-	OfAnyArray []any              `json:",omitzero,inline"`
-	paramUnion
-}
-
-func (u EncryptedDataDataUnionParam) MarshalJSON() ([]byte, error) {
-	return param.MarshalUnion(u, u.OfString, u.OfFloat, u.OfAnyMap, u.OfAnyArray)
-}
-func (u *EncryptedDataDataUnionParam) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, u)
-}
-
-func (u *EncryptedDataDataUnionParam) asAny() any {
-	if !param.IsOmitted(u.OfString) {
-		return &u.OfString.Value
-	} else if !param.IsOmitted(u.OfFloat) {
-		return &u.OfFloat.Value
-	} else if !param.IsOmitted(u.OfAnyMap) {
-		return &u.OfAnyMap
-	} else if !param.IsOmitted(u.OfAnyArray) {
-		return &u.OfAnyArray
-	}
-	return nil
-}
-
-type EncryptedDataAccessParam struct {
-	// Access control list — list of user roles authorized to decrypt this data.
-	ACL []string `json:"acl,omitzero"`
-	paramObj
-}
-
-func (r EncryptedDataAccessParam) MarshalJSON() (data []byte, err error) {
-	type shadow EncryptedDataAccessParam
-	return param.MarshalObject(r, (*shadow)(&r))
-}
-func (r *EncryptedDataAccessParam) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-// Optional metadata describing the data's context.
-type EncryptedDataAttributesParam struct {
-	Owner param.Opt[string] `json:"owner,omitzero" format:"email"`
-	// Any of "public", "internal", "confidential", "restricted".
-	Classification string   `json:"classification,omitzero"`
-	Tags           []string `json:"tags,omitzero"`
-	paramObj
-}
-
-func (r EncryptedDataAttributesParam) MarshalJSON() (data []byte, err error) {
-	type shadow EncryptedDataAttributesParam
-	return param.MarshalObject(r, (*shadow)(&r))
-}
-func (r *EncryptedDataAttributesParam) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-func init() {
-	apijson.RegisterFieldValidator[EncryptedDataAttributesParam](
-		"classification", "public", "internal", "confidential", "restricted",
-	)
-}
-
 // EncryptEncryptDataResponseUnion contains all possible properties and values from
 // [string], [float64], [map[string]any], [[]any].
 //
@@ -198,13 +94,104 @@ func (r *EncryptEncryptDataResponseUnion) UnmarshalJSON(data []byte) error {
 }
 
 type EncryptEncryptDataParams struct {
-	EncryptedData EncryptedDataParam
+	// The actual data to encrypt.
+	//
+	//   - Can be a scalar (string/number), object, or array.
+	//   - If the value is an object or array, only the specified `sensitiveFields` are
+	//     encrypted.
+	Data   EncryptEncryptDataParamsDataUnion `json:"data,omitzero,required"`
+	Access EncryptEncryptDataParamsAccess    `json:"access,omitzero"`
+	// Optional metadata describing the data's context.
+	Attributes EncryptEncryptDataParamsAttributes `json:"attributes,omitzero"`
+	// Laravel-style dot-notated paths to fields that should be encrypted.
+	//
+	// Supports:
+	//
+	// - Dot notation for nested fields: `user.profile.ssn`
+	// - Wildcard `*` for arrays or dynamic keys: `users.*.token`
+	//
+	// Examples:
+	//
+	// - `password`
+	// - `user.credentials.secret`
+	// - `accounts.*.secret`
+	// - `teams.*.members.*.email`
+	SensitiveFields []string `json:"sensitiveFields,omitzero"`
 	paramObj
 }
 
 func (r EncryptEncryptDataParams) MarshalJSON() (data []byte, err error) {
-	return json.Marshal(r.EncryptedData)
+	type shadow EncryptEncryptDataParams
+	return param.MarshalObject(r, (*shadow)(&r))
 }
 func (r *EncryptEncryptDataParams) UnmarshalJSON(data []byte) error {
-	return json.Unmarshal(data, &r.EncryptedData)
+	return apijson.UnmarshalRoot(data, r)
+}
+
+// Only one field can be non-zero.
+//
+// Use [param.IsOmitted] to confirm if a field is set.
+type EncryptEncryptDataParamsDataUnion struct {
+	OfString   param.Opt[string]  `json:",omitzero,inline"`
+	OfFloat    param.Opt[float64] `json:",omitzero,inline"`
+	OfAnyMap   map[string]any     `json:",omitzero,inline"`
+	OfAnyArray []any              `json:",omitzero,inline"`
+	paramUnion
+}
+
+func (u EncryptEncryptDataParamsDataUnion) MarshalJSON() ([]byte, error) {
+	return param.MarshalUnion(u, u.OfString, u.OfFloat, u.OfAnyMap, u.OfAnyArray)
+}
+func (u *EncryptEncryptDataParamsDataUnion) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, u)
+}
+
+func (u *EncryptEncryptDataParamsDataUnion) asAny() any {
+	if !param.IsOmitted(u.OfString) {
+		return &u.OfString.Value
+	} else if !param.IsOmitted(u.OfFloat) {
+		return &u.OfFloat.Value
+	} else if !param.IsOmitted(u.OfAnyMap) {
+		return &u.OfAnyMap
+	} else if !param.IsOmitted(u.OfAnyArray) {
+		return &u.OfAnyArray
+	}
+	return nil
+}
+
+type EncryptEncryptDataParamsAccess struct {
+	// Access control list — list of user roles authorized to decrypt this data.
+	ACL []string `json:"acl,omitzero"`
+	paramObj
+}
+
+func (r EncryptEncryptDataParamsAccess) MarshalJSON() (data []byte, err error) {
+	type shadow EncryptEncryptDataParamsAccess
+	return param.MarshalObject(r, (*shadow)(&r))
+}
+func (r *EncryptEncryptDataParamsAccess) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+// Optional metadata describing the data's context.
+type EncryptEncryptDataParamsAttributes struct {
+	Owner param.Opt[string] `json:"owner,omitzero" format:"email"`
+	// Any of "public", "internal", "confidential", "restricted".
+	Classification string   `json:"classification,omitzero"`
+	Tags           []string `json:"tags,omitzero"`
+	paramObj
+}
+
+func (r EncryptEncryptDataParamsAttributes) MarshalJSON() (data []byte, err error) {
+	type shadow EncryptEncryptDataParamsAttributes
+	return param.MarshalObject(r, (*shadow)(&r))
+}
+func (r *EncryptEncryptDataParamsAttributes) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+func init() {
+	apijson.RegisterFieldValidator[EncryptEncryptDataParamsAttributes](
+		"classification", "public", "internal", "confidential", "restricted",
+	)
 }
