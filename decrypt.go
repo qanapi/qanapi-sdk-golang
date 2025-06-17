@@ -41,62 +41,6 @@ func (r *DecryptService) DecryptPayload(ctx context.Context, body DecryptDecrypt
 	return
 }
 
-// The property Data is required.
-type DecryptedPayloadParam struct {
-	// The encrypted payload to decrypt.
-	//
-	// - Can be a string or an object/array with encrypted fields.
-	// - Decryption is selective if `sensitiveFields` is provided.
-	Data DecryptedPayloadDataUnionParam `json:"data,omitzero,required"`
-	// Laravel-style dot-notated paths to fields to decrypt.
-	//
-	// - Same syntax and behavior as in EncryptRequest.
-	// - If omitted, all string values matching encryption prefix are attempted.
-	//
-	// Examples:
-	//
-	// - `user.ssn`
-	// - `employees.*.payroll.token`
-	SensitiveFields []string `json:"sensitiveFields,omitzero"`
-	paramObj
-}
-
-func (r DecryptedPayloadParam) MarshalJSON() (data []byte, err error) {
-	type shadow DecryptedPayloadParam
-	return param.MarshalObject(r, (*shadow)(&r))
-}
-func (r *DecryptedPayloadParam) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-// Only one field can be non-zero.
-//
-// Use [param.IsOmitted] to confirm if a field is set.
-type DecryptedPayloadDataUnionParam struct {
-	OfString   param.Opt[string] `json:",omitzero,inline"`
-	OfAnyMap   map[string]any    `json:",omitzero,inline"`
-	OfAnyArray []any             `json:",omitzero,inline"`
-	paramUnion
-}
-
-func (u DecryptedPayloadDataUnionParam) MarshalJSON() ([]byte, error) {
-	return param.MarshalUnion(u, u.OfString, u.OfAnyMap, u.OfAnyArray)
-}
-func (u *DecryptedPayloadDataUnionParam) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, u)
-}
-
-func (u *DecryptedPayloadDataUnionParam) asAny() any {
-	if !param.IsOmitted(u.OfString) {
-		return &u.OfString.Value
-	} else if !param.IsOmitted(u.OfAnyMap) {
-		return &u.OfAnyMap
-	} else if !param.IsOmitted(u.OfAnyArray) {
-		return &u.OfAnyArray
-	}
-	return nil
-}
-
 // DecryptDecryptPayloadResponseUnion contains all possible properties and values
 // from [string], [map[string]any], [[]any].
 //
@@ -142,13 +86,56 @@ func (r *DecryptDecryptPayloadResponseUnion) UnmarshalJSON(data []byte) error {
 }
 
 type DecryptDecryptPayloadParams struct {
-	DecryptedPayload DecryptedPayloadParam
+	// The encrypted payload to decrypt.
+	//
+	// - Can be a string or an object/array with encrypted fields.
+	// - Decryption is selective if `sensitiveFields` is provided.
+	Data DecryptDecryptPayloadParamsDataUnion `json:"data,omitzero,required"`
+	// Laravel-style dot-notated paths to fields to decrypt.
+	//
+	// - Same syntax and behavior as in EncryptRequest.
+	// - If omitted, all string values matching encryption prefix are attempted.
+	//
+	// Examples:
+	//
+	// - `user.ssn`
+	// - `employees.*.payroll.token`
+	SensitiveFields []string `json:"sensitiveFields,omitzero"`
 	paramObj
 }
 
 func (r DecryptDecryptPayloadParams) MarshalJSON() (data []byte, err error) {
-	return json.Marshal(r.DecryptedPayload)
+	type shadow DecryptDecryptPayloadParams
+	return param.MarshalObject(r, (*shadow)(&r))
 }
 func (r *DecryptDecryptPayloadParams) UnmarshalJSON(data []byte) error {
-	return json.Unmarshal(data, &r.DecryptedPayload)
+	return apijson.UnmarshalRoot(data, r)
+}
+
+// Only one field can be non-zero.
+//
+// Use [param.IsOmitted] to confirm if a field is set.
+type DecryptDecryptPayloadParamsDataUnion struct {
+	OfString   param.Opt[string] `json:",omitzero,inline"`
+	OfAnyMap   map[string]any    `json:",omitzero,inline"`
+	OfAnyArray []any             `json:",omitzero,inline"`
+	paramUnion
+}
+
+func (u DecryptDecryptPayloadParamsDataUnion) MarshalJSON() ([]byte, error) {
+	return param.MarshalUnion(u, u.OfString, u.OfAnyMap, u.OfAnyArray)
+}
+func (u *DecryptDecryptPayloadParamsDataUnion) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, u)
+}
+
+func (u *DecryptDecryptPayloadParamsDataUnion) asAny() any {
+	if !param.IsOmitted(u.OfString) {
+		return &u.OfString.Value
+	} else if !param.IsOmitted(u.OfAnyMap) {
+		return &u.OfAnyMap
+	} else if !param.IsOmitted(u.OfAnyArray) {
+		return &u.OfAnyArray
+	}
+	return nil
 }
