@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.1.0-alpha.3 (2025-06-17)
+
+Full Changelog: [v0.1.0-alpha.2...v0.1.0-alpha.3](https://github.com/qanapi/qanapi-sdk-golang/compare/v0.1.0-alpha.2...v0.1.0-alpha.3)
+
+### Features
+
+* **api:** update via SDK Studio ([54e2a0b](https://github.com/qanapi/qanapi-sdk-golang/commit/54e2a0b38fc5aaaaa41514b93991be8efa62de50))
+* **api:** update via SDK Studio ([39774a1](https://github.com/qanapi/qanapi-sdk-golang/commit/39774a15efa5775e6f57f504fc1178925fda950d))
+* **api:** update via SDK Studio ([aa16335](https://github.com/qanapi/qanapi-sdk-golang/commit/aa1633524e49ecb2dcbaee92182cb25a8cd75cee))
+* **api:** update via SDK Studio ([42edd0c](https://github.com/qanapi/qanapi-sdk-golang/commit/42edd0c7e477c17097d3e0f59fe1e50a3991818e))
+
 ## 0.1.0-alpha.2 (2025-06-17)
 
 Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/qanapi/qanapi-sdk-golang/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)
