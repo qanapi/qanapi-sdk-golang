@@ -42,16 +42,16 @@ func (r *EncryptService) EncryptData(ctx context.Context, body EncryptEncryptDat
 }
 
 // The property Data is required.
-type EncryptParam struct {
+type EncryptedDataParam struct {
 	// The actual data to encrypt.
 	//
 	//   - Can be a scalar (string/number), object, or array.
 	//   - If the value is an object or array, only the specified `sensitiveFields` are
 	//     encrypted.
-	Data   EncryptDataUnionParam `json:"data,omitzero,required"`
-	Access EncryptAccessParam    `json:"access,omitzero"`
+	Data   EncryptedDataDataUnionParam `json:"data,omitzero,required"`
+	Access EncryptedDataAccessParam    `json:"access,omitzero"`
 	// Optional metadata describing the data's context.
-	Attributes EncryptAttributesParam `json:"attributes,omitzero"`
+	Attributes EncryptedDataAttributesParam `json:"attributes,omitzero"`
 	// Laravel-style dot-notated paths to fields that should be encrypted.
 	//
 	// Supports:
@@ -69,18 +69,18 @@ type EncryptParam struct {
 	paramObj
 }
 
-func (r EncryptParam) MarshalJSON() (data []byte, err error) {
-	type shadow EncryptParam
+func (r EncryptedDataParam) MarshalJSON() (data []byte, err error) {
+	type shadow EncryptedDataParam
 	return param.MarshalObject(r, (*shadow)(&r))
 }
-func (r *EncryptParam) UnmarshalJSON(data []byte) error {
+func (r *EncryptedDataParam) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
 // Only one field can be non-zero.
 //
 // Use [param.IsOmitted] to confirm if a field is set.
-type EncryptDataUnionParam struct {
+type EncryptedDataDataUnionParam struct {
 	OfString   param.Opt[string]  `json:",omitzero,inline"`
 	OfFloat    param.Opt[float64] `json:",omitzero,inline"`
 	OfAnyMap   map[string]any     `json:",omitzero,inline"`
@@ -88,14 +88,14 @@ type EncryptDataUnionParam struct {
 	paramUnion
 }
 
-func (u EncryptDataUnionParam) MarshalJSON() ([]byte, error) {
+func (u EncryptedDataDataUnionParam) MarshalJSON() ([]byte, error) {
 	return param.MarshalUnion(u, u.OfString, u.OfFloat, u.OfAnyMap, u.OfAnyArray)
 }
-func (u *EncryptDataUnionParam) UnmarshalJSON(data []byte) error {
+func (u *EncryptedDataDataUnionParam) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, u)
 }
 
-func (u *EncryptDataUnionParam) asAny() any {
+func (u *EncryptedDataDataUnionParam) asAny() any {
 	if !param.IsOmitted(u.OfString) {
 		return &u.OfString.Value
 	} else if !param.IsOmitted(u.OfFloat) {
@@ -108,22 +108,22 @@ func (u *EncryptDataUnionParam) asAny() any {
 	return nil
 }
 
-type EncryptAccessParam struct {
+type EncryptedDataAccessParam struct {
 	// Access control list — list of user roles authorized to decrypt this data.
 	ACL []string `json:"acl,omitzero"`
 	paramObj
 }
 
-func (r EncryptAccessParam) MarshalJSON() (data []byte, err error) {
-	type shadow EncryptAccessParam
+func (r EncryptedDataAccessParam) MarshalJSON() (data []byte, err error) {
+	type shadow EncryptedDataAccessParam
 	return param.MarshalObject(r, (*shadow)(&r))
 }
-func (r *EncryptAccessParam) UnmarshalJSON(data []byte) error {
+func (r *EncryptedDataAccessParam) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
 // Optional metadata describing the data's context.
-type EncryptAttributesParam struct {
+type EncryptedDataAttributesParam struct {
 	Owner param.Opt[string] `json:"owner,omitzero" format:"email"`
 	// Any of "public", "internal", "confidential", "restricted".
 	Classification string   `json:"classification,omitzero"`
@@ -131,16 +131,16 @@ type EncryptAttributesParam struct {
 	paramObj
 }
 
-func (r EncryptAttributesParam) MarshalJSON() (data []byte, err error) {
-	type shadow EncryptAttributesParam
+func (r EncryptedDataAttributesParam) MarshalJSON() (data []byte, err error) {
+	type shadow EncryptedDataAttributesParam
 	return param.MarshalObject(r, (*shadow)(&r))
 }
-func (r *EncryptAttributesParam) UnmarshalJSON(data []byte) error {
+func (r *EncryptedDataAttributesParam) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
 func init() {
-	apijson.RegisterFieldValidator[EncryptAttributesParam](
+	apijson.RegisterFieldValidator[EncryptedDataAttributesParam](
 		"classification", "public", "internal", "confidential", "restricted",
 	)
 }
@@ -198,13 +198,13 @@ func (r *EncryptEncryptDataResponseUnion) UnmarshalJSON(data []byte) error {
 }
 
 type EncryptEncryptDataParams struct {
-	Encrypt EncryptParam
+	EncryptedData EncryptedDataParam
 	paramObj
 }
 
 func (r EncryptEncryptDataParams) MarshalJSON() (data []byte, err error) {
-	return json.Marshal(r.Encrypt)
+	return json.Marshal(r.EncryptedData)
 }
 func (r *EncryptEncryptDataParams) UnmarshalJSON(data []byte) error {
-	return json.Unmarshal(data, &r.Encrypt)
+	return json.Unmarshal(data, &r.EncryptedData)
 }

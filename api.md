@@ -20,7 +20,7 @@ Methods:
 
 Params Types:
 
-- <a href="https://pkg.go.dev/github.com/qanapi/qanapi-sdk-golang">qanapi</a>.<a href="https://pkg.go.dev/github.com/qanapi/qanapi-sdk-golang#EncryptParam">EncryptParam</a>
+- <a href="https://pkg.go.dev/github.com/qanapi/qanapi-sdk-golang">qanapi</a>.<a href="https://pkg.go.dev/github.com/qanapi/qanapi-sdk-golang#EncryptedDataParam">EncryptedDataParam</a>
 
 Response Types:
 
@@ -34,7 +34,7 @@ Methods:
 
 Params Types:
 
-- <a href="https://pkg.go.dev/github.com/qanapi/qanapi-sdk-golang">qanapi</a>.<a href="https://pkg.go.dev/github.com/qanapi/qanapi-sdk-golang#DecryptParam">DecryptParam</a>
+- <a href="https://pkg.go.dev/github.com/qanapi/qanapi-sdk-golang">qanapi</a>.<a href="https://pkg.go.dev/github.com/qanapi/qanapi-sdk-golang#DecryptedPayloadParam">DecryptedPayloadParam</a>
 
 Response Types:
 
