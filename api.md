@@ -34,7 +34,7 @@ Methods:
 
 Params Types:
 
-- <a href="https://pkg.go.dev/github.com/qanapi/qanapi-sdk-golang">qanapi</a>.<a href="https://pkg.go.dev/github.com/qanapi/qanapi-sdk-golang#DescryptParam">DescryptParam</a>
+- <a href="https://pkg.go.dev/github.com/qanapi/qanapi-sdk-golang">qanapi</a>.<a href="https://pkg.go.dev/github.com/qanapi/qanapi-sdk-golang#DecryptParam">DecryptParam</a>
 
 Response Types:
 

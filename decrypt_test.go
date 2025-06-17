@@ -28,8 +28,8 @@ func TestDecryptDecryptPayloadWithOptionalParams(t *testing.T) {
 		option.WithSubdomain("My-Subdomain"),
 	)
 	_, err := client.Decrypt.DecryptPayload(context.TODO(), qanapi.DecryptDecryptPayloadParams{
-		Descrypt: qanapi.DescryptParam{
-			Data: qanapi.DescryptDataUnionParam{
+		Decrypt: qanapi.DecryptParam{
+			Data: qanapi.DecryptDataUnionParam{
 				OfAnyMap: map[string]any{
 					"password": "bar",
 				},

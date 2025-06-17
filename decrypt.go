@@ -42,12 +42,12 @@ func (r *DecryptService) DecryptPayload(ctx context.Context, body DecryptDecrypt
 }
 
 // The property Data is required.
-type DescryptParam struct {
+type DecryptParam struct {
 	// The encrypted payload to decrypt.
 	//
 	// - Can be a string or an object/array with encrypted fields.
 	// - Decryption is selective if `sensitiveFields` is provided.
-	Data DescryptDataUnionParam `json:"data,omitzero,required"`
+	Data DecryptDataUnionParam `json:"data,omitzero,required"`
 	// Laravel-style dot-notated paths to fields to decrypt.
 	//
 	// - Same syntax and behavior as in EncryptRequest.
@@ -61,32 +61,32 @@ type DescryptParam struct {
 	paramObj
 }
 
-func (r DescryptParam) MarshalJSON() (data []byte, err error) {
-	type shadow DescryptParam
+func (r DecryptParam) MarshalJSON() (data []byte, err error) {
+	type shadow DecryptParam
 	return param.MarshalObject(r, (*shadow)(&r))
 }
-func (r *DescryptParam) UnmarshalJSON(data []byte) error {
+func (r *DecryptParam) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
 // Only one field can be non-zero.
 //
 // Use [param.IsOmitted] to confirm if a field is set.
-type DescryptDataUnionParam struct {
+type DecryptDataUnionParam struct {
 	OfString   param.Opt[string] `json:",omitzero,inline"`
 	OfAnyMap   map[string]any    `json:",omitzero,inline"`
 	OfAnyArray []any             `json:",omitzero,inline"`
 	paramUnion
 }
 
-func (u DescryptDataUnionParam) MarshalJSON() ([]byte, error) {
+func (u DecryptDataUnionParam) MarshalJSON() ([]byte, error) {
 	return param.MarshalUnion(u, u.OfString, u.OfAnyMap, u.OfAnyArray)
 }
-func (u *DescryptDataUnionParam) UnmarshalJSON(data []byte) error {
+func (u *DecryptDataUnionParam) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, u)
 }
 
-func (u *DescryptDataUnionParam) asAny() any {
+func (u *DecryptDataUnionParam) asAny() any {
 	if !param.IsOmitted(u.OfString) {
 		return &u.OfString.Value
 	} else if !param.IsOmitted(u.OfAnyMap) {
@@ -142,13 +142,13 @@ func (r *DecryptDecryptPayloadResponseUnion) UnmarshalJSON(data []byte) error {
 }
 
 type DecryptDecryptPayloadParams struct {
-	Descrypt DescryptParam
+	Decrypt DecryptParam
 	paramObj
 }
 
 func (r DecryptDecryptPayloadParams) MarshalJSON() (data []byte, err error) {
-	return json.Marshal(r.Descrypt)
+	return json.Marshal(r.Decrypt)
 }
 func (r *DecryptDecryptPayloadParams) UnmarshalJSON(data []byte) error {
-	return json.Unmarshal(data, &r.Descrypt)
+	return json.Unmarshal(data, &r.Decrypt)
 }
