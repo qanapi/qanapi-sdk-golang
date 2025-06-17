@@ -18,6 +18,10 @@ Methods:
 
 # Encrypt
 
+Params Types:
+
+- <a href="https://pkg.go.dev/github.com/qanapi/qanapi-sdk-golang">qanapi</a>.<a href="https://pkg.go.dev/github.com/qanapi/qanapi-sdk-golang#EncryptParam">EncryptParam</a>
+
 Response Types:
 
 - <a href="https://pkg.go.dev/github.com/qanapi/qanapi-sdk-golang">qanapi</a>.<a href="https://pkg.go.dev/github.com/qanapi/qanapi-sdk-golang#EncryptEncryptDataResponseUnion">EncryptEncryptDataResponseUnion</a>
@@ -27,6 +31,10 @@ Methods:
 - <code title="post /encrypt">client.Encrypt.<a href="https://pkg.go.dev/github.com/qanapi/qanapi-sdk-golang#EncryptService.EncryptData">EncryptData</a>(ctx <a href="https://pkg.go.dev/context">context</a>.<a href="https://pkg.go.dev/context#Context">Context</a>, body <a href="https://pkg.go.dev/github.com/qanapi/qanapi-sdk-golang">qanapi</a>.<a href="https://pkg.go.dev/github.com/qanapi/qanapi-sdk-golang#EncryptEncryptDataParams">EncryptEncryptDataParams</a>) (<a href="https://pkg.go.dev/github.com/qanapi/qanapi-sdk-golang">qanapi</a>.<a href="https://pkg.go.dev/github.com/qanapi/qanapi-sdk-golang#EncryptEncryptDataResponseUnion">EncryptEncryptDataResponseUnion</a>, <a href="https://pkg.go.dev/builtin#error">error</a>)</code>
 
 # Decrypt
+
+Params Types:
+
+- <a href="https://pkg.go.dev/github.com/qanapi/qanapi-sdk-golang">qanapi</a>.<a href="https://pkg.go.dev/github.com/qanapi/qanapi-sdk-golang#DescryptParam">DescryptParam</a>
 
 Response Types:
 

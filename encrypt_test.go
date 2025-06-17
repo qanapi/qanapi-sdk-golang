@@ -28,20 +28,22 @@ func TestEncryptEncryptDataWithOptionalParams(t *testing.T) {
 		option.WithSubdomain("My-Subdomain"),
 	)
 	_, err := client.Encrypt.EncryptData(context.TODO(), qanapi.EncryptEncryptDataParams{
-		Data: qanapi.EncryptEncryptDataParamsDataUnion{
-			OfAnyMap: map[string]any{
-				"password": "bar",
+		Encrypt: qanapi.EncryptParam{
+			Data: qanapi.EncryptDataUnionParam{
+				OfAnyMap: map[string]any{
+					"password": "bar",
+				},
 			},
+			Access: qanapi.EncryptAccessParam{
+				ACL: []string{"admin"},
+			},
+			Attributes: qanapi.EncryptAttributesParam{
+				Classification: "confidential",
+				Owner:          qanapi.String("alice@example.com"),
+				Tags:           []string{"legal"},
+			},
+			SensitiveFields: []string{"password"},
 		},
-		Access: qanapi.EncryptEncryptDataParamsAccess{
-			ACL: []string{"admin"},
-		},
-		Attributes: qanapi.EncryptEncryptDataParamsAttributes{
-			Classification: "confidential",
-			Owner:          qanapi.String("alice@example.com"),
-			Tags:           []string{"legal"},
-		},
-		SensitiveFields: []string{"password"},
 	})
 	if err != nil {
 		var apierr *qanapi.Error

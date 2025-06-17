@@ -41,6 +41,62 @@ func (r *DecryptService) DecryptPayload(ctx context.Context, body DecryptDecrypt
 	return
 }
 
+// The property Data is required.
+type DescryptParam struct {
+	// The encrypted payload to decrypt.
+	//
+	// - Can be a string or an object/array with encrypted fields.
+	// - Decryption is selective if `sensitiveFields` is provided.
+	Data DescryptDataUnionParam `json:"data,omitzero,required"`
+	// Laravel-style dot-notated paths to fields to decrypt.
+	//
+	// - Same syntax and behavior as in EncryptRequest.
+	// - If omitted, all string values matching encryption prefix are attempted.
+	//
+	// Examples:
+	//
+	// - `user.ssn`
+	// - `employees.*.payroll.token`
+	SensitiveFields []string `json:"sensitiveFields,omitzero"`
+	paramObj
+}
+
+func (r DescryptParam) MarshalJSON() (data []byte, err error) {
+	type shadow DescryptParam
+	return param.MarshalObject(r, (*shadow)(&r))
+}
+func (r *DescryptParam) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+// Only one field can be non-zero.
+//
+// Use [param.IsOmitted] to confirm if a field is set.
+type DescryptDataUnionParam struct {
+	OfString   param.Opt[string] `json:",omitzero,inline"`
+	OfAnyMap   map[string]any    `json:",omitzero,inline"`
+	OfAnyArray []any             `json:",omitzero,inline"`
+	paramUnion
+}
+
+func (u DescryptDataUnionParam) MarshalJSON() ([]byte, error) {
+	return param.MarshalUnion(u, u.OfString, u.OfAnyMap, u.OfAnyArray)
+}
+func (u *DescryptDataUnionParam) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, u)
+}
+
+func (u *DescryptDataUnionParam) asAny() any {
+	if !param.IsOmitted(u.OfString) {
+		return &u.OfString.Value
+	} else if !param.IsOmitted(u.OfAnyMap) {
+		return &u.OfAnyMap
+	} else if !param.IsOmitted(u.OfAnyArray) {
+		return &u.OfAnyArray
+	}
+	return nil
+}
+
 // DecryptDecryptPayloadResponseUnion contains all possible properties and values
 // from [string], [map[string]any], [[]any].
 //
@@ -86,56 +142,13 @@ func (r *DecryptDecryptPayloadResponseUnion) UnmarshalJSON(data []byte) error {
 }
 
 type DecryptDecryptPayloadParams struct {
-	// The encrypted payload to decrypt.
-	//
-	// - Can be a string or an object/array with encrypted fields.
-	// - Decryption is selective if `sensitiveFields` is provided.
-	Data DecryptDecryptPayloadParamsDataUnion `json:"data,omitzero,required"`
-	// Laravel-style dot-notated paths to fields to decrypt.
-	//
-	// - Same syntax and behavior as in EncryptRequest.
-	// - If omitted, all string values matching encryption prefix are attempted.
-	//
-	// Examples:
-	//
-	// - `user.ssn`
-	// - `employees.*.payroll.token`
-	SensitiveFields []string `json:"sensitiveFields,omitzero"`
+	Descrypt DescryptParam
 	paramObj
 }
 
 func (r DecryptDecryptPayloadParams) MarshalJSON() (data []byte, err error) {
-	type shadow DecryptDecryptPayloadParams
-	return param.MarshalObject(r, (*shadow)(&r))
+	return json.Marshal(r.Descrypt)
 }
 func (r *DecryptDecryptPayloadParams) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-// Only one field can be non-zero.
-//
-// Use [param.IsOmitted] to confirm if a field is set.
-type DecryptDecryptPayloadParamsDataUnion struct {
-	OfString   param.Opt[string] `json:",omitzero,inline"`
-	OfAnyMap   map[string]any    `json:",omitzero,inline"`
-	OfAnyArray []any             `json:",omitzero,inline"`
-	paramUnion
-}
-
-func (u DecryptDecryptPayloadParamsDataUnion) MarshalJSON() ([]byte, error) {
-	return param.MarshalUnion(u, u.OfString, u.OfAnyMap, u.OfAnyArray)
-}
-func (u *DecryptDecryptPayloadParamsDataUnion) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, u)
-}
-
-func (u *DecryptDecryptPayloadParamsDataUnion) asAny() any {
-	if !param.IsOmitted(u.OfString) {
-		return &u.OfString.Value
-	} else if !param.IsOmitted(u.OfAnyMap) {
-		return &u.OfAnyMap
-	} else if !param.IsOmitted(u.OfAnyArray) {
-		return &u.OfAnyArray
-	}
-	return nil
+	return json.Unmarshal(data, &r.Descrypt)
 }
