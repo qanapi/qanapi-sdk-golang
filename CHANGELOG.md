@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.0 (2025-06-18)
+
+Full Changelog: [v1.0.2...v1.1.0](https://github.com/qanapi/qanapi-sdk-golang/compare/v1.0.2...v1.1.0)
+
+### Features
+
+* **api:** update via SDK Studio ([a09c69b](https://github.com/qanapi/qanapi-sdk-golang/commit/a09c69bc8328e06d32d984cf2b1172d3839695ae))
+
 ## 1.0.2 (2025-06-18)
 
 Full Changelog: [v1.0.1...v1.0.2](https://github.com/qanapi/qanapi-sdk-golang/compare/v1.0.1...v1.0.2)
