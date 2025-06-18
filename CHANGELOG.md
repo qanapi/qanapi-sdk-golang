@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1 (2025-06-18)
+
+Full Changelog: [v1.0.0...v1.0.1](https://github.com/qanapi/qanapi-sdk-golang/compare/v1.0.0...v1.0.1)
+
 ## 1.0.0 (2025-06-17)
 
 Full Changelog: [v0.1.0-alpha.3...v1.0.0](https://github.com/qanapi/qanapi-sdk-golang/compare/v0.1.0-alpha.3...v1.0.0)
