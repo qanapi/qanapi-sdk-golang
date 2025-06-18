@@ -2,7 +2,7 @@
 
 <a href="https://pkg.go.dev/github.com/qanapi/qanapi-sdk-golang"><img src="https://pkg.go.dev/badge/github.com/qanapi/qanapi-sdk-golang.svg" alt="Go Reference"></a>
 
-The Qanapi Go library provides convenient access to the Qanapi REST API
+The Qanapi Go library provides convenient access to the [Qanapi REST API](https://www.qanapi.com/docs)
 from applications written in Go.
 
 It is generated with [Stainless](https://www.stainless.com/).
