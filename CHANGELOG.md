@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.2.0 (2025-06-21)
+
+Full Changelog: [v1.1.0...v1.2.0](https://github.com/qanapi/qanapi-sdk-golang/compare/v1.1.0...v1.2.0)
+
+### Features
+
+* **client:** add escape hatch for null slice & maps ([ed15113](https://github.com/qanapi/qanapi-sdk-golang/commit/ed151130b862eba95c67d763c334bf7b5fad277e))
+
 ## 1.1.0 (2025-06-18)
 
 Full Changelog: [v1.0.2...v1.1.0](https://github.com/qanapi/qanapi-sdk-golang/compare/v1.0.2...v1.1.0)
