@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.2.1 (2025-06-28)
+
+Full Changelog: [v1.2.0...v1.2.1](https://github.com/qanapi/qanapi-sdk-golang/compare/v1.2.0...v1.2.1)
+
+### Bug Fixes
+
+* don't try to deserialize as json when ResponseBodyInto is []byte ([f90bb33](https://github.com/qanapi/qanapi-sdk-golang/commit/f90bb339a34f340faee8a7c1c1e3c93caa064e96))
+
 ## 1.2.0 (2025-06-21)
 
 Full Changelog: [v1.1.0...v1.2.0](https://github.com/qanapi/qanapi-sdk-golang/compare/v1.1.0...v1.2.0)
