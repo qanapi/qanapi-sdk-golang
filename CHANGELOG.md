@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.2.2 (2025-06-28)
+
+Full Changelog: [v1.2.1...v1.2.2](https://github.com/qanapi/qanapi-sdk-golang/compare/v1.2.1...v1.2.2)
+
+### Chores
+
+* **ci:** only run for pushes and fork pull requests ([19fc92f](https://github.com/qanapi/qanapi-sdk-golang/commit/19fc92f47168bc13bcac7f8e23c6a54a629c100e))
+
 ## 1.2.1 (2025-06-28)
 
 Full Changelog: [v1.2.0...v1.2.1](https://github.com/qanapi/qanapi-sdk-golang/compare/v1.2.0...v1.2.1)
