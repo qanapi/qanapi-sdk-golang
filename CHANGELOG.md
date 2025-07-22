@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.2.3 (2025-07-22)
+
+Full Changelog: [v1.2.2...v1.2.3](https://github.com/qanapi/qanapi-sdk-golang/compare/v1.2.2...v1.2.3)
+
+### Bug Fixes
+
+* **client:** process custom base url ahead of time ([245ff2f](https://github.com/qanapi/qanapi-sdk-golang/commit/245ff2f918ff5a5c68b9c4104fb09d48218dd7f3))
+
+
+### Chores
+
+* **internal:** fix lint script for tests ([5a87ead](https://github.com/qanapi/qanapi-sdk-golang/commit/5a87ead5d473e91d3022f8e85c61bebcca9288bc))
+* lint tests ([dcbe727](https://github.com/qanapi/qanapi-sdk-golang/commit/dcbe727013954389f90e6ba885d30e1c2c398a42))
+* lint tests in subpackages ([3ecf50d](https://github.com/qanapi/qanapi-sdk-golang/commit/3ecf50d39315c9059d0e8ba28d78f19ff983215e))
+
 ## 1.2.2 (2025-06-28)
 
 Full Changelog: [v1.2.1...v1.2.2](https://github.com/qanapi/qanapi-sdk-golang/compare/v1.2.1...v1.2.2)
