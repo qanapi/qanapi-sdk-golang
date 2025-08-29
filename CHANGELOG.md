@@ -1,5 +1,25 @@
 # Changelog
 
+## 1.3.0 (2025-08-29)
+
+Full Changelog: [v1.2.3...v1.3.0](https://github.com/qanapi/qanapi-sdk-golang/compare/v1.2.3...v1.3.0)
+
+### Features
+
+* **client:** support optional json html escaping ([c58929a](https://github.com/qanapi/qanapi-sdk-golang/commit/c58929a0e81ee23c16ff6cfeae4619f3f4978a5f))
+
+
+### Bug Fixes
+
+* close body before retrying ([d2d7170](https://github.com/qanapi/qanapi-sdk-golang/commit/d2d7170fd384d047139feeaa3361430bb84033ec))
+
+
+### Chores
+
+* **internal:** codegen related update ([f235a13](https://github.com/qanapi/qanapi-sdk-golang/commit/f235a13b42eb5fb0e4fd57c1a3c22b5601897c1f))
+* **internal:** update comment in script ([26a9cf1](https://github.com/qanapi/qanapi-sdk-golang/commit/26a9cf113e98262c59182009e344c59f684741b7))
+* update @stainless-api/prism-cli to v5.15.0 ([4180da9](https://github.com/qanapi/qanapi-sdk-golang/commit/4180da96c08545170092168a1935f80dc1418be2))
+
 ## 1.2.3 (2025-07-22)
 
 Full Changelog: [v1.2.2...v1.2.3](https://github.com/qanapi/qanapi-sdk-golang/compare/v1.2.2...v1.2.3)
