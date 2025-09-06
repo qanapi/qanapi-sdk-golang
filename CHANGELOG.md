@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.3.1 (2025-09-06)
+
+Full Changelog: [v1.3.0...v1.3.1](https://github.com/qanapi/qanapi-sdk-golang/compare/v1.3.0...v1.3.1)
+
+### Bug Fixes
+
+* **internal:** unmarshal correctly when there are multiple discriminators ([53ff2e2](https://github.com/qanapi/qanapi-sdk-golang/commit/53ff2e2786b17d8f1e606ab46770fde1c6cfce85))
+
+
+### Chores
+
+* **internal:** codegen related update ([df66538](https://github.com/qanapi/qanapi-sdk-golang/commit/df66538c8c1844a615d32a682631f466589e33e9))
+
 ## 1.3.0 (2025-08-29)
 
 Full Changelog: [v1.2.3...v1.3.0](https://github.com/qanapi/qanapi-sdk-golang/compare/v1.2.3...v1.3.0)
