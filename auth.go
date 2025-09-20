@@ -5,6 +5,7 @@ package qanapi
 import (
 	"context"
 	"net/http"
+	"slices"
 	"time"
 
 	"github.com/qanapi/qanapi-sdk-golang/internal/apijson"
@@ -35,7 +36,7 @@ func NewAuthService(opts ...option.RequestOption) (r AuthService) {
 
 // Authenticate user and return JWT
 func (r *AuthService) Login(ctx context.Context, body AuthLoginParams, opts ...option.RequestOption) (res *AuthLoginResponse, err error) {
-	opts = append(r.Options[:], opts...)
+	opts = slices.Concat(r.Options, opts)
 	path := "auth/login"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
 	return
@@ -43,7 +44,7 @@ func (r *AuthService) Login(ctx context.Context, body AuthLoginParams, opts ...o
 
 // Log out the current user
 func (r *AuthService) Logout(ctx context.Context, opts ...option.RequestOption) (res *AuthLogoutResponse, err error) {
-	opts = append(r.Options[:], opts...)
+	opts = slices.Concat(r.Options, opts)
 	path := "auth/logout"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, nil, &res, opts...)
 	return
@@ -51,7 +52,7 @@ func (r *AuthService) Logout(ctx context.Context, opts ...option.RequestOption) 
 
 // Refresh access token using refresh token
 func (r *AuthService) RefreshToken(ctx context.Context, opts ...option.RequestOption) (res *AuthRefreshTokenResponse, err error) {
-	opts = append(r.Options[:], opts...)
+	opts = slices.Concat(r.Options, opts)
 	path := "auth/refresh"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, nil, &res, opts...)
 	return
@@ -59,7 +60,7 @@ func (r *AuthService) RefreshToken(ctx context.Context, opts ...option.RequestOp
 
 // Retrieve user profile and roles
 func (r *AuthService) GetUserDetails(ctx context.Context, opts ...option.RequestOption) (res *AuthGetUserDetailsResponse, err error) {
-	opts = append(r.Options[:], opts...)
+	opts = slices.Concat(r.Options, opts)
 	path := "auth/userdetails"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, nil, &res, opts...)
 	return
@@ -67,7 +68,7 @@ func (r *AuthService) GetUserDetails(ctx context.Context, opts ...option.Request
 
 // Revoke the current token
 func (r *AuthService) RevokeToken(ctx context.Context, opts ...option.RequestOption) (res *AuthRevokeTokenResponse, err error) {
-	opts = append(r.Options[:], opts...)
+	opts = slices.Concat(r.Options, opts)
 	path := "auth/revoke"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, nil, &res, opts...)
 	return

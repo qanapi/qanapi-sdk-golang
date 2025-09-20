@@ -6,6 +6,7 @@ import (
 	"context"
 	"encoding/json"
 	"net/http"
+	"slices"
 
 	"github.com/qanapi/qanapi-sdk-golang/internal/apijson"
 	"github.com/qanapi/qanapi-sdk-golang/internal/requestconfig"
@@ -35,7 +36,7 @@ func NewEncryptService(opts ...option.RequestOption) (r EncryptService) {
 
 // Encrypt data with optional ACL
 func (r *EncryptService) EncryptData(ctx context.Context, body EncryptEncryptDataParams, opts ...option.RequestOption) (res *EncryptEncryptDataResponseUnion, err error) {
-	opts = append(r.Options[:], opts...)
+	opts = slices.Concat(r.Options, opts)
 	path := "encrypt"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
 	return

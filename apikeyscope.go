@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"slices"
 	"time"
 
 	"github.com/qanapi/qanapi-sdk-golang/internal/apijson"
@@ -36,7 +37,7 @@ func NewAPIKeyScopeService(opts ...option.RequestOption) (r APIKeyScopeService) 
 
 // Retrieve scopes associated with an API Key
 func (r *APIKeyScopeService) Get(ctx context.Context, apiKey int64, opts ...option.RequestOption) (res *[]APIKeyScopeGetResponse, err error) {
-	opts = append(r.Options[:], opts...)
+	opts = slices.Concat(r.Options, opts)
 	path := fmt.Sprintf("api-keys/%v/scopes", apiKey)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, nil, &res, opts...)
 	return
@@ -44,7 +45,7 @@ func (r *APIKeyScopeService) Get(ctx context.Context, apiKey int64, opts ...opti
 
 // Attach scopes to an API Key
 func (r *APIKeyScopeService) Attach(ctx context.Context, apiKey int64, body APIKeyScopeAttachParams, opts ...option.RequestOption) (res *APIKeyScopeAttachResponse, err error) {
-	opts = append(r.Options[:], opts...)
+	opts = slices.Concat(r.Options, opts)
 	path := fmt.Sprintf("api-keys/%v/scopes/attach", apiKey)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
 	return
@@ -52,7 +53,7 @@ func (r *APIKeyScopeService) Attach(ctx context.Context, apiKey int64, body APIK
 
 // Detach scopes from an API Key
 func (r *APIKeyScopeService) Detach(ctx context.Context, apiKey int64, body APIKeyScopeDetachParams, opts ...option.RequestOption) (res *APIKeyScopeDetachResponse, err error) {
-	opts = append(r.Options[:], opts...)
+	opts = slices.Concat(r.Options, opts)
 	path := fmt.Sprintf("api-keys/%v/scopes/detach", apiKey)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
 	return
@@ -60,7 +61,7 @@ func (r *APIKeyScopeService) Detach(ctx context.Context, apiKey int64, body APIK
 
 // Sync scopes of an API Key
 func (r *APIKeyScopeService) Sync(ctx context.Context, apiKey int64, body APIKeyScopeSyncParams, opts ...option.RequestOption) (res *APIKeyScopeSyncResponse, err error) {
-	opts = append(r.Options[:], opts...)
+	opts = slices.Concat(r.Options, opts)
 	path := fmt.Sprintf("api-keys/%v/scopes/sync", apiKey)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
 	return

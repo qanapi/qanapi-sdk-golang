@@ -7,6 +7,7 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"slices"
 
 	"github.com/qanapi/qanapi-sdk-golang/internal/apijson"
 	"github.com/qanapi/qanapi-sdk-golang/internal/requestconfig"
@@ -37,7 +38,7 @@ func NewAPIKeyService(opts ...option.RequestOption) (r APIKeyService) {
 
 // Revoke an API Key
 func (r *APIKeyService) Revoke(ctx context.Context, apiKey string, opts ...option.RequestOption) (res *APIKeyRevokeResponse, err error) {
-	opts = append(r.Options[:], opts...)
+	opts = slices.Concat(r.Options, opts)
 	if apiKey == "" {
 		err = errors.New("missing required apiKey parameter")
 		return
@@ -49,7 +50,7 @@ func (r *APIKeyService) Revoke(ctx context.Context, apiKey string, opts ...optio
 
 // Rotate an API Key
 func (r *APIKeyService) Rotate(ctx context.Context, apiKey string, opts ...option.RequestOption) (res *APIKeyRotateResponse, err error) {
-	opts = append(r.Options[:], opts...)
+	opts = slices.Concat(r.Options, opts)
 	if apiKey == "" {
 		err = errors.New("missing required apiKey parameter")
 		return
