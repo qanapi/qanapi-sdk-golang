@@ -1,6 +1,6 @@
 module github.com/qanapi/qanapi-sdk-golang
 
-go 1.21
+go 1.22
 
 require (
 	github.com/tidwall/gjson v1.14.4
