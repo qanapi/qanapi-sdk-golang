@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"slices"
 	"time"
 
 	"github.com/qanapi/qanapi-sdk-golang/internal/apijson"
@@ -36,7 +37,7 @@ func NewScopeService(opts ...option.RequestOption) (r ScopeService) {
 
 // Create a new scope
 func (r *ScopeService) New(ctx context.Context, body ScopeNewParams, opts ...option.RequestOption) (res *ScopeNewResponse, err error) {
-	opts = append(r.Options[:], opts...)
+	opts = slices.Concat(r.Options, opts)
 	path := "scopes"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
 	return
@@ -44,7 +45,7 @@ func (r *ScopeService) New(ctx context.Context, body ScopeNewParams, opts ...opt
 
 // Get a specific scope
 func (r *ScopeService) Get(ctx context.Context, id int64, opts ...option.RequestOption) (res *ScopeGetResponse, err error) {
-	opts = append(r.Options[:], opts...)
+	opts = slices.Concat(r.Options, opts)
 	path := fmt.Sprintf("scopes/%v", id)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, nil, &res, opts...)
 	return
@@ -52,7 +53,7 @@ func (r *ScopeService) Get(ctx context.Context, id int64, opts ...option.Request
 
 // Update a scope
 func (r *ScopeService) Update(ctx context.Context, id int64, body ScopeUpdateParams, opts ...option.RequestOption) (res *ScopeUpdateResponse, err error) {
-	opts = append(r.Options[:], opts...)
+	opts = slices.Concat(r.Options, opts)
 	path := fmt.Sprintf("scopes/%v", id)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPut, path, body, &res, opts...)
 	return
@@ -60,7 +61,7 @@ func (r *ScopeService) Update(ctx context.Context, id int64, body ScopeUpdatePar
 
 // List all scopes
 func (r *ScopeService) List(ctx context.Context, opts ...option.RequestOption) (res *[]ScopeListResponse, err error) {
-	opts = append(r.Options[:], opts...)
+	opts = slices.Concat(r.Options, opts)
 	path := "scopes"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, nil, &res, opts...)
 	return
@@ -68,7 +69,7 @@ func (r *ScopeService) List(ctx context.Context, opts ...option.RequestOption) (
 
 // Delete a scope
 func (r *ScopeService) Delete(ctx context.Context, id int64, opts ...option.RequestOption) (res *ScopeDeleteResponse, err error) {
-	opts = append(r.Options[:], opts...)
+	opts = slices.Concat(r.Options, opts)
 	path := fmt.Sprintf("scopes/%v", id)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodDelete, path, nil, &res, opts...)
 	return

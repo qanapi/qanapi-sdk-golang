@@ -6,6 +6,7 @@ import (
 	"context"
 	"encoding/json"
 	"net/http"
+	"slices"
 
 	"github.com/qanapi/qanapi-sdk-golang/internal/apijson"
 	"github.com/qanapi/qanapi-sdk-golang/internal/requestconfig"
@@ -35,7 +36,7 @@ func NewDecryptService(opts ...option.RequestOption) (r DecryptService) {
 
 // Decrypt encrypted payload
 func (r *DecryptService) DecryptPayload(ctx context.Context, body DecryptDecryptPayloadParams, opts ...option.RequestOption) (res *DecryptDecryptPayloadResponseUnion, err error) {
-	opts = append(r.Options[:], opts...)
+	opts = slices.Concat(r.Options, opts)
 	path := "decrypt"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
 	return
