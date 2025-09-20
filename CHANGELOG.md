@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.3.2 (2025-09-20)
+
+Full Changelog: [v1.3.1...v1.3.2](https://github.com/qanapi/qanapi-sdk-golang/compare/v1.3.1...v1.3.2)
+
+### Bug Fixes
+
+* use slices.Concat instead of sometimes modifying r.Options ([0e88857](https://github.com/qanapi/qanapi-sdk-golang/commit/0e888579799402c27f399071cac2b8b4c2305d67))
+
+
+### Chores
+
+* bump minimum go version to 1.22 ([380f3c1](https://github.com/qanapi/qanapi-sdk-golang/commit/380f3c1e6de11c61ce93fe4d9a4a1d12226397f9))
+* update more docs for 1.22 ([af45484](https://github.com/qanapi/qanapi-sdk-golang/commit/af454842320c0df29c28099335e368c7eb53375b))
+
 ## 1.3.1 (2025-09-06)
 
 Full Changelog: [v1.3.0...v1.3.1](https://github.com/qanapi/qanapi-sdk-golang/compare/v1.3.0...v1.3.1)
