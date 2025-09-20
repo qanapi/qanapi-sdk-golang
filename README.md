@@ -28,7 +28,7 @@ Or to pin the version:
 <!-- x-release-please-start-version -->
 
 ```sh
-go get -u 'github.com/qanapi/qanapi-sdk-golang@v1.3.1'
+go get -u 'github.com/qanapi/qanapi-sdk-golang@v1.3.2'
 ```
 
 <!-- x-release-please-end -->
