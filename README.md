@@ -35,7 +35,7 @@ go get -u 'github.com/qanapi/qanapi-sdk-golang@v1.3.1'
 
 ## Requirements
 
-This library requires Go 1.18+.
+This library requires Go 1.22+.
 
 ## Usage
 
