@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.3.2 (2025-09-26)
+
+Full Changelog: [v1.3.2...v1.3.2](https://github.com/qanapi/qanapi-sdk-golang/compare/v1.3.2...v1.3.2)
+
+### Bug Fixes
+
+* bugfix for setting JSON keys with special characters ([e4f668a](https://github.com/qanapi/qanapi-sdk-golang/commit/e4f668af9db8dedc4f3d864f8567a7b72ac2ce07))
+
+
+### Chores
+
+* do not install brew dependencies in ./scripts/bootstrap by default ([98d9e43](https://github.com/qanapi/qanapi-sdk-golang/commit/98d9e4307093036b2eacd50dfaabb57ec039da63))
+
 ## 1.3.2 (2025-09-20)
 
 Full Changelog: [v1.3.1...v1.3.2](https://github.com/qanapi/qanapi-sdk-golang/compare/v1.3.1...v1.3.2)
