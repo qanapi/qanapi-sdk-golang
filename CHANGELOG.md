@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.3.3 (2025-11-12)
+
+Full Changelog: [v1.3.2...v1.3.3](https://github.com/qanapi/qanapi-sdk-golang/compare/v1.3.2...v1.3.3)
+
+### Chores
+
+* bump gjson version ([c3dad42](https://github.com/qanapi/qanapi-sdk-golang/commit/c3dad427d9192eb77792338c41ccea2db55289d1))
+* **internal:** grammar fix (it's -&gt; its) ([fc83a35](https://github.com/qanapi/qanapi-sdk-golang/commit/fc83a3524317aaf2f1ca94bf49aef8fc24f5ec4e))
+
 ## 1.3.2 (2025-09-26)
 
 Full Changelog: [v1.3.2...v1.3.2](https://github.com/qanapi/qanapi-sdk-golang/compare/v1.3.2...v1.3.2)
