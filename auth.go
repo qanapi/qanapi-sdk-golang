@@ -39,7 +39,7 @@ func (r *AuthService) Login(ctx context.Context, body AuthLoginParams, opts ...o
 	opts = slices.Concat(r.Options, opts)
 	path := "auth/login"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
-	return
+	return res, err
 }
 
 // Log out the current user
@@ -47,7 +47,7 @@ func (r *AuthService) Logout(ctx context.Context, opts ...option.RequestOption) 
 	opts = slices.Concat(r.Options, opts)
 	path := "auth/logout"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, nil, &res, opts...)
-	return
+	return res, err
 }
 
 // Refresh access token using refresh token
@@ -55,7 +55,7 @@ func (r *AuthService) RefreshToken(ctx context.Context, opts ...option.RequestOp
 	opts = slices.Concat(r.Options, opts)
 	path := "auth/refresh"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, nil, &res, opts...)
-	return
+	return res, err
 }
 
 // Retrieve user profile and roles
@@ -63,7 +63,7 @@ func (r *AuthService) GetUserDetails(ctx context.Context, opts ...option.Request
 	opts = slices.Concat(r.Options, opts)
 	path := "auth/userdetails"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, nil, &res, opts...)
-	return
+	return res, err
 }
 
 // Revoke the current token
@@ -71,7 +71,7 @@ func (r *AuthService) RevokeToken(ctx context.Context, opts ...option.RequestOpt
 	opts = slices.Concat(r.Options, opts)
 	path := "auth/revoke"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, nil, &res, opts...)
-	return
+	return res, err
 }
 
 type AuthLoginResponse struct {
@@ -140,7 +140,7 @@ func (r *AuthRefreshTokenResponse) UnmarshalJSON(data []byte) error {
 type AuthGetUserDetailsResponse struct {
 	ID              int64     `json:"id"`
 	Email           string    `json:"email" format:"email"`
-	EmailVerifiedAt time.Time `json:"email_verified_at,nullable" format:"date-time"`
+	EmailVerifiedAt time.Time `json:"email_verified_at" api:"nullable" format:"date-time"`
 	FirstLogin      int64     `json:"first_login"`
 	GravatarURL     string    `json:"gravatar_url" format:"uri"`
 	Name            string    `json:"name"`
@@ -182,8 +182,8 @@ func (r *AuthRevokeTokenResponse) UnmarshalJSON(data []byte) error {
 }
 
 type AuthLoginParams struct {
-	Email    string `json:"email,required" format:"email"`
-	Password string `json:"password,required"`
+	Email    string `json:"email" api:"required" format:"email"`
+	Password string `json:"password" api:"required"`
 	paramObj
 }
 
