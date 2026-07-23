@@ -39,7 +39,7 @@ func TestUserAgentHeader(t *testing.T) {
 			},
 		}),
 	)
-	client.Auth.Login(context.Background(), qanapi.AuthLoginParams{
+	_, _ = client.Auth.Login(context.Background(), qanapi.AuthLoginParams{
 		Email:    "valid@email.com",
 		Password: "secret1234",
 	})

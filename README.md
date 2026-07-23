@@ -6,7 +6,7 @@
 
 <!-- x-release-please-end -->
 
-The Qanapi Go library provides convenient access to the [Qanapi REST API](https://www.qanapi.com/docs)
+The Qanapi Go library provides convenient access to the [Qanapi REST API](https://docs.qanapi.com/)
 from applications written in Go.
 
 It is generated with [Stainless](https://www.stainless.com/).
@@ -74,7 +74,7 @@ func main() {
 The qanapi library uses the [`omitzero`](https://tip.golang.org/doc/go1.24#encodingjsonpkgencodingjson)
 semantics from the Go 1.24+ `encoding/json` release for request fields.
 
-Required primitive fields (`int64`, `string`, etc.) feature the tag <code>\`json:"...,required"\`</code>. These
+Required primitive fields (`int64`, `string`, etc.) feature the tag <code>\`api:"required"\`</code>. These
 fields are always serialized, even their zero values.
 
 Optional primitive types are wrapped in a `param.Opt[T]`. These fields can be set with the provided constructors, `qanapi.String(string)`, `qanapi.Int(int64)`, etc.

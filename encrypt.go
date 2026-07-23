@@ -39,7 +39,7 @@ func (r *EncryptService) EncryptData(ctx context.Context, body EncryptEncryptDat
 	opts = slices.Concat(r.Options, opts)
 	path := "encrypt"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
-	return
+	return res, err
 }
 
 // EncryptEncryptDataResponseUnion contains all possible properties and values from
@@ -100,7 +100,7 @@ type EncryptEncryptDataParams struct {
 	//   - Can be a scalar (string/number), object, or array.
 	//   - If the value is an object or array, only the specified `sensitiveFields` are
 	//     encrypted.
-	Data   EncryptEncryptDataParamsDataUnion `json:"data,omitzero,required"`
+	Data   EncryptEncryptDataParamsDataUnion `json:"data,omitzero" api:"required"`
 	Access EncryptEncryptDataParamsAccess    `json:"access,omitzero"`
 	// Optional metadata describing the data's context.
 	Attributes EncryptEncryptDataParamsAttributes `json:"attributes,omitzero"`
