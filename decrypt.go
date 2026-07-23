@@ -39,7 +39,7 @@ func (r *DecryptService) DecryptPayload(ctx context.Context, body DecryptDecrypt
 	opts = slices.Concat(r.Options, opts)
 	path := "decrypt"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
-	return
+	return res, err
 }
 
 // DecryptDecryptPayloadResponseUnion contains all possible properties and values
@@ -91,7 +91,7 @@ type DecryptDecryptPayloadParams struct {
 	//
 	// - Can be a string or an object/array with encrypted fields.
 	// - Decryption is selective if `sensitiveFields` is provided.
-	Data DecryptDecryptPayloadParamsDataUnion `json:"data,omitzero,required"`
+	Data DecryptDecryptPayloadParamsDataUnion `json:"data,omitzero" api:"required"`
 	// Laravel-style dot-notated paths to fields to decrypt.
 	//
 	// - Same syntax and behavior as in EncryptRequest.

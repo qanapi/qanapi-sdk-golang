@@ -23,7 +23,6 @@ import (
 // the [NewAPIKeyService] method instead.
 type APIKeyService struct {
 	Options []option.RequestOption
-	Scopes  APIKeyScopeService
 }
 
 // NewAPIKeyService generates a new service that applies the given options to each
@@ -32,7 +31,6 @@ type APIKeyService struct {
 func NewAPIKeyService(opts ...option.RequestOption) (r APIKeyService) {
 	r = APIKeyService{}
 	r.Options = opts
-	r.Scopes = NewAPIKeyScopeService(opts...)
 	return
 }
 
@@ -41,11 +39,11 @@ func (r *APIKeyService) Revoke(ctx context.Context, apiKey string, opts ...optio
 	opts = slices.Concat(r.Options, opts)
 	if apiKey == "" {
 		err = errors.New("missing required apiKey parameter")
-		return
+		return nil, err
 	}
 	path := fmt.Sprintf("api-keys/%s/revoke", apiKey)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPatch, path, nil, &res, opts...)
-	return
+	return res, err
 }
 
 // Rotate an API Key
@@ -53,11 +51,11 @@ func (r *APIKeyService) Rotate(ctx context.Context, apiKey string, opts ...optio
 	opts = slices.Concat(r.Options, opts)
 	if apiKey == "" {
 		err = errors.New("missing required apiKey parameter")
-		return
+		return nil, err
 	}
 	path := fmt.Sprintf("api-keys/%s/rotate", apiKey)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPatch, path, nil, &res, opts...)
-	return
+	return res, err
 }
 
 type APIKeyRevokeResponse struct {

@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"slices"
+	"strings"
 
 	"github.com/qanapi/qanapi-sdk-golang/internal/requestconfig"
 	"github.com/qanapi/qanapi-sdk-golang/option"
@@ -21,14 +22,13 @@ type Client struct {
 	Encrypt EncryptService
 	Decrypt DecryptService
 	APIKeys APIKeyService
-	Scopes  ScopeService
 }
 
 // DefaultClientOptions read from the environment (QANAPI_API_KEY,
 // QANAPI_SUBDOMAIN, QANAPI_BASE_URL). This should be used to initialize new
 // clients.
 func DefaultClientOptions() []option.RequestOption {
-	defaults := []option.RequestOption{option.WithEnvironmentProduction()}
+	defaults := []option.RequestOption{option.WithHTTPClient(defaultHTTPClient()), option.WithEnvironmentProduction()}
 	if o, ok := os.LookupEnv("QANAPI_BASE_URL"); ok {
 		defaults = append(defaults, option.WithBaseURL(o))
 	}
@@ -37,6 +37,14 @@ func DefaultClientOptions() []option.RequestOption {
 	}
 	if o, ok := os.LookupEnv("QANAPI_SUBDOMAIN"); ok {
 		defaults = append(defaults, option.WithSubdomain(o))
+	}
+	if o, ok := os.LookupEnv("QANAPI_CUSTOM_HEADERS"); ok {
+		for _, line := range strings.Split(o, "\n") {
+			colon := strings.Index(line, ":")
+			if colon >= 0 {
+				defaults = append(defaults, option.WithHeader(strings.TrimSpace(line[:colon]), strings.TrimSpace(line[colon+1:])))
+			}
+		}
 	}
 	return defaults
 }
@@ -54,7 +62,6 @@ func NewClient(opts ...option.RequestOption) (r Client) {
 	r.Encrypt = NewEncryptService(opts...)
 	r.Decrypt = NewDecryptService(opts...)
 	r.APIKeys = NewAPIKeyService(opts...)
-	r.Scopes = NewScopeService(opts...)
 
 	return
 }
