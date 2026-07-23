@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.4.0 (2026-07-23)
+
+Full Changelog: [v1.3.3...v1.4.0](https://github.com/qanapi/qanapi-sdk-golang/compare/v1.3.3...v1.4.0)
+
+### Features
+
+* **api:** remove scopes entity ([8065328](https://github.com/qanapi/qanapi-sdk-golang/commit/8065328711c30d250ff8c2f0470bf184a69947f5))
+
+
+### Chores
+
+* remove custom code ([e809f3a](https://github.com/qanapi/qanapi-sdk-golang/commit/e809f3a1deffce9951a24b7f7723f726bcc9d1bc))
+
 ## 1.3.3 (2025-11-12)
 
 Full Changelog: [v1.3.2...v1.3.3](https://github.com/qanapi/qanapi-sdk-golang/compare/v1.3.2...v1.3.3)
