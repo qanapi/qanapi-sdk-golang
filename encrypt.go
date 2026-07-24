@@ -48,22 +48,23 @@ func (r *EncryptService) EncryptData(ctx context.Context, body EncryptEncryptDat
 // Use the methods beginning with 'As' to cast the union to one of its variants.
 //
 // If the underlying value is not a json object, one of the following properties
-// will be valid: OfString OfFloat OfEncryptEncryptDataResponseMapItem OfAnyArray]
+// will be valid: OfString OfFloat
+// OfEncryptEncryptDataResponseEncryptEncryptDataResponseVariant2Item OfAnyArray]
 type EncryptEncryptDataResponseUnion struct {
 	// This field will be present if the value is a [string] instead of an object.
 	OfString string `json:",inline"`
 	// This field will be present if the value is a [float64] instead of an object.
 	OfFloat float64 `json:",inline"`
 	// This field will be present if the value is a [any] instead of an object.
-	OfEncryptEncryptDataResponseMapItem any `json:",inline"`
+	OfEncryptEncryptDataResponseEncryptEncryptDataResponseVariant2Item any `json:",inline"`
 	// This field will be present if the value is a [[]any] instead of an object.
 	OfAnyArray []any `json:",inline"`
 	JSON       struct {
-		OfString                            respjson.Field
-		OfFloat                             respjson.Field
-		OfEncryptEncryptDataResponseMapItem respjson.Field
-		OfAnyArray                          respjson.Field
-		raw                                 string
+		OfString                                                           respjson.Field
+		OfFloat                                                            respjson.Field
+		OfEncryptEncryptDataResponseEncryptEncryptDataResponseVariant2Item respjson.Field
+		OfAnyArray                                                         respjson.Field
+		raw                                                                string
 	} `json:"-"`
 }
 
