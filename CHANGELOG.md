@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.6.0 (2026-07-24)
+
+Full Changelog: [v1.5.0...v1.6.0](https://github.com/qanapi/qanapi-sdk-golang/compare/v1.5.0...v1.6.0)
+
+### Features
+
+* **api:** kotlin auto fixes ([4a68d4d](https://github.com/qanapi/qanapi-sdk-golang/commit/4a68d4d8d921a3413a2ee4f9f9cf14096eeed4bf))
+
 ## 1.5.0 (2026-07-24)
 
 Full Changelog: [v1.4.0...v1.5.0](https://github.com/qanapi/qanapi-sdk-golang/compare/v1.4.0...v1.5.0)
