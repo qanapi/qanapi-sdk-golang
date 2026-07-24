@@ -48,19 +48,21 @@ func (r *DecryptService) DecryptPayload(ctx context.Context, body DecryptDecrypt
 // Use the methods beginning with 'As' to cast the union to one of its variants.
 //
 // If the underlying value is not a json object, one of the following properties
-// will be valid: OfString OfDecryptDecryptPayloadResponseMapItem OfAnyArray]
+// will be valid: OfString
+// OfDecryptDecryptPayloadResponseDecryptDecryptPayloadResponseVariant1Item
+// OfAnyArray]
 type DecryptDecryptPayloadResponseUnion struct {
 	// This field will be present if the value is a [string] instead of an object.
 	OfString string `json:",inline"`
 	// This field will be present if the value is a [any] instead of an object.
-	OfDecryptDecryptPayloadResponseMapItem any `json:",inline"`
+	OfDecryptDecryptPayloadResponseDecryptDecryptPayloadResponseVariant1Item any `json:",inline"`
 	// This field will be present if the value is a [[]any] instead of an object.
 	OfAnyArray []any `json:",inline"`
 	JSON       struct {
-		OfString                               respjson.Field
-		OfDecryptDecryptPayloadResponseMapItem respjson.Field
-		OfAnyArray                             respjson.Field
-		raw                                    string
+		OfString                                                                 respjson.Field
+		OfDecryptDecryptPayloadResponseDecryptDecryptPayloadResponseVariant1Item respjson.Field
+		OfAnyArray                                                               respjson.Field
+		raw                                                                      string
 	} `json:"-"`
 }
 
