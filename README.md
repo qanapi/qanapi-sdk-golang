@@ -57,7 +57,7 @@ func main() {
 		option.WithAPIKey("My API Key"),      // defaults to os.LookupEnv("QANAPI_API_KEY")
 		option.WithSubdomain("My-Subdomain"), // defaults to os.LookupEnv("QANAPI_SUBDOMAIN")
 	)
-	response, err := client.Auth.Login(context.TODO(), qanapi.AuthLoginParams{
+	response, err := client.V2.Auth.Login(context.TODO(), qanapi.V2AuthLoginParams{
 		Email:    "valid@email.com",
 		Password: "secret1234",
 	})
@@ -270,7 +270,7 @@ client := qanapi.NewClient(
 	option.WithHeader("X-Some-Header", "custom_header_info"),
 )
 
-client.Auth.Login(context.TODO(), ...,
+client.V2.Auth.Login(context.TODO(), ...,
 	// Override the header
 	option.WithHeader("X-Some-Header", "some_other_custom_header_info"),
 	// Add an undocumented field to the request body, using sjson syntax
@@ -301,7 +301,7 @@ When the API returns a non-success status code, we return an error with type
 To handle errors, we recommend that you use the `errors.As` pattern:
 
 ```go
-_, err := client.Auth.Login(context.TODO(), qanapi.AuthLoginParams{
+_, err := client.V2.Auth.Login(context.TODO(), qanapi.V2AuthLoginParams{
 	Email:    "valid@email.com",
 	Password: "secret1234",
 })
@@ -329,9 +329,9 @@ To set a per-retry timeout, use `option.WithRequestTimeout()`.
 // This sets the timeout for the request, including all the retries.
 ctx, cancel := context.WithTimeout(context.Background(), 5*time.Minute)
 defer cancel()
-client.Auth.Login(
+client.V2.Auth.Login(
 	ctx,
-	qanapi.AuthLoginParams{
+	qanapi.V2AuthLoginParams{
 		Email:    "valid@email.com",
 		Password: "secret1234",
 	},
@@ -368,9 +368,9 @@ client := qanapi.NewClient(
 )
 
 // Override per-request:
-client.Auth.Login(
+client.V2.Auth.Login(
 	context.TODO(),
-	qanapi.AuthLoginParams{
+	qanapi.V2AuthLoginParams{
 		Email:    "valid@email.com",
 		Password: "secret1234",
 	},
@@ -386,9 +386,9 @@ you need to examine response headers, status codes, or other details.
 ```go
 // Create a variable to store the HTTP response
 var response *http.Response
-response, err := client.Auth.Login(
+response, err := client.V2.Auth.Login(
 	context.TODO(),
-	qanapi.AuthLoginParams{
+	qanapi.V2AuthLoginParams{
 		Email:    "valid@email.com",
 		Password: "secret1234",
 	},

@@ -15,27 +15,27 @@ import (
 	"github.com/qanapi/qanapi-sdk-golang/packages/respjson"
 )
 
-// APIKeyService contains methods and other services that help with interacting
+// V2APIKeyService contains methods and other services that help with interacting
 // with the qanapi API.
 //
 // Note, unlike clients, this service does not read variables from the environment
 // automatically. You should not instantiate this service directly, and instead use
-// the [NewAPIKeyService] method instead.
-type APIKeyService struct {
+// the [NewV2APIKeyService] method instead.
+type V2APIKeyService struct {
 	Options []option.RequestOption
 }
 
-// NewAPIKeyService generates a new service that applies the given options to each
-// request. These options are applied after the parent client's options (if there
-// is one), and before any request-specific options.
-func NewAPIKeyService(opts ...option.RequestOption) (r APIKeyService) {
-	r = APIKeyService{}
+// NewV2APIKeyService generates a new service that applies the given options to
+// each request. These options are applied after the parent client's options (if
+// there is one), and before any request-specific options.
+func NewV2APIKeyService(opts ...option.RequestOption) (r V2APIKeyService) {
+	r = V2APIKeyService{}
 	r.Options = opts
 	return
 }
 
 // Revoke an API Key
-func (r *APIKeyService) Revoke(ctx context.Context, apiKey string, opts ...option.RequestOption) (res *APIKeyRevokeResponse, err error) {
+func (r *V2APIKeyService) Revoke(ctx context.Context, apiKey string, opts ...option.RequestOption) (res *V2APIKeyRevokeResponse, err error) {
 	opts = slices.Concat(r.Options, opts)
 	if apiKey == "" {
 		err = errors.New("missing required apiKey parameter")
@@ -47,7 +47,7 @@ func (r *APIKeyService) Revoke(ctx context.Context, apiKey string, opts ...optio
 }
 
 // Rotate an API Key
-func (r *APIKeyService) Rotate(ctx context.Context, apiKey string, opts ...option.RequestOption) (res *APIKeyRotateResponse, err error) {
+func (r *V2APIKeyService) Rotate(ctx context.Context, apiKey string, opts ...option.RequestOption) (res *V2APIKeyRotateResponse, err error) {
 	opts = slices.Concat(r.Options, opts)
 	if apiKey == "" {
 		err = errors.New("missing required apiKey parameter")
@@ -58,7 +58,7 @@ func (r *APIKeyService) Rotate(ctx context.Context, apiKey string, opts ...optio
 	return res, err
 }
 
-type APIKeyRevokeResponse struct {
+type V2APIKeyRevokeResponse struct {
 	Message string `json:"message"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
@@ -69,12 +69,12 @@ type APIKeyRevokeResponse struct {
 }
 
 // Returns the unmodified JSON received from the API
-func (r APIKeyRevokeResponse) RawJSON() string { return r.JSON.raw }
-func (r *APIKeyRevokeResponse) UnmarshalJSON(data []byte) error {
+func (r V2APIKeyRevokeResponse) RawJSON() string { return r.JSON.raw }
+func (r *V2APIKeyRevokeResponse) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type APIKeyRotateResponse struct {
+type V2APIKeyRotateResponse struct {
 	APIKey  string `json:"api_key"`
 	Message string `json:"message"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
@@ -87,7 +87,7 @@ type APIKeyRotateResponse struct {
 }
 
 // Returns the unmodified JSON received from the API
-func (r APIKeyRotateResponse) RawJSON() string { return r.JSON.raw }
-func (r *APIKeyRotateResponse) UnmarshalJSON(data []byte) error {
+func (r V2APIKeyRotateResponse) RawJSON() string { return r.JSON.raw }
+func (r *V2APIKeyRotateResponse) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }

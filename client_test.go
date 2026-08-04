@@ -39,7 +39,7 @@ func TestUserAgentHeader(t *testing.T) {
 			},
 		}),
 	)
-	_, _ = client.Auth.Login(context.Background(), qanapi.AuthLoginParams{
+	_, _ = client.V2.Auth.Login(context.Background(), qanapi.V2AuthLoginParams{
 		Email:    "valid@email.com",
 		Password: "secret1234",
 	})
@@ -67,7 +67,7 @@ func TestRetryAfter(t *testing.T) {
 			},
 		}),
 	)
-	_, err := client.Auth.Login(context.Background(), qanapi.AuthLoginParams{
+	_, err := client.V2.Auth.Login(context.Background(), qanapi.V2AuthLoginParams{
 		Email:    "valid@email.com",
 		Password: "secret1234",
 	})
@@ -106,7 +106,7 @@ func TestDeleteRetryCountHeader(t *testing.T) {
 		}),
 		option.WithHeaderDel("X-Stainless-Retry-Count"),
 	)
-	_, err := client.Auth.Login(context.Background(), qanapi.AuthLoginParams{
+	_, err := client.V2.Auth.Login(context.Background(), qanapi.V2AuthLoginParams{
 		Email:    "valid@email.com",
 		Password: "secret1234",
 	})
@@ -140,7 +140,7 @@ func TestOverwriteRetryCountHeader(t *testing.T) {
 		}),
 		option.WithHeader("X-Stainless-Retry-Count", "42"),
 	)
-	_, err := client.Auth.Login(context.Background(), qanapi.AuthLoginParams{
+	_, err := client.V2.Auth.Login(context.Background(), qanapi.V2AuthLoginParams{
 		Email:    "valid@email.com",
 		Password: "secret1234",
 	})
@@ -173,7 +173,7 @@ func TestRetryAfterMs(t *testing.T) {
 			},
 		}),
 	)
-	_, err := client.Auth.Login(context.Background(), qanapi.AuthLoginParams{
+	_, err := client.V2.Auth.Login(context.Background(), qanapi.V2AuthLoginParams{
 		Email:    "valid@email.com",
 		Password: "secret1234",
 	})
@@ -200,7 +200,7 @@ func TestContextCancel(t *testing.T) {
 	)
 	cancelCtx, cancel := context.WithCancel(context.Background())
 	cancel()
-	_, err := client.Auth.Login(cancelCtx, qanapi.AuthLoginParams{
+	_, err := client.V2.Auth.Login(cancelCtx, qanapi.V2AuthLoginParams{
 		Email:    "valid@email.com",
 		Password: "secret1234",
 	})
@@ -224,7 +224,7 @@ func TestContextCancelDelay(t *testing.T) {
 	)
 	cancelCtx, cancel := context.WithTimeout(context.Background(), 2*time.Millisecond)
 	defer cancel()
-	_, err := client.Auth.Login(cancelCtx, qanapi.AuthLoginParams{
+	_, err := client.V2.Auth.Login(cancelCtx, qanapi.V2AuthLoginParams{
 		Email:    "valid@email.com",
 		Password: "secret1234",
 	})
@@ -254,7 +254,7 @@ func TestContextDeadline(t *testing.T) {
 				},
 			}),
 		)
-		_, err := client.Auth.Login(deadlineCtx, qanapi.AuthLoginParams{
+		_, err := client.V2.Auth.Login(deadlineCtx, qanapi.V2AuthLoginParams{
 			Email:    "valid@email.com",
 			Password: "secret1234",
 		})

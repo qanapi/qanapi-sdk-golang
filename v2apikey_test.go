@@ -13,7 +13,7 @@ import (
 	"github.com/qanapi/qanapi-sdk-golang/option"
 )
 
-func TestEncryptEncryptDataWithOptionalParams(t *testing.T) {
+func TestV2APIKeyRevoke(t *testing.T) {
 	t.Skip("Mock server tests are disabled")
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
@@ -27,22 +27,31 @@ func TestEncryptEncryptDataWithOptionalParams(t *testing.T) {
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
 	)
-	_, err := client.Encrypt.EncryptData(context.TODO(), qanapi.EncryptEncryptDataParams{
-		Data: qanapi.EncryptEncryptDataParamsDataUnion{
-			OfAnyMap: map[string]any{
-				"password": "bar",
-			},
-		},
-		Access: qanapi.EncryptEncryptDataParamsAccess{
-			ACL: []string{"admin"},
-		},
-		Attributes: qanapi.EncryptEncryptDataParamsAttributes{
-			Classification: "confidential",
-			Owner:          qanapi.String("alice@example.com"),
-			Tags:           []string{"legal"},
-		},
-		SensitiveFields: []string{"password"},
-	})
+	_, err := client.V2.APIKeys.Revoke(context.TODO(), "apiKey")
+	if err != nil {
+		var apierr *qanapi.Error
+		if errors.As(err, &apierr) {
+			t.Log(string(apierr.DumpRequest(true)))
+		}
+		t.Fatalf("err should be nil: %s", err.Error())
+	}
+}
+
+func TestV2APIKeyRotate(t *testing.T) {
+	t.Skip("Mock server tests are disabled")
+	baseURL := "http://localhost:4010"
+	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
+		baseURL = envURL
+	}
+	if !testutil.CheckTestServer(t, baseURL) {
+		return
+	}
+	client := qanapi.NewClient(
+		option.WithBaseURL(baseURL),
+		option.WithAPIKey("My API Key"),
+		option.WithSubdomain("My-Subdomain"),
+	)
+	_, err := client.V2.APIKeys.Rotate(context.TODO(), "apiKey")
 	if err != nil {
 		var apierr *qanapi.Error
 		if errors.As(err, &apierr) {

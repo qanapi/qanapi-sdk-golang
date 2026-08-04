@@ -13,7 +13,7 @@ import (
 	"github.com/qanapi/qanapi-sdk-golang/option"
 )
 
-func TestAPIKeyRevoke(t *testing.T) {
+func TestV2DecryptDecryptPayloadWithOptionalParams(t *testing.T) {
 	t.Skip("Mock server tests are disabled")
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
@@ -27,31 +27,14 @@ func TestAPIKeyRevoke(t *testing.T) {
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
 	)
-	_, err := client.APIKeys.Revoke(context.TODO(), "apiKey")
-	if err != nil {
-		var apierr *qanapi.Error
-		if errors.As(err, &apierr) {
-			t.Log(string(apierr.DumpRequest(true)))
-		}
-		t.Fatalf("err should be nil: %s", err.Error())
-	}
-}
-
-func TestAPIKeyRotate(t *testing.T) {
-	t.Skip("Mock server tests are disabled")
-	baseURL := "http://localhost:4010"
-	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
-		baseURL = envURL
-	}
-	if !testutil.CheckTestServer(t, baseURL) {
-		return
-	}
-	client := qanapi.NewClient(
-		option.WithBaseURL(baseURL),
-		option.WithAPIKey("My API Key"),
-		option.WithSubdomain("My-Subdomain"),
-	)
-	_, err := client.APIKeys.Rotate(context.TODO(), "apiKey")
+	_, err := client.V2.Decrypt.DecryptPayload(context.TODO(), qanapi.V2DecryptDecryptPayloadParams{
+		Data: qanapi.V2DecryptDecryptPayloadParamsDataUnion{
+			OfAnyMap: map[string]any{
+				"password": "bar",
+			},
+		},
+		SensitiveFields: []string{"password"},
+	})
 	if err != nil {
 		var apierr *qanapi.Error
 		if errors.As(err, &apierr) {
