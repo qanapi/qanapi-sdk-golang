@@ -26,7 +26,7 @@ func TestUsage(t *testing.T) {
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
 	)
-	response, err := client.Auth.Login(context.TODO(), qanapi.AuthLoginParams{
+	response, err := client.V2.Auth.Login(context.TODO(), qanapi.V2AuthLoginParams{
 		Email:    "valid@email.com",
 		Password: "secret1234",
 	})

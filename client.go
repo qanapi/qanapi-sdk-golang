@@ -18,10 +18,7 @@ import (
 // directly, and instead use the [NewClient] method instead.
 type Client struct {
 	Options []option.RequestOption
-	Auth    AuthService
-	Encrypt EncryptService
-	Decrypt DecryptService
-	APIKeys APIKeyService
+	V2      V2Service
 }
 
 // DefaultClientOptions read from the environment (QANAPI_API_KEY,
@@ -58,10 +55,7 @@ func NewClient(opts ...option.RequestOption) (r Client) {
 
 	r = Client{Options: opts}
 
-	r.Auth = NewAuthService(opts...)
-	r.Encrypt = NewEncryptService(opts...)
-	r.Decrypt = NewDecryptService(opts...)
-	r.APIKeys = NewAPIKeyService(opts...)
+	r.V2 = NewV2Service(opts...)
 
 	return
 }
