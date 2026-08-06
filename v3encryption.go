@@ -74,13 +74,13 @@ type V3EncryptionEncryptResponse map[string]any
 
 type V3EncryptionDecryptParams struct {
 	// A JSON object to decrypt fields on. A maximum depth of 32 is allowed.
-	Body          map[string]any
+	Data          map[string]any
 	XQanapiFields param.Opt[string] `header:"x-qanapi-fields,omitzero" json:"-"`
 	paramObj
 }
 
 func (r V3EncryptionDecryptParams) MarshalJSON() (data []byte, err error) {
-	return shimjson.Marshal(r.Body)
+	return shimjson.Marshal(r.Data)
 }
 func (r *V3EncryptionDecryptParams) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
@@ -88,14 +88,14 @@ func (r *V3EncryptionDecryptParams) UnmarshalJSON(data []byte) error {
 
 type V3EncryptionEncryptParams struct {
 	// A JSON object to encrypt fields on. A maximum depth of 32 is allowed.
-	Body               map[string]any
+	Data               map[string]any
 	XQanapiFields      string            `header:"x-qanapi-fields" api:"required" json:"-"`
 	XQanapiDestination param.Opt[string] `header:"x-qanapi-destination,omitzero" json:"-"`
 	paramObj
 }
 
 func (r V3EncryptionEncryptParams) MarshalJSON() (data []byte, err error) {
-	return shimjson.Marshal(r.Body)
+	return shimjson.Marshal(r.Data)
 }
 func (r *V3EncryptionEncryptParams) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)

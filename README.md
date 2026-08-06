@@ -61,7 +61,7 @@ func main() {
 		context.TODO(),
 		"proxy",
 		qanapi.V3EncryptionEncryptParams{
-			Body: map[string]any{
+			Data: map[string]any{
 				"foo": "bar",
 			},
 			XQanapiFields: "x-qanapi-fields",
@@ -311,7 +311,7 @@ _, err := client.V3.Encryption.Encrypt(
 	context.TODO(),
 	"proxy",
 	qanapi.V3EncryptionEncryptParams{
-		Body: map[string]any{
+		Data: map[string]any{
 			"foo": "bar",
 		},
 		XQanapiFields: "x-qanapi-fields",
@@ -345,7 +345,7 @@ client.V3.Encryption.Encrypt(
 	ctx,
 	"proxy",
 	qanapi.V3EncryptionEncryptParams{
-		Body: map[string]any{
+		Data: map[string]any{
 			"foo": "bar",
 		},
 		XQanapiFields: "x-qanapi-fields",
@@ -387,7 +387,7 @@ client.V3.Encryption.Encrypt(
 	context.TODO(),
 	"proxy",
 	qanapi.V3EncryptionEncryptParams{
-		Body: map[string]any{
+		Data: map[string]any{
 			"foo": "bar",
 		},
 		XQanapiFields: "x-qanapi-fields",
@@ -408,7 +408,7 @@ response, err := client.V3.Encryption.Encrypt(
 	context.TODO(),
 	"proxy",
 	qanapi.V3EncryptionEncryptParams{
-		Body: map[string]any{
+		Data: map[string]any{
 			"foo": "bar",
 		},
 		XQanapiFields: "x-qanapi-fields",
