@@ -19,6 +19,7 @@ import (
 type Client struct {
 	Options []option.RequestOption
 	V2      V2Service
+	V3      V3Service
 }
 
 // DefaultClientOptions read from the environment (QANAPI_API_KEY,
@@ -56,6 +57,7 @@ func NewClient(opts ...option.RequestOption) (r Client) {
 	r = Client{Options: opts}
 
 	r.V2 = NewV2Service(opts...)
+	r.V3 = NewV3Service(opts...)
 
 	return
 }
