@@ -37,7 +37,7 @@ func NewV2EncryptService(opts ...option.RequestOption) (r V2EncryptService) {
 // Encrypt data with optional ACL
 func (r *V2EncryptService) EncryptData(ctx context.Context, body V2EncryptEncryptDataParams, opts ...option.RequestOption) (res *V2EncryptEncryptDataResponseUnion, err error) {
 	opts = slices.Concat(r.Options, opts)
-	path := "encrypt"
+	path := "v2/encrypt"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
 	return res, err
 }

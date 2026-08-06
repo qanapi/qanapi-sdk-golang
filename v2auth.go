@@ -37,7 +37,7 @@ func NewV2AuthService(opts ...option.RequestOption) (r V2AuthService) {
 // Authenticate user and return JWT
 func (r *V2AuthService) Login(ctx context.Context, body V2AuthLoginParams, opts ...option.RequestOption) (res *V2AuthLoginResponse, err error) {
 	opts = slices.Concat(r.Options, opts)
-	path := "auth/login"
+	path := "v2/auth/login"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
 	return res, err
 }
@@ -45,7 +45,7 @@ func (r *V2AuthService) Login(ctx context.Context, body V2AuthLoginParams, opts 
 // Log out the current user
 func (r *V2AuthService) Logout(ctx context.Context, opts ...option.RequestOption) (res *V2AuthLogoutResponse, err error) {
 	opts = slices.Concat(r.Options, opts)
-	path := "auth/logout"
+	path := "v2/auth/logout"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, nil, &res, opts...)
 	return res, err
 }
@@ -53,7 +53,7 @@ func (r *V2AuthService) Logout(ctx context.Context, opts ...option.RequestOption
 // Refresh access token using refresh token
 func (r *V2AuthService) RefreshToken(ctx context.Context, opts ...option.RequestOption) (res *V2AuthRefreshTokenResponse, err error) {
 	opts = slices.Concat(r.Options, opts)
-	path := "auth/refresh"
+	path := "v2/auth/refresh"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, nil, &res, opts...)
 	return res, err
 }
@@ -61,7 +61,7 @@ func (r *V2AuthService) RefreshToken(ctx context.Context, opts ...option.Request
 // Retrieve user profile and roles
 func (r *V2AuthService) GetUserDetails(ctx context.Context, opts ...option.RequestOption) (res *V2AuthGetUserDetailsResponse, err error) {
 	opts = slices.Concat(r.Options, opts)
-	path := "auth/userdetails"
+	path := "v2/auth/userdetails"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, nil, &res, opts...)
 	return res, err
 }
@@ -69,7 +69,7 @@ func (r *V2AuthService) GetUserDetails(ctx context.Context, opts ...option.Reque
 // Revoke the current token
 func (r *V2AuthService) RevokeToken(ctx context.Context, opts ...option.RequestOption) (res *V2AuthRevokeTokenResponse, err error) {
 	opts = slices.Concat(r.Options, opts)
-	path := "auth/revoke"
+	path := "v2/auth/revoke"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, nil, &res, opts...)
 	return res, err
 }

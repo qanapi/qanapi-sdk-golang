@@ -41,7 +41,7 @@ func (r *V2APIKeyService) Revoke(ctx context.Context, apiKey string, opts ...opt
 		err = errors.New("missing required apiKey parameter")
 		return nil, err
 	}
-	path := fmt.Sprintf("api-keys/%s/revoke", apiKey)
+	path := fmt.Sprintf("v2/api-keys/%s/revoke", apiKey)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPatch, path, nil, &res, opts...)
 	return res, err
 }
@@ -53,7 +53,7 @@ func (r *V2APIKeyService) Rotate(ctx context.Context, apiKey string, opts ...opt
 		err = errors.New("missing required apiKey parameter")
 		return nil, err
 	}
-	path := fmt.Sprintf("api-keys/%s/rotate", apiKey)
+	path := fmt.Sprintf("v2/api-keys/%s/rotate", apiKey)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPatch, path, nil, &res, opts...)
 	return res, err
 }
