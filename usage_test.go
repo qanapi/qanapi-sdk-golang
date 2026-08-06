@@ -31,9 +31,9 @@ func TestUsage(t *testing.T) {
 		"proxy",
 		qanapi.V3EncryptionEncryptParams{
 			Data: map[string]any{
-				"foo": "bar",
+				"password": "secret123",
 			},
-			XQanapiFields: "x-qanapi-fields",
+			XQanapiFields: "password",
 		},
 	)
 	if err != nil {
