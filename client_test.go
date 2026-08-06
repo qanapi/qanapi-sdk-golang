@@ -43,7 +43,7 @@ func TestUserAgentHeader(t *testing.T) {
 		context.Background(),
 		"proxy",
 		qanapi.V3EncryptionEncryptParams{
-			Body: map[string]any{
+			Data: map[string]any{
 				"foo": "bar",
 			},
 			XQanapiFields: "x-qanapi-fields",
@@ -77,7 +77,7 @@ func TestRetryAfter(t *testing.T) {
 		context.Background(),
 		"proxy",
 		qanapi.V3EncryptionEncryptParams{
-			Body: map[string]any{
+			Data: map[string]any{
 				"foo": "bar",
 			},
 			XQanapiFields: "x-qanapi-fields",
@@ -122,7 +122,7 @@ func TestDeleteRetryCountHeader(t *testing.T) {
 		context.Background(),
 		"proxy",
 		qanapi.V3EncryptionEncryptParams{
-			Body: map[string]any{
+			Data: map[string]any{
 				"foo": "bar",
 			},
 			XQanapiFields: "x-qanapi-fields",
@@ -162,7 +162,7 @@ func TestOverwriteRetryCountHeader(t *testing.T) {
 		context.Background(),
 		"proxy",
 		qanapi.V3EncryptionEncryptParams{
-			Body: map[string]any{
+			Data: map[string]any{
 				"foo": "bar",
 			},
 			XQanapiFields: "x-qanapi-fields",
@@ -201,7 +201,7 @@ func TestRetryAfterMs(t *testing.T) {
 		context.Background(),
 		"proxy",
 		qanapi.V3EncryptionEncryptParams{
-			Body: map[string]any{
+			Data: map[string]any{
 				"foo": "bar",
 			},
 			XQanapiFields: "x-qanapi-fields",
@@ -234,7 +234,7 @@ func TestContextCancel(t *testing.T) {
 		cancelCtx,
 		"proxy",
 		qanapi.V3EncryptionEncryptParams{
-			Body: map[string]any{
+			Data: map[string]any{
 				"foo": "bar",
 			},
 			XQanapiFields: "x-qanapi-fields",
@@ -264,7 +264,7 @@ func TestContextCancelDelay(t *testing.T) {
 		cancelCtx,
 		"proxy",
 		qanapi.V3EncryptionEncryptParams{
-			Body: map[string]any{
+			Data: map[string]any{
 				"foo": "bar",
 			},
 			XQanapiFields: "x-qanapi-fields",
@@ -300,7 +300,7 @@ func TestContextDeadline(t *testing.T) {
 			deadlineCtx,
 			"proxy",
 			qanapi.V3EncryptionEncryptParams{
-				Body: map[string]any{
+				Data: map[string]any{
 					"foo": "bar",
 				},
 				XQanapiFields: "x-qanapi-fields",
