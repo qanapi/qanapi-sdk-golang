@@ -62,11 +62,7 @@ func main() {
 		"proxy",
 		qanapi.V3EncryptionEncryptParams{
 			Body: map[string]any{
-				"name":    "bar",
-				"email":   "bar",
-				"ssn":     "bar",
-				"dob":     "bar",
-				"address": "bar",
+				"foo": "bar",
 			},
 			XQanapiFields: "x-qanapi-fields",
 		},
@@ -316,11 +312,7 @@ _, err := client.V3.Encryption.Encrypt(
 	"proxy",
 	qanapi.V3EncryptionEncryptParams{
 		Body: map[string]any{
-			"name":    "bar",
-			"email":   "bar",
-			"ssn":     "bar",
-			"dob":     "bar",
-			"address": "bar",
+			"foo": "bar",
 		},
 		XQanapiFields: "x-qanapi-fields",
 	},
@@ -354,11 +346,7 @@ client.V3.Encryption.Encrypt(
 	"proxy",
 	qanapi.V3EncryptionEncryptParams{
 		Body: map[string]any{
-			"name":    "bar",
-			"email":   "bar",
-			"ssn":     "bar",
-			"dob":     "bar",
-			"address": "bar",
+			"foo": "bar",
 		},
 		XQanapiFields: "x-qanapi-fields",
 	},
@@ -400,11 +388,7 @@ client.V3.Encryption.Encrypt(
 	"proxy",
 	qanapi.V3EncryptionEncryptParams{
 		Body: map[string]any{
-			"name":    "bar",
-			"email":   "bar",
-			"ssn":     "bar",
-			"dob":     "bar",
-			"address": "bar",
+			"foo": "bar",
 		},
 		XQanapiFields: "x-qanapi-fields",
 	},
@@ -425,11 +409,7 @@ response, err := client.V3.Encryption.Encrypt(
 	"proxy",
 	qanapi.V3EncryptionEncryptParams{
 		Body: map[string]any{
-			"name":    "bar",
-			"email":   "bar",
-			"ssn":     "bar",
-			"dob":     "bar",
-			"address": "bar",
+			"foo": "bar",
 		},
 		XQanapiFields: "x-qanapi-fields",
 	},
