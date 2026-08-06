@@ -62,9 +62,9 @@ func main() {
 		"proxy",
 		qanapi.V3EncryptionEncryptParams{
 			Data: map[string]any{
-				"foo": "bar",
+				"password": "secret123",
 			},
-			XQanapiFields: "x-qanapi-fields",
+			XQanapiFields: "password",
 		},
 	)
 	if err != nil {
@@ -312,9 +312,9 @@ _, err := client.V3.Encryption.Encrypt(
 	"proxy",
 	qanapi.V3EncryptionEncryptParams{
 		Data: map[string]any{
-			"foo": "bar",
+			"password": "secret123",
 		},
-		XQanapiFields: "x-qanapi-fields",
+		XQanapiFields: "password",
 	},
 )
 if err != nil {
@@ -346,9 +346,9 @@ client.V3.Encryption.Encrypt(
 	"proxy",
 	qanapi.V3EncryptionEncryptParams{
 		Data: map[string]any{
-			"foo": "bar",
+			"password": "secret123",
 		},
-		XQanapiFields: "x-qanapi-fields",
+		XQanapiFields: "password",
 	},
 	// This sets the per-retry timeout
 	option.WithRequestTimeout(20*time.Second),
@@ -388,9 +388,9 @@ client.V3.Encryption.Encrypt(
 	"proxy",
 	qanapi.V3EncryptionEncryptParams{
 		Data: map[string]any{
-			"foo": "bar",
+			"password": "secret123",
 		},
-		XQanapiFields: "x-qanapi-fields",
+		XQanapiFields: "password",
 	},
 	option.WithMaxRetries(5),
 )
@@ -409,9 +409,9 @@ response, err := client.V3.Encryption.Encrypt(
 	"proxy",
 	qanapi.V3EncryptionEncryptParams{
 		Data: map[string]any{
-			"foo": "bar",
+			"password": "secret123",
 		},
-		XQanapiFields: "x-qanapi-fields",
+		XQanapiFields: "password",
 	},
 	option.WithResponseInto(&response),
 )

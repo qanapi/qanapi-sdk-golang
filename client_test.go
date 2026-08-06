@@ -44,9 +44,9 @@ func TestUserAgentHeader(t *testing.T) {
 		"proxy",
 		qanapi.V3EncryptionEncryptParams{
 			Data: map[string]any{
-				"foo": "bar",
+				"password": "secret123",
 			},
-			XQanapiFields: "x-qanapi-fields",
+			XQanapiFields: "password",
 		},
 	)
 	if userAgent != fmt.Sprintf("Qanapi/Go %s", internal.PackageVersion) {
@@ -78,9 +78,9 @@ func TestRetryAfter(t *testing.T) {
 		"proxy",
 		qanapi.V3EncryptionEncryptParams{
 			Data: map[string]any{
-				"foo": "bar",
+				"password": "secret123",
 			},
-			XQanapiFields: "x-qanapi-fields",
+			XQanapiFields: "password",
 		},
 	)
 	if err == nil {
@@ -123,9 +123,9 @@ func TestDeleteRetryCountHeader(t *testing.T) {
 		"proxy",
 		qanapi.V3EncryptionEncryptParams{
 			Data: map[string]any{
-				"foo": "bar",
+				"password": "secret123",
 			},
-			XQanapiFields: "x-qanapi-fields",
+			XQanapiFields: "password",
 		},
 	)
 	if err == nil {
@@ -163,9 +163,9 @@ func TestOverwriteRetryCountHeader(t *testing.T) {
 		"proxy",
 		qanapi.V3EncryptionEncryptParams{
 			Data: map[string]any{
-				"foo": "bar",
+				"password": "secret123",
 			},
-			XQanapiFields: "x-qanapi-fields",
+			XQanapiFields: "password",
 		},
 	)
 	if err == nil {
@@ -202,9 +202,9 @@ func TestRetryAfterMs(t *testing.T) {
 		"proxy",
 		qanapi.V3EncryptionEncryptParams{
 			Data: map[string]any{
-				"foo": "bar",
+				"password": "secret123",
 			},
-			XQanapiFields: "x-qanapi-fields",
+			XQanapiFields: "password",
 		},
 	)
 	if err == nil {
@@ -235,9 +235,9 @@ func TestContextCancel(t *testing.T) {
 		"proxy",
 		qanapi.V3EncryptionEncryptParams{
 			Data: map[string]any{
-				"foo": "bar",
+				"password": "secret123",
 			},
-			XQanapiFields: "x-qanapi-fields",
+			XQanapiFields: "password",
 		},
 	)
 	if err == nil {
@@ -265,9 +265,9 @@ func TestContextCancelDelay(t *testing.T) {
 		"proxy",
 		qanapi.V3EncryptionEncryptParams{
 			Data: map[string]any{
-				"foo": "bar",
+				"password": "secret123",
 			},
-			XQanapiFields: "x-qanapi-fields",
+			XQanapiFields: "password",
 		},
 	)
 	if err == nil {
@@ -301,9 +301,9 @@ func TestContextDeadline(t *testing.T) {
 			"proxy",
 			qanapi.V3EncryptionEncryptParams{
 				Data: map[string]any{
-					"foo": "bar",
+					"password": "secret123",
 				},
-				XQanapiFields: "x-qanapi-fields",
+				XQanapiFields: "password",
 			},
 		)
 		if err == nil {
