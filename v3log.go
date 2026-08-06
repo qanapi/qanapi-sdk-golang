@@ -388,7 +388,7 @@ type V3LogUnifiedResponseData struct {
 	CauserEmail   string                               `json:"causer_email" api:"nullable" format:"email"`
 	Configuration Configuration                        `json:"configuration"`
 	Description   string                               `json:"description"`
-	Details       any                                  `json:"details" api:"nullable"`
+	Details       string                               `json:"details" api:"nullable"`
 	FullLog       V3LogUnifiedResponseDataFullLogUnion `json:"full_log"`
 	// Any of "activity", "api", "usage".
 	LogType    string    `json:"log_type"`

@@ -57,14 +57,24 @@ func main() {
 		option.WithAPIKey("My API Key"),      // defaults to os.LookupEnv("QANAPI_API_KEY")
 		option.WithSubdomain("My-Subdomain"), // defaults to os.LookupEnv("QANAPI_SUBDOMAIN")
 	)
-	response, err := client.V2.Auth.Login(context.TODO(), qanapi.V2AuthLoginParams{
-		Email:    "valid@email.com",
-		Password: "secret1234",
-	})
+	response, err := client.V3.Encryption.Encrypt(
+		context.TODO(),
+		"proxy",
+		qanapi.V3EncryptionEncryptParams{
+			Body: map[string]any{
+				"name":    "bar",
+				"email":   "bar",
+				"ssn":     "bar",
+				"dob":     "bar",
+				"address": "bar",
+			},
+			XQanapiFields: "x-qanapi-fields",
+		},
+	)
 	if err != nil {
 		panic(err.Error())
 	}
-	fmt.Printf("%+v\n", response.AccessToken)
+	fmt.Printf("%+v\n", response)
 }
 
 ```
@@ -270,7 +280,7 @@ client := qanapi.NewClient(
 	option.WithHeader("X-Some-Header", "custom_header_info"),
 )
 
-client.V2.Auth.Login(context.TODO(), ...,
+client.V3.Encryption.Encrypt(context.TODO(), ...,
 	// Override the header
 	option.WithHeader("X-Some-Header", "some_other_custom_header_info"),
 	// Add an undocumented field to the request body, using sjson syntax
@@ -301,17 +311,27 @@ When the API returns a non-success status code, we return an error with type
 To handle errors, we recommend that you use the `errors.As` pattern:
 
 ```go
-_, err := client.V2.Auth.Login(context.TODO(), qanapi.V2AuthLoginParams{
-	Email:    "valid@email.com",
-	Password: "secret1234",
-})
+_, err := client.V3.Encryption.Encrypt(
+	context.TODO(),
+	"proxy",
+	qanapi.V3EncryptionEncryptParams{
+		Body: map[string]any{
+			"name":    "bar",
+			"email":   "bar",
+			"ssn":     "bar",
+			"dob":     "bar",
+			"address": "bar",
+		},
+		XQanapiFields: "x-qanapi-fields",
+	},
+)
 if err != nil {
 	var apierr *qanapi.Error
 	if errors.As(err, &apierr) {
 		println(string(apierr.DumpRequest(true)))  // Prints the serialized HTTP request
 		println(string(apierr.DumpResponse(true))) // Prints the serialized HTTP response
 	}
-	panic(err.Error()) // GET "/v2/auth/login": 400 Bad Request { ... }
+	panic(err.Error()) // GET "/v3/encryption/{proxy}/encrypt": 400 Bad Request { ... }
 }
 ```
 
@@ -329,11 +349,18 @@ To set a per-retry timeout, use `option.WithRequestTimeout()`.
 // This sets the timeout for the request, including all the retries.
 ctx, cancel := context.WithTimeout(context.Background(), 5*time.Minute)
 defer cancel()
-client.V2.Auth.Login(
+client.V3.Encryption.Encrypt(
 	ctx,
-	qanapi.V2AuthLoginParams{
-		Email:    "valid@email.com",
-		Password: "secret1234",
+	"proxy",
+	qanapi.V3EncryptionEncryptParams{
+		Body: map[string]any{
+			"name":    "bar",
+			"email":   "bar",
+			"ssn":     "bar",
+			"dob":     "bar",
+			"address": "bar",
+		},
+		XQanapiFields: "x-qanapi-fields",
 	},
 	// This sets the per-retry timeout
 	option.WithRequestTimeout(20*time.Second),
@@ -368,11 +395,18 @@ client := qanapi.NewClient(
 )
 
 // Override per-request:
-client.V2.Auth.Login(
+client.V3.Encryption.Encrypt(
 	context.TODO(),
-	qanapi.V2AuthLoginParams{
-		Email:    "valid@email.com",
-		Password: "secret1234",
+	"proxy",
+	qanapi.V3EncryptionEncryptParams{
+		Body: map[string]any{
+			"name":    "bar",
+			"email":   "bar",
+			"ssn":     "bar",
+			"dob":     "bar",
+			"address": "bar",
+		},
+		XQanapiFields: "x-qanapi-fields",
 	},
 	option.WithMaxRetries(5),
 )
@@ -386,11 +420,18 @@ you need to examine response headers, status codes, or other details.
 ```go
 // Create a variable to store the HTTP response
 var response *http.Response
-response, err := client.V2.Auth.Login(
+response, err := client.V3.Encryption.Encrypt(
 	context.TODO(),
-	qanapi.V2AuthLoginParams{
-		Email:    "valid@email.com",
-		Password: "secret1234",
+	"proxy",
+	qanapi.V3EncryptionEncryptParams{
+		Body: map[string]any{
+			"name":    "bar",
+			"email":   "bar",
+			"ssn":     "bar",
+			"dob":     "bar",
+			"address": "bar",
+		},
+		XQanapiFields: "x-qanapi-fields",
 	},
 	option.WithResponseInto(&response),
 )
