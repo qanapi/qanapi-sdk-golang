@@ -110,12 +110,12 @@ func (r *V3LogActivityResponse) UnmarshalJSON(data []byte) error {
 }
 
 type V3LogActivityResponseData struct {
-	Action      string                        `json:"action"`
-	Description string                        `json:"description"`
-	IP          string                        `json:"ip" api:"nullable"`
-	Timestamp   time.Time                     `json:"timestamp" format:"date-time"`
-	User        V3LogActivityResponseDataUser `json:"user"`
-	When        string                        `json:"when"`
+	Action      string    `json:"action"`
+	Description string    `json:"description"`
+	IP          string    `json:"ip" api:"nullable"`
+	Timestamp   time.Time `json:"timestamp" format:"date-time"`
+	User        User      `json:"user"`
+	When        string    `json:"when"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Action      respjson.Field
@@ -132,70 +132,6 @@ type V3LogActivityResponseData struct {
 // Returns the unmodified JSON received from the API
 func (r V3LogActivityResponseData) RawJSON() string { return r.JSON.raw }
 func (r *V3LogActivityResponseData) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type V3LogActivityResponseDataUser struct {
-	ID               int64                               `json:"id" api:"required"`
-	Email            string                              `json:"email" api:"required" format:"email"`
-	Name             string                              `json:"name" api:"required"`
-	CreatedAt        time.Time                           `json:"created_at" format:"date-time"`
-	Roles            []V3LogActivityResponseDataUserRole `json:"roles"`
-	TwoFactorEnabled bool                                `json:"two_factor_enabled"`
-	UpdatedAt        time.Time                           `json:"updated_at" format:"date-time"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		ID               respjson.Field
-		Email            respjson.Field
-		Name             respjson.Field
-		CreatedAt        respjson.Field
-		Roles            respjson.Field
-		TwoFactorEnabled respjson.Field
-		UpdatedAt        respjson.Field
-		ExtraFields      map[string]respjson.Field
-		raw              string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r V3LogActivityResponseDataUser) RawJSON() string { return r.JSON.raw }
-func (r *V3LogActivityResponseDataUser) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type V3LogActivityResponseDataUserRole struct {
-	Name        string                                        `json:"name" api:"required"`
-	Description string                                        `json:"description" api:"nullable"`
-	Permissions []V3LogActivityResponseDataUserRolePermission `json:"permissions"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Name        respjson.Field
-		Description respjson.Field
-		Permissions respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r V3LogActivityResponseDataUserRole) RawJSON() string { return r.JSON.raw }
-func (r *V3LogActivityResponseDataUserRole) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type V3LogActivityResponseDataUserRolePermission struct {
-	Name string `json:"name" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Name        respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r V3LogActivityResponseDataUserRolePermission) RawJSON() string { return r.JSON.raw }
-func (r *V3LogActivityResponseDataUserRolePermission) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -262,17 +198,17 @@ func (r *V3LogAPIResponse) UnmarshalJSON(data []byte) error {
 }
 
 type V3LogAPIResponseData struct {
-	APIKey          V3LogAPIResponseDataAPIKey `json:"api_key"`
-	APIKeyID        int64                      `json:"api_key_id"`
-	ConfigurationID int64                      `json:"configuration_id" api:"nullable"`
-	CreatedAt       time.Time                  `json:"created_at" format:"date-time"`
-	Domain          string                     `json:"domain"`
-	Endpoint        string                     `json:"endpoint"`
-	Method          string                     `json:"method"`
-	Proxied         bool                       `json:"proxied"`
-	ProxiedTo       string                     `json:"proxied_to" api:"nullable"`
-	RequestID       string                     `json:"request_id" api:"nullable"`
-	StatusCode      int64                      `json:"status_code"`
+	APIKey          APIKey    `json:"api_key"`
+	APIKeyID        int64     `json:"api_key_id"`
+	ConfigurationID int64     `json:"configuration_id" api:"nullable"`
+	CreatedAt       time.Time `json:"created_at" format:"date-time"`
+	Domain          string    `json:"domain"`
+	Endpoint        string    `json:"endpoint"`
+	Method          string    `json:"method"`
+	Proxied         bool      `json:"proxied"`
+	ProxiedTo       string    `json:"proxied_to" api:"nullable"`
+	RequestID       string    `json:"request_id" api:"nullable"`
+	StatusCode      int64     `json:"status_code"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		APIKey          respjson.Field
@@ -294,159 +230,6 @@ type V3LogAPIResponseData struct {
 // Returns the unmodified JSON received from the API
 func (r V3LogAPIResponseData) RawJSON() string { return r.JSON.raw }
 func (r *V3LogAPIResponseData) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type V3LogAPIResponseDataAPIKey struct {
-	ID     string `json:"id" api:"required"`
-	Prefix string `json:"prefix" api:"required"`
-	// Any of "active", "revoked".
-	Status         string                                    `json:"status" api:"required"`
-	Configurations []V3LogAPIResponseDataAPIKeyConfiguration `json:"configurations"`
-	CreatedAt      time.Time                                 `json:"created_at" format:"date-time"`
-	Permissions    []V3LogAPIResponseDataAPIKeyPermission    `json:"permissions"`
-	RevokedAt      time.Time                                 `json:"revoked_at" api:"nullable" format:"date-time"`
-	UpdatedAt      time.Time                                 `json:"updated_at" format:"date-time"`
-	User           V3LogAPIResponseDataAPIKeyUser            `json:"user"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		ID             respjson.Field
-		Prefix         respjson.Field
-		Status         respjson.Field
-		Configurations respjson.Field
-		CreatedAt      respjson.Field
-		Permissions    respjson.Field
-		RevokedAt      respjson.Field
-		UpdatedAt      respjson.Field
-		User           respjson.Field
-		ExtraFields    map[string]respjson.Field
-		raw            string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r V3LogAPIResponseDataAPIKey) RawJSON() string { return r.JSON.raw }
-func (r *V3LogAPIResponseDataAPIKey) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type V3LogAPIResponseDataAPIKeyConfiguration struct {
-	ID     string                                         `json:"id" api:"required" format:"uuid"`
-	Name   string                                         `json:"name" api:"required"`
-	Type   string                                         `json:"type" api:"required"`
-	Values []V3LogAPIResponseDataAPIKeyConfigurationValue `json:"values"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		ID          respjson.Field
-		Name        respjson.Field
-		Type        respjson.Field
-		Values      respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r V3LogAPIResponseDataAPIKeyConfiguration) RawJSON() string { return r.JSON.raw }
-func (r *V3LogAPIResponseDataAPIKeyConfiguration) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type V3LogAPIResponseDataAPIKeyConfigurationValue struct {
-	Key   string `json:"key" api:"required"`
-	Value string `json:"value" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Key         respjson.Field
-		Value       respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r V3LogAPIResponseDataAPIKeyConfigurationValue) RawJSON() string { return r.JSON.raw }
-func (r *V3LogAPIResponseDataAPIKeyConfigurationValue) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type V3LogAPIResponseDataAPIKeyPermission struct {
-	Name string `json:"name" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Name        respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r V3LogAPIResponseDataAPIKeyPermission) RawJSON() string { return r.JSON.raw }
-func (r *V3LogAPIResponseDataAPIKeyPermission) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type V3LogAPIResponseDataAPIKeyUser struct {
-	ID               int64                                `json:"id" api:"required"`
-	Email            string                               `json:"email" api:"required" format:"email"`
-	Name             string                               `json:"name" api:"required"`
-	CreatedAt        time.Time                            `json:"created_at" format:"date-time"`
-	Roles            []V3LogAPIResponseDataAPIKeyUserRole `json:"roles"`
-	TwoFactorEnabled bool                                 `json:"two_factor_enabled"`
-	UpdatedAt        time.Time                            `json:"updated_at" format:"date-time"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		ID               respjson.Field
-		Email            respjson.Field
-		Name             respjson.Field
-		CreatedAt        respjson.Field
-		Roles            respjson.Field
-		TwoFactorEnabled respjson.Field
-		UpdatedAt        respjson.Field
-		ExtraFields      map[string]respjson.Field
-		raw              string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r V3LogAPIResponseDataAPIKeyUser) RawJSON() string { return r.JSON.raw }
-func (r *V3LogAPIResponseDataAPIKeyUser) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type V3LogAPIResponseDataAPIKeyUserRole struct {
-	Name        string                                         `json:"name" api:"required"`
-	Description string                                         `json:"description" api:"nullable"`
-	Permissions []V3LogAPIResponseDataAPIKeyUserRolePermission `json:"permissions"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Name        respjson.Field
-		Description respjson.Field
-		Permissions respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r V3LogAPIResponseDataAPIKeyUserRole) RawJSON() string { return r.JSON.raw }
-func (r *V3LogAPIResponseDataAPIKeyUserRole) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type V3LogAPIResponseDataAPIKeyUserRolePermission struct {
-	Name string `json:"name" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Name        respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r V3LogAPIResponseDataAPIKeyUserRolePermission) RawJSON() string { return r.JSON.raw }
-func (r *V3LogAPIResponseDataAPIKeyUserRolePermission) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -601,18 +384,18 @@ func (r *V3LogUnifiedResponse) UnmarshalJSON(data []byte) error {
 }
 
 type V3LogUnifiedResponseData struct {
-	Action        string                                `json:"action"`
-	CauserEmail   string                                `json:"causer_email" api:"nullable" format:"email"`
-	Configuration V3LogUnifiedResponseDataConfiguration `json:"configuration"`
-	Description   string                                `json:"description"`
-	Details       any                                   `json:"details" api:"nullable"`
-	FullLog       V3LogUnifiedResponseDataFullLogUnion  `json:"full_log"`
+	Action        string                               `json:"action"`
+	CauserEmail   string                               `json:"causer_email" api:"nullable" format:"email"`
+	Configuration Configuration                        `json:"configuration"`
+	Description   string                               `json:"description"`
+	Details       any                                  `json:"details" api:"nullable"`
+	FullLog       V3LogUnifiedResponseDataFullLogUnion `json:"full_log"`
 	// Any of "activity", "api", "usage".
-	LogType    string                       `json:"log_type"`
-	RequestID  string                       `json:"request_id" api:"nullable"`
-	StatusCode int64                        `json:"status_code" api:"nullable"`
-	Timestamp  time.Time                    `json:"timestamp" format:"date-time"`
-	User       V3LogUnifiedResponseDataUser `json:"user"`
+	LogType    string    `json:"log_type"`
+	RequestID  string    `json:"request_id" api:"nullable"`
+	StatusCode int64     `json:"status_code" api:"nullable"`
+	Timestamp  time.Time `json:"timestamp" format:"date-time"`
+	User       User      `json:"user"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Action        respjson.Field
@@ -637,46 +420,6 @@ func (r *V3LogUnifiedResponseData) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type V3LogUnifiedResponseDataConfiguration struct {
-	ID     string                                       `json:"id" api:"required" format:"uuid"`
-	Name   string                                       `json:"name" api:"required"`
-	Type   string                                       `json:"type" api:"required"`
-	Values []V3LogUnifiedResponseDataConfigurationValue `json:"values"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		ID          respjson.Field
-		Name        respjson.Field
-		Type        respjson.Field
-		Values      respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r V3LogUnifiedResponseDataConfiguration) RawJSON() string { return r.JSON.raw }
-func (r *V3LogUnifiedResponseDataConfiguration) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type V3LogUnifiedResponseDataConfigurationValue struct {
-	Key   string `json:"key" api:"required"`
-	Value string `json:"value" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Key         respjson.Field
-		Value       respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r V3LogUnifiedResponseDataConfigurationValue) RawJSON() string { return r.JSON.raw }
-func (r *V3LogUnifiedResponseDataConfigurationValue) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
 // V3LogUnifiedResponseDataFullLogUnion contains all possible properties and values
 // from [V3LogUnifiedResponseDataFullLogActivityLog],
 // [V3LogUnifiedResponseDataFullLogAPILog],
@@ -692,11 +435,11 @@ type V3LogUnifiedResponseDataFullLogUnion struct {
 	// This field is from variant [V3LogUnifiedResponseDataFullLogActivityLog].
 	Timestamp time.Time `json:"timestamp"`
 	// This field is from variant [V3LogUnifiedResponseDataFullLogActivityLog].
-	User V3LogUnifiedResponseDataFullLogActivityLogUser `json:"user"`
+	User User `json:"user"`
 	// This field is from variant [V3LogUnifiedResponseDataFullLogActivityLog].
 	When string `json:"when"`
 	// This field is from variant [V3LogUnifiedResponseDataFullLogAPILog].
-	APIKey V3LogUnifiedResponseDataFullLogAPILogAPIKey `json:"api_key"`
+	APIKey APIKey `json:"api_key"`
 	// This field is from variant [V3LogUnifiedResponseDataFullLogAPILog].
 	APIKeyID        int64     `json:"api_key_id"`
 	ConfigurationID int64     `json:"configuration_id"`
@@ -765,12 +508,12 @@ func (r *V3LogUnifiedResponseDataFullLogUnion) UnmarshalJSON(data []byte) error 
 }
 
 type V3LogUnifiedResponseDataFullLogActivityLog struct {
-	Action      string                                         `json:"action"`
-	Description string                                         `json:"description"`
-	IP          string                                         `json:"ip" api:"nullable"`
-	Timestamp   time.Time                                      `json:"timestamp" format:"date-time"`
-	User        V3LogUnifiedResponseDataFullLogActivityLogUser `json:"user"`
-	When        string                                         `json:"when"`
+	Action      string    `json:"action"`
+	Description string    `json:"description"`
+	IP          string    `json:"ip" api:"nullable"`
+	Timestamp   time.Time `json:"timestamp" format:"date-time"`
+	User        User      `json:"user"`
+	When        string    `json:"when"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Action      respjson.Field
@@ -790,84 +533,18 @@ func (r *V3LogUnifiedResponseDataFullLogActivityLog) UnmarshalJSON(data []byte) 
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type V3LogUnifiedResponseDataFullLogActivityLogUser struct {
-	ID               int64                                                `json:"id" api:"required"`
-	Email            string                                               `json:"email" api:"required" format:"email"`
-	Name             string                                               `json:"name" api:"required"`
-	CreatedAt        time.Time                                            `json:"created_at" format:"date-time"`
-	Roles            []V3LogUnifiedResponseDataFullLogActivityLogUserRole `json:"roles"`
-	TwoFactorEnabled bool                                                 `json:"two_factor_enabled"`
-	UpdatedAt        time.Time                                            `json:"updated_at" format:"date-time"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		ID               respjson.Field
-		Email            respjson.Field
-		Name             respjson.Field
-		CreatedAt        respjson.Field
-		Roles            respjson.Field
-		TwoFactorEnabled respjson.Field
-		UpdatedAt        respjson.Field
-		ExtraFields      map[string]respjson.Field
-		raw              string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r V3LogUnifiedResponseDataFullLogActivityLogUser) RawJSON() string { return r.JSON.raw }
-func (r *V3LogUnifiedResponseDataFullLogActivityLogUser) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type V3LogUnifiedResponseDataFullLogActivityLogUserRole struct {
-	Name        string                                                         `json:"name" api:"required"`
-	Description string                                                         `json:"description" api:"nullable"`
-	Permissions []V3LogUnifiedResponseDataFullLogActivityLogUserRolePermission `json:"permissions"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Name        respjson.Field
-		Description respjson.Field
-		Permissions respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r V3LogUnifiedResponseDataFullLogActivityLogUserRole) RawJSON() string { return r.JSON.raw }
-func (r *V3LogUnifiedResponseDataFullLogActivityLogUserRole) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type V3LogUnifiedResponseDataFullLogActivityLogUserRolePermission struct {
-	Name string `json:"name" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Name        respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r V3LogUnifiedResponseDataFullLogActivityLogUserRolePermission) RawJSON() string {
-	return r.JSON.raw
-}
-func (r *V3LogUnifiedResponseDataFullLogActivityLogUserRolePermission) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
 type V3LogUnifiedResponseDataFullLogAPILog struct {
-	APIKey          V3LogUnifiedResponseDataFullLogAPILogAPIKey `json:"api_key"`
-	APIKeyID        int64                                       `json:"api_key_id"`
-	ConfigurationID int64                                       `json:"configuration_id" api:"nullable"`
-	CreatedAt       time.Time                                   `json:"created_at" format:"date-time"`
-	Domain          string                                      `json:"domain"`
-	Endpoint        string                                      `json:"endpoint"`
-	Method          string                                      `json:"method"`
-	Proxied         bool                                        `json:"proxied"`
-	ProxiedTo       string                                      `json:"proxied_to" api:"nullable"`
-	RequestID       string                                      `json:"request_id" api:"nullable"`
-	StatusCode      int64                                       `json:"status_code"`
+	APIKey          APIKey    `json:"api_key"`
+	APIKeyID        int64     `json:"api_key_id"`
+	ConfigurationID int64     `json:"configuration_id" api:"nullable"`
+	CreatedAt       time.Time `json:"created_at" format:"date-time"`
+	Domain          string    `json:"domain"`
+	Endpoint        string    `json:"endpoint"`
+	Method          string    `json:"method"`
+	Proxied         bool      `json:"proxied"`
+	ProxiedTo       string    `json:"proxied_to" api:"nullable"`
+	RequestID       string    `json:"request_id" api:"nullable"`
+	StatusCode      int64     `json:"status_code"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		APIKey          respjson.Field
@@ -889,163 +566,6 @@ type V3LogUnifiedResponseDataFullLogAPILog struct {
 // Returns the unmodified JSON received from the API
 func (r V3LogUnifiedResponseDataFullLogAPILog) RawJSON() string { return r.JSON.raw }
 func (r *V3LogUnifiedResponseDataFullLogAPILog) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type V3LogUnifiedResponseDataFullLogAPILogAPIKey struct {
-	ID     string `json:"id" api:"required"`
-	Prefix string `json:"prefix" api:"required"`
-	// Any of "active", "revoked".
-	Status         string                                                     `json:"status" api:"required"`
-	Configurations []V3LogUnifiedResponseDataFullLogAPILogAPIKeyConfiguration `json:"configurations"`
-	CreatedAt      time.Time                                                  `json:"created_at" format:"date-time"`
-	Permissions    []V3LogUnifiedResponseDataFullLogAPILogAPIKeyPermission    `json:"permissions"`
-	RevokedAt      time.Time                                                  `json:"revoked_at" api:"nullable" format:"date-time"`
-	UpdatedAt      time.Time                                                  `json:"updated_at" format:"date-time"`
-	User           V3LogUnifiedResponseDataFullLogAPILogAPIKeyUser            `json:"user"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		ID             respjson.Field
-		Prefix         respjson.Field
-		Status         respjson.Field
-		Configurations respjson.Field
-		CreatedAt      respjson.Field
-		Permissions    respjson.Field
-		RevokedAt      respjson.Field
-		UpdatedAt      respjson.Field
-		User           respjson.Field
-		ExtraFields    map[string]respjson.Field
-		raw            string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r V3LogUnifiedResponseDataFullLogAPILogAPIKey) RawJSON() string { return r.JSON.raw }
-func (r *V3LogUnifiedResponseDataFullLogAPILogAPIKey) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type V3LogUnifiedResponseDataFullLogAPILogAPIKeyConfiguration struct {
-	ID     string                                                          `json:"id" api:"required" format:"uuid"`
-	Name   string                                                          `json:"name" api:"required"`
-	Type   string                                                          `json:"type" api:"required"`
-	Values []V3LogUnifiedResponseDataFullLogAPILogAPIKeyConfigurationValue `json:"values"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		ID          respjson.Field
-		Name        respjson.Field
-		Type        respjson.Field
-		Values      respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r V3LogUnifiedResponseDataFullLogAPILogAPIKeyConfiguration) RawJSON() string { return r.JSON.raw }
-func (r *V3LogUnifiedResponseDataFullLogAPILogAPIKeyConfiguration) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type V3LogUnifiedResponseDataFullLogAPILogAPIKeyConfigurationValue struct {
-	Key   string `json:"key" api:"required"`
-	Value string `json:"value" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Key         respjson.Field
-		Value       respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r V3LogUnifiedResponseDataFullLogAPILogAPIKeyConfigurationValue) RawJSON() string {
-	return r.JSON.raw
-}
-func (r *V3LogUnifiedResponseDataFullLogAPILogAPIKeyConfigurationValue) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type V3LogUnifiedResponseDataFullLogAPILogAPIKeyPermission struct {
-	Name string `json:"name" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Name        respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r V3LogUnifiedResponseDataFullLogAPILogAPIKeyPermission) RawJSON() string { return r.JSON.raw }
-func (r *V3LogUnifiedResponseDataFullLogAPILogAPIKeyPermission) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type V3LogUnifiedResponseDataFullLogAPILogAPIKeyUser struct {
-	ID               int64                                                 `json:"id" api:"required"`
-	Email            string                                                `json:"email" api:"required" format:"email"`
-	Name             string                                                `json:"name" api:"required"`
-	CreatedAt        time.Time                                             `json:"created_at" format:"date-time"`
-	Roles            []V3LogUnifiedResponseDataFullLogAPILogAPIKeyUserRole `json:"roles"`
-	TwoFactorEnabled bool                                                  `json:"two_factor_enabled"`
-	UpdatedAt        time.Time                                             `json:"updated_at" format:"date-time"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		ID               respjson.Field
-		Email            respjson.Field
-		Name             respjson.Field
-		CreatedAt        respjson.Field
-		Roles            respjson.Field
-		TwoFactorEnabled respjson.Field
-		UpdatedAt        respjson.Field
-		ExtraFields      map[string]respjson.Field
-		raw              string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r V3LogUnifiedResponseDataFullLogAPILogAPIKeyUser) RawJSON() string { return r.JSON.raw }
-func (r *V3LogUnifiedResponseDataFullLogAPILogAPIKeyUser) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type V3LogUnifiedResponseDataFullLogAPILogAPIKeyUserRole struct {
-	Name        string                                                          `json:"name" api:"required"`
-	Description string                                                          `json:"description" api:"nullable"`
-	Permissions []V3LogUnifiedResponseDataFullLogAPILogAPIKeyUserRolePermission `json:"permissions"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Name        respjson.Field
-		Description respjson.Field
-		Permissions respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r V3LogUnifiedResponseDataFullLogAPILogAPIKeyUserRole) RawJSON() string { return r.JSON.raw }
-func (r *V3LogUnifiedResponseDataFullLogAPILogAPIKeyUserRole) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type V3LogUnifiedResponseDataFullLogAPILogAPIKeyUserRolePermission struct {
-	Name string `json:"name" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Name        respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r V3LogUnifiedResponseDataFullLogAPILogAPIKeyUserRolePermission) RawJSON() string {
-	return r.JSON.raw
-}
-func (r *V3LogUnifiedResponseDataFullLogAPILogAPIKeyUserRolePermission) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -1072,70 +592,6 @@ type V3LogUnifiedResponseDataFullLogQanapiFlowLog struct {
 // Returns the unmodified JSON received from the API
 func (r V3LogUnifiedResponseDataFullLogQanapiFlowLog) RawJSON() string { return r.JSON.raw }
 func (r *V3LogUnifiedResponseDataFullLogQanapiFlowLog) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type V3LogUnifiedResponseDataUser struct {
-	ID               int64                              `json:"id" api:"required"`
-	Email            string                             `json:"email" api:"required" format:"email"`
-	Name             string                             `json:"name" api:"required"`
-	CreatedAt        time.Time                          `json:"created_at" format:"date-time"`
-	Roles            []V3LogUnifiedResponseDataUserRole `json:"roles"`
-	TwoFactorEnabled bool                               `json:"two_factor_enabled"`
-	UpdatedAt        time.Time                          `json:"updated_at" format:"date-time"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		ID               respjson.Field
-		Email            respjson.Field
-		Name             respjson.Field
-		CreatedAt        respjson.Field
-		Roles            respjson.Field
-		TwoFactorEnabled respjson.Field
-		UpdatedAt        respjson.Field
-		ExtraFields      map[string]respjson.Field
-		raw              string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r V3LogUnifiedResponseDataUser) RawJSON() string { return r.JSON.raw }
-func (r *V3LogUnifiedResponseDataUser) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type V3LogUnifiedResponseDataUserRole struct {
-	Name        string                                       `json:"name" api:"required"`
-	Description string                                       `json:"description" api:"nullable"`
-	Permissions []V3LogUnifiedResponseDataUserRolePermission `json:"permissions"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Name        respjson.Field
-		Description respjson.Field
-		Permissions respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r V3LogUnifiedResponseDataUserRole) RawJSON() string { return r.JSON.raw }
-func (r *V3LogUnifiedResponseDataUserRole) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type V3LogUnifiedResponseDataUserRolePermission struct {
-	Name string `json:"name" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Name        respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r V3LogUnifiedResponseDataUserRolePermission) RawJSON() string { return r.JSON.raw }
-func (r *V3LogUnifiedResponseDataUserRolePermission) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 

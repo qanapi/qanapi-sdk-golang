@@ -145,7 +145,7 @@ func TestV3UserPatchWithOptionalParams(t *testing.T) {
 	}
 }
 
-func TestV3UserRestoreWithOptionalParams(t *testing.T) {
+func TestV3UserRestore(t *testing.T) {
 	t.Skip("Mock server tests are disabled")
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
@@ -159,16 +159,7 @@ func TestV3UserRestoreWithOptionalParams(t *testing.T) {
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
 	)
-	_, err := client.V3.Users.Restore(
-		context.TODO(),
-		0,
-		qanapi.V3UserRestoreParams{
-			Email:            qanapi.String("dev@stainless.com"),
-			Name:             qanapi.String("name"),
-			Role:             qanapi.String("role"),
-			TwoFactorEnabled: qanapi.Bool(true),
-		},
-	)
+	_, err := client.V3.Users.Restore(context.TODO(), 0)
 	if err != nil {
 		var apierr *qanapi.Error
 		if errors.As(err, &apierr) {
