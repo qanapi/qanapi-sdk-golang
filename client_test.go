@@ -44,11 +44,7 @@ func TestUserAgentHeader(t *testing.T) {
 		"proxy",
 		qanapi.V3EncryptionEncryptParams{
 			Body: map[string]any{
-				"name":    "bar",
-				"email":   "bar",
-				"ssn":     "bar",
-				"dob":     "bar",
-				"address": "bar",
+				"foo": "bar",
 			},
 			XQanapiFields: "x-qanapi-fields",
 		},
@@ -82,11 +78,7 @@ func TestRetryAfter(t *testing.T) {
 		"proxy",
 		qanapi.V3EncryptionEncryptParams{
 			Body: map[string]any{
-				"name":    "bar",
-				"email":   "bar",
-				"ssn":     "bar",
-				"dob":     "bar",
-				"address": "bar",
+				"foo": "bar",
 			},
 			XQanapiFields: "x-qanapi-fields",
 		},
@@ -131,11 +123,7 @@ func TestDeleteRetryCountHeader(t *testing.T) {
 		"proxy",
 		qanapi.V3EncryptionEncryptParams{
 			Body: map[string]any{
-				"name":    "bar",
-				"email":   "bar",
-				"ssn":     "bar",
-				"dob":     "bar",
-				"address": "bar",
+				"foo": "bar",
 			},
 			XQanapiFields: "x-qanapi-fields",
 		},
@@ -175,11 +163,7 @@ func TestOverwriteRetryCountHeader(t *testing.T) {
 		"proxy",
 		qanapi.V3EncryptionEncryptParams{
 			Body: map[string]any{
-				"name":    "bar",
-				"email":   "bar",
-				"ssn":     "bar",
-				"dob":     "bar",
-				"address": "bar",
+				"foo": "bar",
 			},
 			XQanapiFields: "x-qanapi-fields",
 		},
@@ -218,11 +202,7 @@ func TestRetryAfterMs(t *testing.T) {
 		"proxy",
 		qanapi.V3EncryptionEncryptParams{
 			Body: map[string]any{
-				"name":    "bar",
-				"email":   "bar",
-				"ssn":     "bar",
-				"dob":     "bar",
-				"address": "bar",
+				"foo": "bar",
 			},
 			XQanapiFields: "x-qanapi-fields",
 		},
@@ -255,11 +235,7 @@ func TestContextCancel(t *testing.T) {
 		"proxy",
 		qanapi.V3EncryptionEncryptParams{
 			Body: map[string]any{
-				"name":    "bar",
-				"email":   "bar",
-				"ssn":     "bar",
-				"dob":     "bar",
-				"address": "bar",
+				"foo": "bar",
 			},
 			XQanapiFields: "x-qanapi-fields",
 		},
@@ -289,11 +265,7 @@ func TestContextCancelDelay(t *testing.T) {
 		"proxy",
 		qanapi.V3EncryptionEncryptParams{
 			Body: map[string]any{
-				"name":    "bar",
-				"email":   "bar",
-				"ssn":     "bar",
-				"dob":     "bar",
-				"address": "bar",
+				"foo": "bar",
 			},
 			XQanapiFields: "x-qanapi-fields",
 		},
@@ -329,11 +301,7 @@ func TestContextDeadline(t *testing.T) {
 			"proxy",
 			qanapi.V3EncryptionEncryptParams{
 				Body: map[string]any{
-					"name":    "bar",
-					"email":   "bar",
-					"ssn":     "bar",
-					"dob":     "bar",
-					"address": "bar",
+					"foo": "bar",
 				},
 				XQanapiFields: "x-qanapi-fields",
 			},

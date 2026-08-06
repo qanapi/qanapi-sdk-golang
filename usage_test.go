@@ -31,11 +31,7 @@ func TestUsage(t *testing.T) {
 		"proxy",
 		qanapi.V3EncryptionEncryptParams{
 			Body: map[string]any{
-				"name":    "bar",
-				"email":   "bar",
-				"ssn":     "bar",
-				"dob":     "bar",
-				"address": "bar",
+				"foo": "bar",
 			},
 			XQanapiFields: "x-qanapi-fields",
 		},
