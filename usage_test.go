@@ -26,12 +26,22 @@ func TestUsage(t *testing.T) {
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
 	)
-	response, err := client.V2.Auth.Login(context.TODO(), qanapi.V2AuthLoginParams{
-		Email:    "valid@email.com",
-		Password: "secret1234",
-	})
+	response, err := client.V3.Encryption.Encrypt(
+		context.TODO(),
+		"proxy",
+		qanapi.V3EncryptionEncryptParams{
+			Body: map[string]any{
+				"name":    "bar",
+				"email":   "bar",
+				"ssn":     "bar",
+				"dob":     "bar",
+				"address": "bar",
+			},
+			XQanapiFields: "x-qanapi-fields",
+		},
+	)
 	if err != nil {
 		t.Fatalf("err should be nil: %s", err.Error())
 	}
-	t.Logf("%+v\n", response.AccessToken)
+	t.Logf("%+v\n", response)
 }
