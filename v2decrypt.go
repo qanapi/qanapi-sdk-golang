@@ -15,88 +15,88 @@ import (
 	"github.com/qanapi/qanapi-sdk-golang/packages/respjson"
 )
 
-// DecryptService contains methods and other services that help with interacting
+// V2DecryptService contains methods and other services that help with interacting
 // with the qanapi API.
 //
 // Note, unlike clients, this service does not read variables from the environment
 // automatically. You should not instantiate this service directly, and instead use
-// the [NewDecryptService] method instead.
-type DecryptService struct {
+// the [NewV2DecryptService] method instead.
+type V2DecryptService struct {
 	Options []option.RequestOption
 }
 
-// NewDecryptService generates a new service that applies the given options to each
-// request. These options are applied after the parent client's options (if there
-// is one), and before any request-specific options.
-func NewDecryptService(opts ...option.RequestOption) (r DecryptService) {
-	r = DecryptService{}
+// NewV2DecryptService generates a new service that applies the given options to
+// each request. These options are applied after the parent client's options (if
+// there is one), and before any request-specific options.
+func NewV2DecryptService(opts ...option.RequestOption) (r V2DecryptService) {
+	r = V2DecryptService{}
 	r.Options = opts
 	return
 }
 
 // Decrypt encrypted payload
-func (r *DecryptService) DecryptPayload(ctx context.Context, body DecryptDecryptPayloadParams, opts ...option.RequestOption) (res *DecryptDecryptPayloadResponseUnion, err error) {
+func (r *V2DecryptService) DecryptPayload(ctx context.Context, body V2DecryptDecryptPayloadParams, opts ...option.RequestOption) (res *V2DecryptDecryptPayloadResponseUnion, err error) {
 	opts = slices.Concat(r.Options, opts)
-	path := "decrypt"
+	path := "v2/decrypt"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
 	return res, err
 }
 
-// DecryptDecryptPayloadResponseUnion contains all possible properties and values
+// V2DecryptDecryptPayloadResponseUnion contains all possible properties and values
 // from [string], [map[string]any], [[]any].
 //
 // Use the methods beginning with 'As' to cast the union to one of its variants.
 //
 // If the underlying value is not a json object, one of the following properties
 // will be valid: OfString
-// OfDecryptDecryptPayloadResponseDecryptDecryptPayloadResponseVariant1Item
+// OfV2DecryptDecryptPayloadResponseDecryptDecryptPayloadResponseVariant1Item
 // OfAnyArray]
-type DecryptDecryptPayloadResponseUnion struct {
+type V2DecryptDecryptPayloadResponseUnion struct {
 	// This field will be present if the value is a [string] instead of an object.
 	OfString string `json:",inline"`
 	// This field will be present if the value is a [any] instead of an object.
-	OfDecryptDecryptPayloadResponseDecryptDecryptPayloadResponseVariant1Item any `json:",inline"`
+	OfV2DecryptDecryptPayloadResponseDecryptDecryptPayloadResponseVariant1Item any `json:",inline"`
 	// This field will be present if the value is a [[]any] instead of an object.
 	OfAnyArray []any `json:",inline"`
 	JSON       struct {
-		OfString                                                                 respjson.Field
-		OfDecryptDecryptPayloadResponseDecryptDecryptPayloadResponseVariant1Item respjson.Field
-		OfAnyArray                                                               respjson.Field
-		raw                                                                      string
+		OfString                                                                   respjson.Field
+		OfV2DecryptDecryptPayloadResponseDecryptDecryptPayloadResponseVariant1Item respjson.Field
+		OfAnyArray                                                                 respjson.Field
+		raw                                                                        string
 	} `json:"-"`
 }
 
-func (u DecryptDecryptPayloadResponseUnion) AsString() (v string) {
+func (u V2DecryptDecryptPayloadResponseUnion) AsString() (v string) {
 	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
 	return
 }
 
-func (u DecryptDecryptPayloadResponseUnion) AsAnyMap() (v map[string]any) {
+func (u V2DecryptDecryptPayloadResponseUnion) AsAnyMap() (v map[string]any) {
 	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
 	return
 }
 
-func (u DecryptDecryptPayloadResponseUnion) AsAnyArray() (v []any) {
+func (u V2DecryptDecryptPayloadResponseUnion) AsAnyArray() (v []any) {
 	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
 	return
 }
 
 // Returns the unmodified JSON received from the API
-func (u DecryptDecryptPayloadResponseUnion) RawJSON() string { return u.JSON.raw }
+func (u V2DecryptDecryptPayloadResponseUnion) RawJSON() string { return u.JSON.raw }
 
-func (r *DecryptDecryptPayloadResponseUnion) UnmarshalJSON(data []byte) error {
+func (r *V2DecryptDecryptPayloadResponseUnion) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type DecryptDecryptPayloadParams struct {
+type V2DecryptDecryptPayloadParams struct {
 	// The encrypted payload to decrypt.
 	//
 	// - Can be a string or an object/array with encrypted fields.
 	// - Decryption is selective if `sensitiveFields` is provided.
-	Data DecryptDecryptPayloadParamsDataUnion `json:"data,omitzero" api:"required"`
+	Data V2DecryptDecryptPayloadParamsDataUnion `json:"data,omitzero" api:"required"`
 	// Laravel-style dot-notated paths to fields to decrypt.
 	//
-	// - Same syntax and behavior as in EncryptRequest.
+	// - Same syntax and behavior as in V2EncryptRequest.
 	// - If omitted, all string values matching encryption prefix are attempted.
 	//
 	// Examples:
@@ -107,32 +107,32 @@ type DecryptDecryptPayloadParams struct {
 	paramObj
 }
 
-func (r DecryptDecryptPayloadParams) MarshalJSON() (data []byte, err error) {
-	type shadow DecryptDecryptPayloadParams
+func (r V2DecryptDecryptPayloadParams) MarshalJSON() (data []byte, err error) {
+	type shadow V2DecryptDecryptPayloadParams
 	return param.MarshalObject(r, (*shadow)(&r))
 }
-func (r *DecryptDecryptPayloadParams) UnmarshalJSON(data []byte) error {
+func (r *V2DecryptDecryptPayloadParams) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
 // Only one field can be non-zero.
 //
 // Use [param.IsOmitted] to confirm if a field is set.
-type DecryptDecryptPayloadParamsDataUnion struct {
+type V2DecryptDecryptPayloadParamsDataUnion struct {
 	OfString   param.Opt[string] `json:",omitzero,inline"`
 	OfAnyMap   map[string]any    `json:",omitzero,inline"`
 	OfAnyArray []any             `json:",omitzero,inline"`
 	paramUnion
 }
 
-func (u DecryptDecryptPayloadParamsDataUnion) MarshalJSON() ([]byte, error) {
+func (u V2DecryptDecryptPayloadParamsDataUnion) MarshalJSON() ([]byte, error) {
 	return param.MarshalUnion(u, u.OfString, u.OfAnyMap, u.OfAnyArray)
 }
-func (u *DecryptDecryptPayloadParamsDataUnion) UnmarshalJSON(data []byte) error {
+func (u *V2DecryptDecryptPayloadParamsDataUnion) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, u)
 }
 
-func (u *DecryptDecryptPayloadParamsDataUnion) asAny() any {
+func (u *V2DecryptDecryptPayloadParamsDataUnion) asAny() any {
 	if !param.IsOmitted(u.OfString) {
 		return &u.OfString.Value
 	} else if !param.IsOmitted(u.OfAnyMap) {

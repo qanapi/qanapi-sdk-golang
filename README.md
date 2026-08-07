@@ -28,7 +28,7 @@ Or to pin the version:
 <!-- x-release-please-start-version -->
 
 ```sh
-go get -u 'github.com/qanapi/qanapi-sdk-golang@v1.6.0'
+go get -u 'github.com/qanapi/qanapi-sdk-golang@v1.7.0'
 ```
 
 <!-- x-release-please-end -->
@@ -57,14 +57,20 @@ func main() {
 		option.WithAPIKey("My API Key"),      // defaults to os.LookupEnv("QANAPI_API_KEY")
 		option.WithSubdomain("My-Subdomain"), // defaults to os.LookupEnv("QANAPI_SUBDOMAIN")
 	)
-	response, err := client.Auth.Login(context.TODO(), qanapi.AuthLoginParams{
-		Email:    "valid@email.com",
-		Password: "secret1234",
-	})
+	response, err := client.V3.Encryption.Encrypt(
+		context.TODO(),
+		"{proxy}",
+		qanapi.V3EncryptionEncryptParams{
+			Data: map[string]any{
+				"password": "secret123",
+			},
+			XQanapiFields: "password",
+		},
+	)
 	if err != nil {
 		panic(err.Error())
 	}
-	fmt.Printf("%+v\n", response.AccessToken)
+	fmt.Printf("%+v\n", response)
 }
 
 ```
@@ -270,7 +276,7 @@ client := qanapi.NewClient(
 	option.WithHeader("X-Some-Header", "custom_header_info"),
 )
 
-client.Auth.Login(context.TODO(), ...,
+client.V3.Encryption.Encrypt(context.TODO(), ...,
 	// Override the header
 	option.WithHeader("X-Some-Header", "some_other_custom_header_info"),
 	// Add an undocumented field to the request body, using sjson syntax
@@ -301,17 +307,23 @@ When the API returns a non-success status code, we return an error with type
 To handle errors, we recommend that you use the `errors.As` pattern:
 
 ```go
-_, err := client.Auth.Login(context.TODO(), qanapi.AuthLoginParams{
-	Email:    "valid@email.com",
-	Password: "secret1234",
-})
+_, err := client.V3.Encryption.Encrypt(
+	context.TODO(),
+	"{proxy}",
+	qanapi.V3EncryptionEncryptParams{
+		Data: map[string]any{
+			"password": "secret123",
+		},
+		XQanapiFields: "password",
+	},
+)
 if err != nil {
 	var apierr *qanapi.Error
 	if errors.As(err, &apierr) {
 		println(string(apierr.DumpRequest(true)))  // Prints the serialized HTTP request
 		println(string(apierr.DumpResponse(true))) // Prints the serialized HTTP response
 	}
-	panic(err.Error()) // GET "/auth/login": 400 Bad Request { ... }
+	panic(err.Error()) // GET "/v3/encryption/{proxy}/encrypt": 400 Bad Request { ... }
 }
 ```
 
@@ -329,11 +341,14 @@ To set a per-retry timeout, use `option.WithRequestTimeout()`.
 // This sets the timeout for the request, including all the retries.
 ctx, cancel := context.WithTimeout(context.Background(), 5*time.Minute)
 defer cancel()
-client.Auth.Login(
+client.V3.Encryption.Encrypt(
 	ctx,
-	qanapi.AuthLoginParams{
-		Email:    "valid@email.com",
-		Password: "secret1234",
+	"{proxy}",
+	qanapi.V3EncryptionEncryptParams{
+		Data: map[string]any{
+			"password": "secret123",
+		},
+		XQanapiFields: "password",
 	},
 	// This sets the per-retry timeout
 	option.WithRequestTimeout(20*time.Second),
@@ -368,11 +383,14 @@ client := qanapi.NewClient(
 )
 
 // Override per-request:
-client.Auth.Login(
+client.V3.Encryption.Encrypt(
 	context.TODO(),
-	qanapi.AuthLoginParams{
-		Email:    "valid@email.com",
-		Password: "secret1234",
+	"{proxy}",
+	qanapi.V3EncryptionEncryptParams{
+		Data: map[string]any{
+			"password": "secret123",
+		},
+		XQanapiFields: "password",
 	},
 	option.WithMaxRetries(5),
 )
@@ -386,11 +404,14 @@ you need to examine response headers, status codes, or other details.
 ```go
 // Create a variable to store the HTTP response
 var response *http.Response
-response, err := client.Auth.Login(
+response, err := client.V3.Encryption.Encrypt(
 	context.TODO(),
-	qanapi.AuthLoginParams{
-		Email:    "valid@email.com",
-		Password: "secret1234",
+	"{proxy}",
+	qanapi.V3EncryptionEncryptParams{
+		Data: map[string]any{
+			"password": "secret123",
+		},
+		XQanapiFields: "password",
 	},
 	option.WithResponseInto(&response),
 )

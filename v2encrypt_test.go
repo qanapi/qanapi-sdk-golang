@@ -13,7 +13,7 @@ import (
 	"github.com/qanapi/qanapi-sdk-golang/option"
 )
 
-func TestDecryptDecryptPayloadWithOptionalParams(t *testing.T) {
+func TestV2EncryptEncryptDataWithOptionalParams(t *testing.T) {
 	t.Skip("Mock server tests are disabled")
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
@@ -26,12 +26,21 @@ func TestDecryptDecryptPayloadWithOptionalParams(t *testing.T) {
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
+		option.WithBearerToken("My Bearer Token"),
 	)
-	_, err := client.Decrypt.DecryptPayload(context.TODO(), qanapi.DecryptDecryptPayloadParams{
-		Data: qanapi.DecryptDecryptPayloadParamsDataUnion{
+	_, err := client.V2.Encrypt.EncryptData(context.TODO(), qanapi.V2EncryptEncryptDataParams{
+		Data: qanapi.V2EncryptEncryptDataParamsDataUnion{
 			OfAnyMap: map[string]any{
 				"password": "bar",
 			},
+		},
+		Access: qanapi.V2EncryptEncryptDataParamsAccess{
+			ACL: []string{"admin"},
+		},
+		Attributes: qanapi.V2EncryptEncryptDataParamsAttributes{
+			Classification: "confidential",
+			Owner:          qanapi.String("alice@example.com"),
+			Tags:           []string{"legal"},
 		},
 		SensitiveFields: []string{"password"},
 	})

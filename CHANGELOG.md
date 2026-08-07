@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.7.0 (2026-08-07)
+
+Full Changelog: [v1.6.0...v1.7.0](https://github.com/qanapi/qanapi-sdk-golang/compare/v1.6.0...v1.7.0)
+
+### Features
+
+* **api:** add all v2 routes to a sub resource ([723b073](https://github.com/qanapi/qanapi-sdk-golang/commit/723b0734c1c043fafd4a4b92b8bfb2909c47e42a))
+* **api:** Add API V3 support ([087925e](https://github.com/qanapi/qanapi-sdk-golang/commit/087925ede99ca5d2c8a35865f2f37f0bc8bb8766))
+* **api:** add schema models ([b79fa4b](https://github.com/qanapi/qanapi-sdk-golang/commit/b79fa4b73afb2894bda968ebab50da9b0941b138))
+* **api:** Add v2 routes as sub resources ([a239f95](https://github.com/qanapi/qanapi-sdk-golang/commit/a239f951a86d7a28c1e78a943dc243185d3af3b1))
+* **api:** examples ([42dbf27](https://github.com/qanapi/qanapi-sdk-golang/commit/42dbf278c9dcbf721da595a23b2ec7e25abda795))
+* **api:** make x-qanapi-fields required in v3 decrypt ([e244191](https://github.com/qanapi/qanapi-sdk-golang/commit/e244191ebbef6de8ccd7f2b0e9b4dafc9e85109d))
+* **api:** move v3 to the top ([b4376f2](https://github.com/qanapi/qanapi-sdk-golang/commit/b4376f22ffe6dff473cda02102d05214c1ee51b8))
+* **api:** move x-qanapi-fields to SensitiveFields parameter ([3636005](https://github.com/qanapi/qanapi-sdk-golang/commit/36360058f839819bada33dd90a8f14c5fd6ed768))
+* **api:** rename V2 encryption schemas ([ae5a797](https://github.com/qanapi/qanapi-sdk-golang/commit/ae5a797d697cd329ce0c1f8f4c23f9b63dbde5c6))
+* **api:** set v3 encryption routes body param name ([aad5504](https://github.com/qanapi/qanapi-sdk-golang/commit/aad55040fe2005318e2555791f0e35b33cef3533))
+* **api:** V3 Encryption Schemas ([a91c484](https://github.com/qanapi/qanapi-sdk-golang/commit/a91c484dc0f6d70c507e806e8bc686bae0486994))
+
 ## 1.6.0 (2026-07-24)
 
 Full Changelog: [v1.5.0...v1.6.0](https://github.com/qanapi/qanapi-sdk-golang/compare/v1.5.0...v1.6.0)
