@@ -26,6 +26,7 @@ func TestV2EncryptEncryptDataWithOptionalParams(t *testing.T) {
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
+		option.WithBearerToken("My Bearer Token"),
 	)
 	_, err := client.V2.Encrypt.EncryptData(context.TODO(), qanapi.V2EncryptEncryptDataParams{
 		Data: qanapi.V2EncryptEncryptDataParamsDataUnion{
