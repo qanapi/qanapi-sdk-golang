@@ -26,6 +26,7 @@ func TestV2DecryptDecryptPayloadWithOptionalParams(t *testing.T) {
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
+		option.WithBearerToken("My Bearer Token"),
 	)
 	_, err := client.V2.Decrypt.DecryptPayload(context.TODO(), qanapi.V2DecryptDecryptPayloadParams{
 		Data: qanapi.V2DecryptDecryptPayloadParamsDataUnion{

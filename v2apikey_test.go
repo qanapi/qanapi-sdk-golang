@@ -26,6 +26,7 @@ func TestV2APIKeyRevoke(t *testing.T) {
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
+		option.WithBearerToken("My Bearer Token"),
 	)
 	_, err := client.V2.APIKeys.Revoke(context.TODO(), "apiKey")
 	if err != nil {
@@ -50,6 +51,7 @@ func TestV2APIKeyRotate(t *testing.T) {
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
+		option.WithBearerToken("My Bearer Token"),
 	)
 	_, err := client.V2.APIKeys.Rotate(context.TODO(), "apiKey")
 	if err != nil {

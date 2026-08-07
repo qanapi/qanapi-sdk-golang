@@ -53,6 +53,7 @@ func TestV2AuthLogout(t *testing.T) {
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
+		option.WithBearerToken("My Bearer Token"),
 	)
 	_, err := client.V2.Auth.Logout(context.TODO())
 	if err != nil {
@@ -77,6 +78,7 @@ func TestV2AuthRefreshToken(t *testing.T) {
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
+		option.WithBearerToken("My Bearer Token"),
 	)
 	_, err := client.V2.Auth.RefreshToken(context.TODO())
 	if err != nil {
@@ -101,6 +103,7 @@ func TestV2AuthGetUserDetails(t *testing.T) {
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
+		option.WithBearerToken("My Bearer Token"),
 	)
 	_, err := client.V2.Auth.GetUserDetails(context.TODO())
 	if err != nil {
@@ -125,6 +128,7 @@ func TestV2AuthRevokeToken(t *testing.T) {
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
+		option.WithBearerToken("My Bearer Token"),
 	)
 	_, err := client.V2.Auth.RevokeToken(context.TODO())
 	if err != nil {
