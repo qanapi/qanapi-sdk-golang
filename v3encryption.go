@@ -38,7 +38,7 @@ func NewV3EncryptionService(opts ...option.RequestOption) (r V3EncryptionService
 // Decrypt data
 func (r *V3EncryptionService) Decrypt(ctx context.Context, proxy string, params V3EncryptionDecryptParams, opts ...option.RequestOption) (res *V3EncryptionDecryptResponse, err error) {
 	if !param.IsOmitted(params.XQanapiFields) {
-		opts = append(opts, option.WithHeader("x-qanapi-fields", fmt.Sprintf("%v", params.XQanapiFields.Value)))
+		opts = append(opts, option.WithHeader("x-qanapi-fields", fmt.Sprintf("%v", params.XQanapiFields)))
 	}
 	opts = slices.Concat(r.Options, opts)
 	if proxy == "" {
@@ -75,7 +75,7 @@ type V3EncryptionEncryptResponse map[string]any
 type V3EncryptionDecryptParams struct {
 	// A JSON object to decrypt fields on. A maximum depth of 32 is allowed.
 	Data          map[string]any
-	XQanapiFields param.Opt[string] `header:"x-qanapi-fields,omitzero" json:"-"`
+	XQanapiFields string `header:"x-qanapi-fields" api:"required" json:"-"`
 	paramObj
 }
 

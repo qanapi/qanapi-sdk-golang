@@ -13,7 +13,7 @@ import (
 	"github.com/qanapi/qanapi-sdk-golang/option"
 )
 
-func TestV3EncryptionDecryptWithOptionalParams(t *testing.T) {
+func TestV3EncryptionDecrypt(t *testing.T) {
 	t.Skip("Mock server tests are disabled")
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
@@ -34,7 +34,7 @@ func TestV3EncryptionDecryptWithOptionalParams(t *testing.T) {
 			Data: map[string]any{
 				"foo": "bar",
 			},
-			XQanapiFields: qanapi.String("x-qanapi-fields"),
+			XQanapiFields: "x-qanapi-fields",
 		},
 	)
 	if err != nil {
