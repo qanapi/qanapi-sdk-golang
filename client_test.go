@@ -41,7 +41,7 @@ func TestUserAgentHeader(t *testing.T) {
 	)
 	_, _ = client.V3.Encryption.Encrypt(
 		context.Background(),
-		"proxy",
+		"{proxy}",
 		qanapi.V3EncryptionEncryptParams{
 			Data: map[string]any{
 				"password": "secret123",
@@ -75,7 +75,7 @@ func TestRetryAfter(t *testing.T) {
 	)
 	_, err := client.V3.Encryption.Encrypt(
 		context.Background(),
-		"proxy",
+		"{proxy}",
 		qanapi.V3EncryptionEncryptParams{
 			Data: map[string]any{
 				"password": "secret123",
@@ -120,7 +120,7 @@ func TestDeleteRetryCountHeader(t *testing.T) {
 	)
 	_, err := client.V3.Encryption.Encrypt(
 		context.Background(),
-		"proxy",
+		"{proxy}",
 		qanapi.V3EncryptionEncryptParams{
 			Data: map[string]any{
 				"password": "secret123",
@@ -160,7 +160,7 @@ func TestOverwriteRetryCountHeader(t *testing.T) {
 	)
 	_, err := client.V3.Encryption.Encrypt(
 		context.Background(),
-		"proxy",
+		"{proxy}",
 		qanapi.V3EncryptionEncryptParams{
 			Data: map[string]any{
 				"password": "secret123",
@@ -199,7 +199,7 @@ func TestRetryAfterMs(t *testing.T) {
 	)
 	_, err := client.V3.Encryption.Encrypt(
 		context.Background(),
-		"proxy",
+		"{proxy}",
 		qanapi.V3EncryptionEncryptParams{
 			Data: map[string]any{
 				"password": "secret123",
@@ -232,7 +232,7 @@ func TestContextCancel(t *testing.T) {
 	cancel()
 	_, err := client.V3.Encryption.Encrypt(
 		cancelCtx,
-		"proxy",
+		"{proxy}",
 		qanapi.V3EncryptionEncryptParams{
 			Data: map[string]any{
 				"password": "secret123",
@@ -262,7 +262,7 @@ func TestContextCancelDelay(t *testing.T) {
 	defer cancel()
 	_, err := client.V3.Encryption.Encrypt(
 		cancelCtx,
-		"proxy",
+		"{proxy}",
 		qanapi.V3EncryptionEncryptParams{
 			Data: map[string]any{
 				"password": "secret123",
@@ -298,7 +298,7 @@ func TestContextDeadline(t *testing.T) {
 		)
 		_, err := client.V3.Encryption.Encrypt(
 			deadlineCtx,
-			"proxy",
+			"{proxy}",
 			qanapi.V3EncryptionEncryptParams{
 				Data: map[string]any{
 					"password": "secret123",

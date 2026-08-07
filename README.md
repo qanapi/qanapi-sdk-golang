@@ -59,7 +59,7 @@ func main() {
 	)
 	response, err := client.V3.Encryption.Encrypt(
 		context.TODO(),
-		"proxy",
+		"{proxy}",
 		qanapi.V3EncryptionEncryptParams{
 			Data: map[string]any{
 				"password": "secret123",
@@ -309,7 +309,7 @@ To handle errors, we recommend that you use the `errors.As` pattern:
 ```go
 _, err := client.V3.Encryption.Encrypt(
 	context.TODO(),
-	"proxy",
+	"{proxy}",
 	qanapi.V3EncryptionEncryptParams{
 		Data: map[string]any{
 			"password": "secret123",
@@ -343,7 +343,7 @@ ctx, cancel := context.WithTimeout(context.Background(), 5*time.Minute)
 defer cancel()
 client.V3.Encryption.Encrypt(
 	ctx,
-	"proxy",
+	"{proxy}",
 	qanapi.V3EncryptionEncryptParams{
 		Data: map[string]any{
 			"password": "secret123",
@@ -385,7 +385,7 @@ client := qanapi.NewClient(
 // Override per-request:
 client.V3.Encryption.Encrypt(
 	context.TODO(),
-	"proxy",
+	"{proxy}",
 	qanapi.V3EncryptionEncryptParams{
 		Data: map[string]any{
 			"password": "secret123",
@@ -406,7 +406,7 @@ you need to examine response headers, status codes, or other details.
 var response *http.Response
 response, err := client.V3.Encryption.Encrypt(
 	context.TODO(),
-	"proxy",
+	"{proxy}",
 	qanapi.V3EncryptionEncryptParams{
 		Data: map[string]any{
 			"password": "secret123",

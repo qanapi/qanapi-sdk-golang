@@ -28,7 +28,7 @@ func TestUsage(t *testing.T) {
 	)
 	response, err := client.V3.Encryption.Encrypt(
 		context.TODO(),
-		"proxy",
+		"{proxy}",
 		qanapi.V3EncryptionEncryptParams{
 			Data: map[string]any{
 				"password": "secret123",
