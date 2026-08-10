@@ -32,7 +32,11 @@ func TestV3EncryptionDecrypt(t *testing.T) {
 		"proxy",
 		qanapi.V3EncryptionDecryptParams{
 			Data: map[string]any{
-				"foo": "bar",
+				"name":    "bar",
+				"email":   "bar",
+				"ssn":     "bar",
+				"dob":     "bar",
+				"address": "bar",
 			},
 			XQanapiFields: "x-qanapi-fields",
 		},
@@ -65,7 +69,11 @@ func TestV3EncryptionEncryptWithOptionalParams(t *testing.T) {
 		"proxy",
 		qanapi.V3EncryptionEncryptParams{
 			Data: map[string]any{
-				"foo": "bar",
+				"name":    "bar",
+				"email":   "bar",
+				"ssn":     "bar",
+				"dob":     "bar",
+				"address": "bar",
 			},
 			XQanapiFields:      "x-qanapi-fields",
 			XQanapiDestination: qanapi.String("x-qanapi-destination"),
