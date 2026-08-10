@@ -34,7 +34,7 @@ func NewV2DecryptService(opts ...option.RequestOption) (r V2DecryptService) {
 	return
 }
 
-// Decrypt encrypted payload
+// Decrypt data
 func (r *V2DecryptService) DecryptPayload(ctx context.Context, body V2DecryptDecryptPayloadParams, opts ...option.RequestOption) (res *V2DecryptDecryptPayloadResponseUnion, err error) {
 	opts = slices.Concat(r.Options, opts)
 	path := "v2/decrypt"

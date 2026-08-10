@@ -34,7 +34,7 @@ func NewV2AuthService(opts ...option.RequestOption) (r V2AuthService) {
 	return
 }
 
-// Authenticate user and return JWT
+// Login
 func (r *V2AuthService) Login(ctx context.Context, body V2AuthLoginParams, opts ...option.RequestOption) (res *V2AuthLoginResponse, err error) {
 	opts = slices.Concat(r.Options, opts)
 	path := "v2/auth/login"
@@ -42,7 +42,7 @@ func (r *V2AuthService) Login(ctx context.Context, body V2AuthLoginParams, opts 
 	return res, err
 }
 
-// Log out the current user
+// Logout
 func (r *V2AuthService) Logout(ctx context.Context, opts ...option.RequestOption) (res *V2AuthLogoutResponse, err error) {
 	opts = slices.Concat(r.Options, opts)
 	path := "v2/auth/logout"
@@ -50,7 +50,7 @@ func (r *V2AuthService) Logout(ctx context.Context, opts ...option.RequestOption
 	return res, err
 }
 
-// Refresh access token using refresh token
+// Refresh token
 func (r *V2AuthService) RefreshToken(ctx context.Context, opts ...option.RequestOption) (res *V2AuthRefreshTokenResponse, err error) {
 	opts = slices.Concat(r.Options, opts)
 	path := "v2/auth/refresh"
@@ -58,7 +58,7 @@ func (r *V2AuthService) RefreshToken(ctx context.Context, opts ...option.Request
 	return res, err
 }
 
-// Retrieve user profile and roles
+// Get user details
 func (r *V2AuthService) GetUserDetails(ctx context.Context, opts ...option.RequestOption) (res *V2AuthGetUserDetailsResponse, err error) {
 	opts = slices.Concat(r.Options, opts)
 	path := "v2/auth/userdetails"
@@ -66,7 +66,7 @@ func (r *V2AuthService) GetUserDetails(ctx context.Context, opts ...option.Reque
 	return res, err
 }
 
-// Revoke the current token
+// Revoke token
 func (r *V2AuthService) RevokeToken(ctx context.Context, opts ...option.RequestOption) (res *V2AuthRevokeTokenResponse, err error) {
 	opts = slices.Concat(r.Options, opts)
 	path := "v2/auth/revoke"

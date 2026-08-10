@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"net/http"
 	"slices"
+	"time"
 
 	"github.com/qanapi/qanapi-sdk-golang/internal/apijson"
 	"github.com/qanapi/qanapi-sdk-golang/internal/requestconfig"
@@ -34,7 +35,7 @@ func NewV2APIKeyService(opts ...option.RequestOption) (r V2APIKeyService) {
 	return
 }
 
-// Revoke an API Key
+// Revoke API Key
 func (r *V2APIKeyService) Revoke(ctx context.Context, apiKey string, opts ...option.RequestOption) (res *V2APIKeyRevokeResponse, err error) {
 	opts = slices.Concat(r.Options, opts)
 	if apiKey == "" {
@@ -46,7 +47,7 @@ func (r *V2APIKeyService) Revoke(ctx context.Context, apiKey string, opts ...opt
 	return res, err
 }
 
-// Rotate an API Key
+// Rotate API Key
 func (r *V2APIKeyService) Rotate(ctx context.Context, apiKey string, opts ...option.RequestOption) (res *V2APIKeyRotateResponse, err error) {
 	opts = slices.Concat(r.Options, opts)
 	if apiKey == "" {
@@ -59,10 +60,14 @@ func (r *V2APIKeyService) Rotate(ctx context.Context, apiKey string, opts ...opt
 }
 
 type V2APIKeyRevokeResponse struct {
-	Message string `json:"message"`
+	ID        string    `json:"id"`
+	Message   string    `json:"message"`
+	RevokedAt time.Time `json:"revoked_at" format:"date-time"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
+		ID          respjson.Field
 		Message     respjson.Field
+		RevokedAt   respjson.Field
 		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
