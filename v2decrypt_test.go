@@ -4,6 +4,7 @@ package qanapi_test
 
 import (
 	"context"
+	"errors"
 	"os"
 	"testing"
 
@@ -12,7 +13,7 @@ import (
 	"github.com/qanapi/qanapi-sdk-golang/option"
 )
 
-func TestUsage(t *testing.T) {
+func TestV2DecryptDecryptPayloadWithOptionalParams(t *testing.T) {
 	t.Skip("Mock server tests are disabled")
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
@@ -25,19 +26,21 @@ func TestUsage(t *testing.T) {
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 		option.WithSubdomain("My-Subdomain"),
+		option.WithBearerToken("My Bearer Token"),
 	)
-	response, err := client.V3.Encryption.Encrypt(
-		context.TODO(),
-		"{proxy}",
-		qanapi.V3EncryptionEncryptParams{
-			Data: map[string]any{
-				"password": "secret123",
+	_, err := client.V2.Decrypt.DecryptPayload(context.TODO(), qanapi.V2DecryptDecryptPayloadParams{
+		Data: qanapi.V2DecryptDecryptPayloadParamsDataUnion{
+			OfAnyMap: map[string]any{
+				"password": "bar",
 			},
-			XQanapiFields: "password",
 		},
-	)
+		SensitiveFields: []string{"password"},
+	})
 	if err != nil {
+		var apierr *qanapi.Error
+		if errors.As(err, &apierr) {
+			t.Log(string(apierr.DumpRequest(true)))
+		}
 		t.Fatalf("err should be nil: %s", err.Error())
 	}
-	t.Logf("%+v\n", response)
 }
