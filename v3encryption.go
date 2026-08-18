@@ -55,6 +55,9 @@ func (r *V3EncryptionService) Encrypt(ctx context.Context, proxy string, params 
 	if !param.IsOmitted(params.XQanapiFields) {
 		opts = append(opts, option.WithHeader("x-qanapi-fields", fmt.Sprintf("%v", params.XQanapiFields)))
 	}
+	if !param.IsOmitted(params.XQanapiClassification) {
+		opts = append(opts, option.WithHeader("x-qanapi-classification", fmt.Sprintf("%v", params.XQanapiClassification.Value)))
+	}
 	if !param.IsOmitted(params.XQanapiDestination) {
 		opts = append(opts, option.WithHeader("x-qanapi-destination", fmt.Sprintf("%v", params.XQanapiDestination.Value)))
 	}
@@ -88,9 +91,10 @@ func (r *V3EncryptionDecryptParams) UnmarshalJSON(data []byte) error {
 
 type V3EncryptionEncryptParams struct {
 	// A JSON object to encrypt fields on. A maximum depth of 32 is allowed.
-	Data               map[string]any
-	XQanapiFields      string            `header:"x-qanapi-fields" api:"required" json:"-"`
-	XQanapiDestination param.Opt[string] `header:"x-qanapi-destination,omitzero" json:"-"`
+	Data                  map[string]any
+	XQanapiFields         string            `header:"x-qanapi-fields" api:"required" json:"-"`
+	XQanapiClassification param.Opt[string] `header:"x-qanapi-classification,omitzero" json:"-"`
+	XQanapiDestination    param.Opt[string] `header:"x-qanapi-destination,omitzero" json:"-"`
 	paramObj
 }
 

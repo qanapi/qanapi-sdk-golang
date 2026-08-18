@@ -50,7 +50,7 @@ func (r *V3ConfigurationService) Update(ctx context.Context, configuration strin
 		return nil, err
 	}
 	path := fmt.Sprintf("v3/configurations/%s", configuration)
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPut, path, body, &res, opts...)
+	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPatch, path, body, &res, opts...)
 	return res, err
 }
 

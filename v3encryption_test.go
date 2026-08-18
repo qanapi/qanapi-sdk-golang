@@ -75,8 +75,9 @@ func TestV3EncryptionEncryptWithOptionalParams(t *testing.T) {
 				"dob":     "bar",
 				"address": "bar",
 			},
-			XQanapiFields:      "x-qanapi-fields",
-			XQanapiDestination: qanapi.String("x-qanapi-destination"),
+			XQanapiFields:         "x-qanapi-fields",
+			XQanapiClassification: qanapi.String("x-qanapi-classification"),
+			XQanapiDestination:    qanapi.String("x-qanapi-destination"),
 		},
 	)
 	if err != nil {
