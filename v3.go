@@ -3,10 +3,12 @@
 package qanapi
 
 import (
+	"encoding/json"
 	"time"
 
 	"github.com/qanapi/qanapi-sdk-golang/internal/apijson"
 	"github.com/qanapi/qanapi-sdk-golang/option"
+	"github.com/qanapi/qanapi-sdk-golang/packages/param"
 	"github.com/qanapi/qanapi-sdk-golang/packages/respjson"
 )
 
@@ -17,13 +19,14 @@ import (
 // automatically. You should not instantiate this service directly, and instead use
 // the [NewV3Service] method instead.
 type V3Service struct {
-	Options        []option.RequestOption
-	Roles          V3RoleService
-	Configurations V3ConfigurationService
-	Users          V3UserService
-	APIKeys        V3APIKeyService
-	Logs           V3LogService
-	Encryption     V3EncryptionService
+	Options         []option.RequestOption
+	Roles           V3RoleService
+	Configurations  V3ConfigurationService
+	Users           V3UserService
+	APIKeys         V3APIKeyService
+	Logs            V3LogService
+	Encryption      V3EncryptionService
+	Classifications V3ClassificationService
 }
 
 // NewV3Service generates a new service that applies the given options to each
@@ -38,6 +41,7 @@ func NewV3Service(opts ...option.RequestOption) (r V3Service) {
 	r.APIKeys = NewV3APIKeyService(opts...)
 	r.Logs = NewV3LogService(opts...)
 	r.Encryption = NewV3EncryptionService(opts...)
+	r.Classifications = NewV3ClassificationService(opts...)
 	return
 }
 
@@ -100,6 +104,51 @@ type Configuration struct {
 // Returns the unmodified JSON received from the API
 func (r Configuration) RawJSON() string { return r.JSON.raw }
 func (r *Configuration) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type GoogleGroup struct {
+	ID    string `json:"id" api:"required"`
+	Email string `json:"email"`
+	Name  string `json:"name"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		ID          respjson.Field
+		Email       respjson.Field
+		Name        respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r GoogleGroup) RawJSON() string { return r.JSON.raw }
+func (r *GoogleGroup) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+// ToParam converts this GoogleGroup to a GoogleGroupParam.
+//
+// Warning: the fields of the param type will not be present. ToParam should only
+// be used at the last possible moment before sending a request. Test for this with
+// GoogleGroupParam.Overrides()
+func (r GoogleGroup) ToParam() GoogleGroupParam {
+	return param.Override[GoogleGroupParam](json.RawMessage(r.RawJSON()))
+}
+
+// The property ID is required.
+type GoogleGroupParam struct {
+	ID    string            `json:"id" api:"required"`
+	Email param.Opt[string] `json:"email,omitzero"`
+	Name  param.Opt[string] `json:"name,omitzero"`
+	paramObj
+}
+
+func (r GoogleGroupParam) MarshalJSON() (data []byte, err error) {
+	type shadow GoogleGroupParam
+	return param.MarshalObject(r, (*shadow)(&r))
+}
+func (r *GoogleGroupParam) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
