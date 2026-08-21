@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.8.0 (2026-08-18)
+
+Full Changelog: [v1.7.0...v1.8.0](https://github.com/qanapi/qanapi-sdk-golang/compare/v1.7.0...v1.8.0)
+
+### Features
+
+* **api:** add API V3 classification routes ([cc74854](https://github.com/qanapi/qanapi-sdk-golang/commit/cc7485483373ce289a4807f6cc3a57e00dd8237d))
+
 ## 1.7.0 (2026-08-10)
 
 Full Changelog: [v1.6.0...v1.7.0](https://github.com/qanapi/qanapi-sdk-golang/compare/v1.6.0...v1.7.0)

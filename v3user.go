@@ -41,6 +41,14 @@ func (r *V3UserService) New(ctx context.Context, body V3UserNewParams, opts ...o
 	return res, err
 }
 
+// Update user
+func (r *V3UserService) Update(ctx context.Context, user int64, body V3UserUpdateParams, opts ...option.RequestOption) (res *User, err error) {
+	opts = slices.Concat(r.Options, opts)
+	path := fmt.Sprintf("v3/users/%v", user)
+	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPatch, path, body, &res, opts...)
+	return res, err
+}
+
 // List users
 func (r *V3UserService) List(ctx context.Context, opts ...option.RequestOption) (res *[]User, err error) {
 	opts = slices.Concat(r.Options, opts)
@@ -63,14 +71,6 @@ func (r *V3UserService) Me(ctx context.Context, opts ...option.RequestOption) (r
 	opts = slices.Concat(r.Options, opts)
 	path := "v3/users/me"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, nil, &res, opts...)
-	return res, err
-}
-
-// Update user
-func (r *V3UserService) Patch(ctx context.Context, user int64, body V3UserPatchParams, opts ...option.RequestOption) (res *User, err error) {
-	opts = slices.Concat(r.Options, opts)
-	path := fmt.Sprintf("v3/users/%v", user)
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPatch, path, body, &res, opts...)
 	return res, err
 }
 
@@ -105,7 +105,7 @@ func (r *V3UserNewParams) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type V3UserPatchParams struct {
+type V3UserUpdateParams struct {
 	Email            param.Opt[string] `json:"email,omitzero" format:"email"`
 	Name             param.Opt[string] `json:"name,omitzero"`
 	Role             param.Opt[string] `json:"role,omitzero"`
@@ -113,10 +113,10 @@ type V3UserPatchParams struct {
 	paramObj
 }
 
-func (r V3UserPatchParams) MarshalJSON() (data []byte, err error) {
-	type shadow V3UserPatchParams
+func (r V3UserUpdateParams) MarshalJSON() (data []byte, err error) {
+	type shadow V3UserUpdateParams
 	return param.MarshalObject(r, (*shadow)(&r))
 }
-func (r *V3UserPatchParams) UnmarshalJSON(data []byte) error {
+func (r *V3UserUpdateParams) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
