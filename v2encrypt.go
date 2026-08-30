@@ -98,9 +98,9 @@ func (r *V2EncryptEncryptDataResponseUnion) UnmarshalJSON(data []byte) error {
 type V2EncryptEncryptDataParams struct {
 	// The actual data to encrypt.
 	//
-	//   - Can be a scalar (string/number), object, or array.
-	//   - If the value is an object or array, only the specified `sensitiveFields` are
-	//     encrypted.
+	// - Can be a scalar (string/number), object, or array.
+	// - If the value is an object or array, only the specified `sensitiveFields` are
+	//   encrypted.
 	Data   V2EncryptEncryptDataParamsDataUnion `json:"data,omitzero" api:"required"`
 	Access V2EncryptEncryptDataParamsAccess    `json:"access,omitzero"`
 	// Optional metadata describing the data's context.
