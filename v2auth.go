@@ -58,19 +58,19 @@ func (r *V2AuthService) RefreshToken(ctx context.Context, opts ...option.Request
 	return res, err
 }
 
-// Get user details
-func (r *V2AuthService) GetUserDetails(ctx context.Context, opts ...option.RequestOption) (res *V2AuthGetUserDetailsResponse, err error) {
-	opts = slices.Concat(r.Options, opts)
-	path := "v2/auth/userdetails"
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, nil, &res, opts...)
-	return res, err
-}
-
 // Revoke token
 func (r *V2AuthService) RevokeToken(ctx context.Context, opts ...option.RequestOption) (res *V2AuthRevokeTokenResponse, err error) {
 	opts = slices.Concat(r.Options, opts)
 	path := "v2/auth/revoke"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, nil, &res, opts...)
+	return res, err
+}
+
+// Get user details
+func (r *V2AuthService) UserDetails(ctx context.Context, opts ...option.RequestOption) (res *V2AuthUserDetailsResponse, err error) {
+	opts = slices.Concat(r.Options, opts)
+	path := "v2/auth/userdetails"
+	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, nil, &res, opts...)
 	return res, err
 }
 
@@ -137,7 +137,23 @@ func (r *V2AuthRefreshTokenResponse) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type V2AuthGetUserDetailsResponse struct {
+type V2AuthRevokeTokenResponse struct {
+	Message string `json:"message"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Message     respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r V2AuthRevokeTokenResponse) RawJSON() string { return r.JSON.raw }
+func (r *V2AuthRevokeTokenResponse) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type V2AuthUserDetailsResponse struct {
 	ID              int64     `json:"id"`
 	Email           string    `json:"email" format:"email"`
 	EmailVerifiedAt time.Time `json:"email_verified_at" api:"nullable" format:"date-time"`
@@ -160,24 +176,8 @@ type V2AuthGetUserDetailsResponse struct {
 }
 
 // Returns the unmodified JSON received from the API
-func (r V2AuthGetUserDetailsResponse) RawJSON() string { return r.JSON.raw }
-func (r *V2AuthGetUserDetailsResponse) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type V2AuthRevokeTokenResponse struct {
-	Message string `json:"message"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Message     respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r V2AuthRevokeTokenResponse) RawJSON() string { return r.JSON.raw }
-func (r *V2AuthRevokeTokenResponse) UnmarshalJSON(data []byte) error {
+func (r V2AuthUserDetailsResponse) RawJSON() string { return r.JSON.raw }
+func (r *V2AuthUserDetailsResponse) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
