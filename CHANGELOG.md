@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.9.0 (2026-09-07)
+
+Full Changelog: [v1.8.0...v1.9.0](https://github.com/qanapi/qanapi-sdk-golang/compare/v1.8.0...v1.9.0)
+
+### Features
+
+* initial stlc build ([4c81955](https://github.com/qanapi/qanapi-sdk-golang/commit/4c81955892cbd1f449d9cab6ccdbb336285e32d0))
+* initial stlc build ([c2c9d30](https://github.com/qanapi/qanapi-sdk-golang/commit/c2c9d304aa2533b349ef3ec536d99fe80efc77de))
+
+
+### Chores
+
+* add github workflows as custom code ([d36ca46](https://github.com/qanapi/qanapi-sdk-golang/commit/d36ca46189dccb0eabe26d731619fd409b99b393))
+
 ## 1.8.0 (2026-08-18)
 
 Full Changelog: [v1.7.0...v1.8.0](https://github.com/qanapi/qanapi-sdk-golang/compare/v1.7.0...v1.8.0)
